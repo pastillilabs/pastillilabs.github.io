@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import "../components"
 
 Item {
     implicitWidth: 480
@@ -27,14 +28,14 @@ Item {
             wrapMode: Text.WordWrap
         }
 
-        Image {
+        IconButton {
             width: 202
             height: 60
             anchors.horizontalCenter: parent.horizontalCenter
 
             source: "../../img/en-play-badge.png"
 
-//            onClicked: Qt.openUrlExternally("https://play.google.com/store/apps/details?id=com.pastillilabs.situations2")
+            onClicked: Qt.openUrlExternally("https://play.google.com/store/apps/details?id=com.pastillilabs.situations2")
         }
     }
 }
