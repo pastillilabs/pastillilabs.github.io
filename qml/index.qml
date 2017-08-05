@@ -1,11 +1,12 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.0
+import "sections" as Sections
 
 Rectangle {
     id: root
 
-    width: 480
-    height: 640
+    implicitWidth: 480
+    implicitHeight: 640
 
     color: "#6080a0"
 
@@ -18,21 +19,13 @@ Rectangle {
         Column {
             width: root.width
 
-            Item {
+            Sections.Banner {
                 anchors {
                     left: parent.left
                     right: parent.right
                 }
 
                 height: root.height
-
-                Text {
-                    anchors.centerIn: parent
-
-                    color: "white"
-                    font.pixelSize: 40
-                    text: "Hello world!"
-                }
             }
 
             Item {
