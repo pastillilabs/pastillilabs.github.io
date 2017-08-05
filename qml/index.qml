@@ -10,7 +10,13 @@ Rectangle {
 
     color: "#6080a0"
 
+    Text {
+        text: scrollView.flickableItem.contentY
+    }
+
     ScrollView {
+        id: scrollView
+
         anchors.fill: parent
 
         horizontalScrollBarPolicy: Qt.ScrollBarAlwaysOff
