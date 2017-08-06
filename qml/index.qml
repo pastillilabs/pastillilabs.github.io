@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.0
 import QtQuick.Window 2.0
-import "sections" as Sections
+import "sections"
 
 Window {
     id: root
@@ -22,7 +22,7 @@ Window {
         Column {
             width: root.width
 
-            Sections.Banner {
+            Banner {
                 anchors {
                     left: parent.left
                     right: parent.right
