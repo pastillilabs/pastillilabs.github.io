@@ -1,14 +1,17 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.0
+import QtQuick.Window 2.0
 import "sections" as Sections
 
-Rectangle {
+Window {
     id: root
 
-    implicitWidth: 480
-    implicitHeight: 640
+    width: 480
+    height: 640
 
-    color: "#6080a0"
+    Background {
+        anchors.fill: parent
+    }
 
     ScrollView {
         anchors.fill: parent
