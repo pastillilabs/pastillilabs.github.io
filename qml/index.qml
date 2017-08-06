@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtQuick.Controls 1.0
 import "sections" as Sections
 
 Rectangle {
@@ -9,17 +10,13 @@ Rectangle {
 
     color: "#6080a0"
 
-    Flickable {
+    ScrollView {
         anchors.fill: parent
 
-//        horizontalScrollBarPolicy: Qt.ScrollBarAlwaysOff
-//        verticalScrollBarPolicy: Qt.ScrollBarAsNeeded
-
-        contentHeight: column.height
+        horizontalScrollBarPolicy: Qt.ScrollBarAlwaysOff
+        verticalScrollBarPolicy: Qt.ScrollBarAsNeeded
 
         Column {
-            id: column
-
             width: root.width
 
             Sections.Banner {
