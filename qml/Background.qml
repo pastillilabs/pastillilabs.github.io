@@ -16,7 +16,7 @@ Item {
         anchors.fill: parent
 
         fillMode: Image.PreserveAspectCrop
-        opacity: 0.5
+        opacity: 0.75
         source: "../img/background/1.jpg"
     }
 }
