@@ -4,8 +4,12 @@ import "../components"
 Item {
     id: root
 
+    property bool mobile: width < 500 || height < 500
+
+    onMobileChanged: label.font.pixelSize = (mobile ? 30 : 40)
+
     Rectangle {
-        height: column.height + 100
+        height: column.height + (root.mobile ? 80 : 100)
         anchors {
             left: parent.left
             right: parent.right
@@ -33,6 +37,8 @@ Item {
         spacing: 40
 
         Label {
+            id: label
+
             anchors {
                 left: parent.left
                 right: parent.right
