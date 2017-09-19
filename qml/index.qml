@@ -36,20 +36,18 @@ Item {
         dropdownItem: dropdown
         homeIconSource: "../img/mono/situations.png"
         mobile: parent.mobile
+
+        onMobileChanged: dropdown.focus = false
+        onSelectionChanged: dropdown.focus = false
     }
 
     PageView {
         id: pageView
 
-        anchors {
-            top: header.bottom
-            bottom: footer.top
-            left: parent.left
-            right: parent.right
-        }
+        anchors.fill: parent
 
         index: header.selection
-        opacity: dropdown.visible ? 0.25 : 1
+        opacity: 1 - dropdown.opacity
     }
 
     Footer {
@@ -68,19 +66,21 @@ Item {
     Dropdown {
         id: dropdown
 
-        anchors {
-            top: header.bottom
-            bottom: parent.bottom
-            left: parent.left
-            right: parent.right
-        }
+        anchors.fill: parent
 
+        focus: false
         model: parent.pageModel
-        visible: false
+        opacity: focus ? 0.9 : 0
+        visible: opacity > 0
 
-        onClicked: visible = false
+        onClicked: focus = false
         onSelectionChanged: header.selection = selection
         onVisibleChanged: selection = header.selection
+
+        Behavior on opacity {
+            NumberAnimation {
+            }
+        }
     }
 }
 

@@ -1,15 +1,17 @@
 import QtQuick 2.0
 
 Item {
-    height: 40
+    id: itemRoot
+
+    implicitHeight: 40
 
     property bool focused: false
-    property alias text: itemText.text
+    property alias text: itemLabel.text
 
     signal clicked()
 
     Label {
-        id: itemText
+        id: itemLabel
 
         anchors.centerIn: parent
 
@@ -18,18 +20,18 @@ Item {
             pixelSize: 30
         }
         horizontalAlignment: Text.AlignHCenter
-        color: mouseArea.pressed || parent.focused ? "#a0c0e0" : "white"
+        color: (itemArea.pressed || itemRoot.focused) ? "#a0c0e0" : "white"
     }
 
     MouseArea {
-        id: mouseArea
+        id: itemArea
 
         anchors.fill: parent
 
         cursorShape: Qt.PointingHandCursor
         hoverEnabled: true
 
-        onClicked: parent.clicked()
+        onClicked: itemRoot.clicked()
     }
 }
 

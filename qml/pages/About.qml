@@ -48,7 +48,7 @@ Item {
             }
 
             horizontalAlignment: Text.AlignHCenter
-            text: "Our vision is to make software that is very EASY to understand and use by anyone - yet POWERFUL enough also for more advanced users."
+            text: "Our vision is to craft software EASY to understand and use by anyone - yet POWERFUL enough for advanced users also."
             wrapMode: Text.Wrap
         }
     }

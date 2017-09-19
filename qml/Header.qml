@@ -12,9 +12,6 @@ Item {
     property alias model: itemView.model
     property int selection: 0
 
-    onMobileChanged: dropdownItem.visible = false
-    onSelectionChanged: dropdownItem.visible = false
-
     Item {
         anchors.fill: parent
 
@@ -30,7 +27,7 @@ Item {
                 anchors.centerIn: parent
 
                 onClicked: {
-                    dropdownItem.visible = false;
+                    root.dropdownItem.focus = false;
                     selection = 0;
                 }
             }
@@ -69,7 +66,7 @@ Item {
             source: "../img/mono/menu.png"
             visible: mobile
 
-            onClicked: dropdownItem.visible = !dropdownItem.visible
+            onClicked: root.dropdownItem.focus = !root.dropdownItem.focus
         }
     }
 }

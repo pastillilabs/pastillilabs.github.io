@@ -14,7 +14,7 @@ Item {
         anchors.fill: parent
 
         color: "black"
-        opacity: 0.25
+        opacity: 0.5
     }
 
     MouseArea {
@@ -35,14 +35,39 @@ Item {
         Repeater {
             id: itemView
 
-            DropdownItem {
-                width: parent.width
+            Item {
+                id: itemRoot
 
-                focused: root.selection === index
-                text: name
-                visible: index > 0
+                height: 40
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
 
-                onClicked: root.clicked(index)
+                Label {
+                    id: itemLabel
+
+                    anchors.centerIn: parent
+
+                    font {
+                        bold: true
+                        pixelSize: 30
+                    }
+                    color: (itemArea.containsPress || root.selection === index) ? "#a0c0e0" : "white"
+                    horizontalAlignment: Text.AlignHCenter
+                    text: name
+                }
+
+                MouseArea {
+                    id: itemArea
+
+                    anchors.fill: parent
+
+                    cursorShape: Qt.PointingHandCursor
+                    hoverEnabled: true
+
+                    onClicked: root.clicked(index)
+                }
             }
         }
     }

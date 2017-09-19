@@ -3,7 +3,7 @@ import "../components"
 
 Item {
     id: root
-    
+
     Rectangle {
         height: column.height + 100
         anchors {
