@@ -2,33 +2,49 @@ import QtQuick 2.0
 import "../components"
 
 Item {
-    implicitWidth: 480
-    implicitHeight: 640
-
-    Column {
+    id: root
+    
+    Rectangle {
+        height: column.height + 100
         anchors {
             left: parent.left
             right: parent.right
             verticalCenter: parent.verticalCenter
-            margins: root.width / 20
         }
 
-        spacing: 20
+        border {
+            color: "#204050"
+            width: 1
+        }
+        color: "#405060"
+        opacity: 0.5
+    }
 
-        Text {
+    Column {
+        id: column
+        
+        anchors {
+            left: parent.left
+            right: parent.right
+            verticalCenter: parent.verticalCenter
+            margins: root.width * 0.1
+        }
+
+        spacing: 40
+
+        Label {
             anchors {
                 left: parent.left
                 right: parent.right
             }
 
-            color: "white"
-            horizontalAlignment: Text.AlignHCenter
             font.pixelSize: 40
-            text: "Put The Smart on your smart device!"
+            horizontalAlignment: Text.AlignHCenter
+            text: "Put the smart on your smartphone!"
             wrapMode: Text.WordWrap
         }
 
-        IconButton {
+        ImageButton {
             width: 202
             height: 60
             anchors.horizontalCenter: parent.horizontalCenter

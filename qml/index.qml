@@ -1,55 +1,86 @@
 import QtQuick 2.0
-import QtQuick.Controls 1.0
-import QtQuick.Window 2.0
-import "sections"
+import "components"
 
-Window {
-    id: root
+Item {
+    property bool mobile: width < 500 || height < 500
+    property ListModel pageModel: ListModel {}
 
-    width: 480
-    height: 640
+    Component.onCompleted: {
+        var pageHome = Qt.resolvedUrl("pages/Home.qml");
+        var pageSituations = Qt.resolvedUrl("pages/Situations.qml");
+        var pageHelp = Qt.resolvedUrl("pages/Help.qml");
+        var pageAbout = Qt.resolvedUrl("pages/About.qml");
+                
+        pageModel.append({ name: "Home", target: pageHome });
+        pageModel.append({ name: "Situations", target: pageSituations });
+        pageModel.append({ name: "Help", target: pageHelp });
+        pageModel.append({ name: "About", target: pageAbout });
+
+        header.model = pageModel;
+        pageView.model = pageModel;
+    }
 
     Background {
         anchors.fill: parent
     }
 
-    ScrollView {
-        anchors.fill: parent
+    Header {
+        id: header
 
-        horizontalScrollBarPolicy: Qt.ScrollBarAlwaysOff
-        verticalScrollBarPolicy: Qt.ScrollBarAsNeeded
-
-        Column {
-            width: root.width
-
-            Banner {
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                }
-
-                height: root.height
-            }
-
-            Item {
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                }
-
-                height: Math.max(root.height, testContent.height)
-
-                Rectangle {
-                    id: testContent
-
-                    width: 100
-                    height: 100
-                    anchors.centerIn: parent
-
-                    color: "green"
-                }
-            }
+        height: mobile ? 60 : 80
+        anchors {
+            left: parent.left
+            right: parent.right
         }
+
+        dropdownItem: dropdown
+        homeIconSource: "../img/mono/situations.png"
+        mobile: parent.mobile
+    }
+
+    PageView {
+        id: pageView
+
+        anchors {
+            top: header.bottom
+            bottom: footer.top
+            left: parent.left
+            right: parent.right
+        }
+
+        index: header.selection
+        opacity: dropdown.visible ? 0.25 : 1
+    }
+
+    Footer {
+        id: footer
+
+        height: mobile ? 0 : implicitHeight
+        anchors {
+            bottom: parent.bottom
+            left: parent.left
+            right: parent.right
+        }
+        
+        visible: !mobile
+    }
+
+    Dropdown {
+        id: dropdown
+
+        anchors {
+            top: header.bottom
+            bottom: parent.bottom
+            left: parent.left
+            right: parent.right
+        }
+
+        model: parent.pageModel
+        visible: false
+
+        onClicked: visible = false
+        onSelectionChanged: header.selection = selection
+        onVisibleChanged: selection = header.selection
     }
 }
 

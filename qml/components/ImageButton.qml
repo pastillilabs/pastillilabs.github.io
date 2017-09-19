@@ -4,16 +4,16 @@ Item {
     implicitWidth: 40
     implicitHeight: 40
 
-    property alias source: imageItem.source
+    property alias source: image.source
 
     signal clicked()
-
+    
     Image {
-        id: imageItem
+        id: image
 
         anchors.fill: parent
 
-        opacity: mouseArea.pressed ? 0.5 : 1
+        opacity: mouseArea.containsPress ? 0.5 : 1
     }
 
     MouseArea {
