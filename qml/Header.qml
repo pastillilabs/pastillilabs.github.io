@@ -6,11 +6,11 @@ Item {
 
     height: 80
 
-    property Dropdown dropdownItem
-    property alias homeIconSource: homeButton.source
-    property bool mobile: false
+    property bool hamburger: false
     property alias model: itemView.model
     property int selection: 0
+
+    signal menuClicked()
 
     Item {
         anchors.fill: parent
@@ -20,16 +20,13 @@ Item {
             height: parent.height
 
             ImageButton {
-                id: homeButton
-
                 width: parent.width * 3
                 height: parent.height * 3
                 anchors.centerIn: parent
 
-                onClicked: {
-                    root.dropdownItem.focus = false;
-                    selection = 0;
-                }
+                source: "../img/mono/situations.png"
+
+                onClicked: root.selection = 0
             }
         }
 
@@ -41,7 +38,7 @@ Item {
             }
 
             spacing: 10
-            visible: !mobile
+            visible: !root.hamburger
 
             Repeater {
                 id: itemView
@@ -51,7 +48,7 @@ Item {
                     text: name
                     visible: index > 0
 
-                    onClicked: selection = index
+                    onClicked: root.selection = index
                 }
             }
         }
@@ -64,9 +61,9 @@ Item {
             }
 
             source: "../img/mono/menu.png"
-            visible: mobile
+            visible: root.hamburger
 
-            onClicked: root.dropdownItem.focus = !root.dropdownItem.focus
+            onClicked: root.menuClicked()
         }
     }
 }

@@ -37,7 +37,7 @@ Item {
             }
 
             horizontalAlignment: Text.AlignHCenter
-            text: "Situations app is developed by Pastilli Labs."
+            text: "Situations is developed by Pastilli Labs."
             wrapMode: Text.Wrap
         }
 
@@ -48,7 +48,7 @@ Item {
             }
 
             horizontalAlignment: Text.AlignHCenter
-            text: "Our vision is to craft software EASY to understand and use by anyone - yet POWERFUL enough for advanced users also."
+            text: "Our vision is to make software EASY to understand and use by anyone - yet POWERFUL enough for advanced users also."
             wrapMode: Text.Wrap
         }
     }

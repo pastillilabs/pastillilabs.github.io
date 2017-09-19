@@ -2,8 +2,12 @@ import QtQuick 2.0
 import "components"
 
 Item {
+    id: root
+
     property bool mobile: width < 500 || height < 500
     property ListModel pageModel: ListModel {}
+
+    onMobileChanged: dropdown.focus = false
 
     Component.onCompleted: {
         var pageHome = Qt.resolvedUrl("pages/Home.qml");
@@ -24,43 +28,48 @@ Item {
         anchors.fill: parent
     }
 
-    Header {
-        id: header
-
-        height: mobile ? 60 : 80
-        anchors {
-            left: parent.left
-            right: parent.right
-        }
-
-        dropdownItem: dropdown
-        homeIconSource: "../img/mono/situations.png"
-        mobile: parent.mobile
-
-        onMobileChanged: dropdown.focus = false
-        onSelectionChanged: dropdown.focus = false
-    }
-
-    PageView {
-        id: pageView
-
+    Item {
         anchors.fill: parent
 
-        index: header.selection
-        opacity: 1 - dropdown.opacity
-    }
+        opacity: dropdown.focus ? 0.01 : 1
 
-    Footer {
-        id: footer
-
-        height: mobile ? 0 : implicitHeight
-        anchors {
-            bottom: parent.bottom
-            left: parent.left
-            right: parent.right
+        Behavior on opacity {
+            NumberAnimation {
+            }
         }
-        
-        visible: !mobile
+
+        Header {
+            id: header
+
+            height: hamburger ? 60 : 80
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
+
+            hamburger: mobile
+
+            onSelectionChanged: dropdown.focus = false
+            onMenuClicked: dropdown.focus = true
+        }
+
+        PageView {
+            id: pageView
+
+            anchors.fill: parent
+
+            index: header.selection
+        }
+
+        Footer {
+            anchors {
+                bottom: parent.bottom
+                left: parent.left
+                right: parent.right
+            }
+
+            visible: !root.mobile
+        }
     }
 
     Dropdown {
@@ -70,17 +79,11 @@ Item {
 
         focus: false
         model: parent.pageModel
-        opacity: focus ? 0.9 : 0
-        visible: opacity > 0
+        visible: focus
 
         onClicked: focus = false
         onSelectionChanged: header.selection = selection
         onVisibleChanged: selection = header.selection
-
-        Behavior on opacity {
-            NumberAnimation {
-            }
-        }
     }
 }
 
