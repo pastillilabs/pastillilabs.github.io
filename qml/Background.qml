@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import "components"
 
 Rectangle {
     id: root
@@ -7,6 +8,8 @@ Rectangle {
     
     property int index: -1
     property int count: 5
+
+    signal homeClicked()
     
     Component.onCompleted: {
         index = Math.random() * count;
@@ -64,6 +67,20 @@ Rectangle {
                 image1.opacity = 0;
             }
         }
+    }
+
+    ImageButton {
+        width: 260
+        height: 260
+        anchors {
+            top: parent.top
+            left: parent.left
+            margins: -80
+        }
+
+        source: "../img/mono/situations.png"
+
+        onClicked: root.homeClicked()
     }
 }
 

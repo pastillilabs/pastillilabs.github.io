@@ -4,14 +4,19 @@ Item {
     id: root
 
     property int index: 0
-    property ListModel model
+    property ListModel model: ListModel {}
+
+    QtObject {
+        id: priv
+
+        property var currentItem: root.model.get(root.index)
+        property string currentTarget: currentItem ? currentItem.target : ""
+    }
 
     Loader {
         anchors.fill: parent
 
-        property var currentItem: model ? model.get(root.index) : null
-
-        source: currentItem ? currentItem.target : ""
+        source: priv.currentTarget
     }
 }
 

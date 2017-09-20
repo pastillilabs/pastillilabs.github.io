@@ -17,10 +17,10 @@ Item {
         }
 
         border {
-            color: "#204050"
+            color: "black"
             width: 1
         }
-        color: "#405060"
+        color: "#203040"
         opacity: 0.5
     }
 

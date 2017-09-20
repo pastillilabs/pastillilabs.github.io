@@ -26,6 +26,8 @@ Item {
 
     Background {
         anchors.fill: parent
+
+        onHomeClicked: header.selection = 0
     }
 
     Item {
@@ -36,6 +38,14 @@ Item {
         Behavior on opacity {
             NumberAnimation {
             }
+        }
+
+        PageView {
+            id: pageView
+
+            anchors.fill: parent
+
+            index: header.selection
         }
 
         Header {
@@ -51,14 +61,6 @@ Item {
 
             onSelectionChanged: dropdown.focus = false
             onMenuClicked: dropdown.focus = true
-        }
-
-        PageView {
-            id: pageView
-
-            anchors.fill: parent
-
-            index: header.selection
         }
 
         Footer {
