@@ -5,23 +5,11 @@ Item {
     id: root
 
     property bool mobile: width < 500 || height < 500
-    property ListModel pageModel: ListModel {}
 
     onMobileChanged: dropdown.focus = false
 
-    Component.onCompleted: {
-        var pageHome = Qt.resolvedUrl("pages/Home.qml");
-        var pageSituations = Qt.resolvedUrl("pages/Situations.qml");
-        var pageHelp = Qt.resolvedUrl("pages/Help.qml");
-        var pageAbout = Qt.resolvedUrl("pages/About.qml");
-                
-        pageModel.append({ name: "Home", target: pageHome });
-        pageModel.append({ name: "Situations", target: pageSituations });
-        pageModel.append({ name: "Help", target: pageHelp });
-        pageModel.append({ name: "About", target: pageAbout });
-
-        header.model = pageModel;
-        pageView.model = pageModel;
+    Models {
+        id: models
     }
 
     Background {
@@ -46,6 +34,8 @@ Item {
             anchors.fill: parent
 
             index: header.selection
+            model: models.pages
+            pagePath: Qt.resolvedUrl("pages/")
         }
 
         Header {
@@ -58,6 +48,7 @@ Item {
             }
 
             hamburger: mobile
+            model: models.pages
 
             onSelectionChanged: dropdown.focus = false
             onMenuClicked: dropdown.focus = true
