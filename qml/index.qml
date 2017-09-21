@@ -77,6 +77,8 @@ Item {
         onClicked: focus = false
         onSelectionChanged: header.selection = selection
         onVisibleChanged: selection = header.selection
+
+        Component.onCompleted: model = models.pages
     }
 }
 
