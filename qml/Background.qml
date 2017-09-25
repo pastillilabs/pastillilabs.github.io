@@ -75,7 +75,7 @@ Rectangle {
         anchors {
             top: parent.top
             left: parent.left
-            margins: -Math.min(width, height) / 4
+            margins: -Math.min(width, height) / 3
         }
 
         source: "../img/situations_shadow.png"
