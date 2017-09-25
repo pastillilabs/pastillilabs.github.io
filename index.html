@@ -25,16 +25,29 @@
     <meta name="theme-color" content="#6080a0">
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'>
     <style>
-        body {
+        body, html {
+            width: 100%;
+            height: 100%;
             background-color: #6080a0;
+            display: table;
             font-family: Arial;
+            margin: 0;
         }
         * {
             -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
         }
+        .loading-text {
+            color: white;
+            display: table-cell;
+            text-align: center;
+            vertical-align: middle
+        }
     </style>
   </head>
-  <body style="margin: 0;" data-qml="qml/index.qml">
+  <body data-qml="qml/index.qml">
     <script type="text/javascript" src="lib/qmlweb/qmlweb.js"></script>
+    <div class="loading-text">
+        Loading...
+    </div>
   </body>
 </html>

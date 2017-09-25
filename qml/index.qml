@@ -6,7 +6,10 @@ Item {
 
     property bool mobile: width < 500 || height < 500
 
-    onMobileChanged: dropdown.focus = false
+    onMobileChanged: {
+        pageView.mobile = mobile;
+        dropdown.focus = false;
+    }
 
     Models {
         id: models

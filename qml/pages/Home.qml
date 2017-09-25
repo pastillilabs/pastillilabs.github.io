@@ -4,34 +4,19 @@ import "../components"
 Item {
     id: root
 
-    property bool mobile: width < 500 || height < 500
+    property alias contentHeight: column.height
+    property bool mobile: false
 
     onMobileChanged: label.font.pixelSize = (mobile ? 30 : 40)
 
-    Rectangle {
-        height: column.height + (root.mobile ? 80 : 100)
-        anchors {
-            left: parent.left
-            right: parent.right
-            verticalCenter: parent.verticalCenter
-        }
-
-        border {
-            color: "black"
-            width: 1
-        }
-        color: "#203040"
-        opacity: 0.5
-    }
-
     Column {
         id: column
-        
+
         anchors {
             left: parent.left
             right: parent.right
+            margins: parent.width * 0.1
             verticalCenter: parent.verticalCenter
-            margins: root.width * 0.1
         }
 
         spacing: 40
