@@ -70,12 +70,12 @@ Rectangle {
     }
 
     ImageButton {
-        width: 384
-        height: 384
+        width: 320
+        height: 320
         anchors {
             top: parent.top
             left: parent.left
-            margins: -80
+            margins: -Math.min(width, height) / 4
         }
 
         source: "../img/situations_shadow.png"
