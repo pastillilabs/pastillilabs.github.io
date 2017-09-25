@@ -70,15 +70,15 @@ Rectangle {
     }
 
     ImageButton {
-        width: 260
-        height: 260
+        width: 384
+        height: 384
         anchors {
             top: parent.top
             left: parent.left
             margins: -80
         }
 
-        source: "../img/mono/situations.png"
+        source: "../img/situations_shadow.png"
 
         onClicked: root.homeClicked()
     }

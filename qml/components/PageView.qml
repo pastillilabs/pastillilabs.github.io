@@ -15,7 +15,7 @@ Item {
     }
 
     Rectangle {
-        height: loader.contentHeight + (root.mobile ? 80 : 100)
+        height: loader.contentHeight + (root.mobile ? 60 : 100)
         anchors {
             left: parent.left
             right: parent.right
@@ -27,7 +27,7 @@ Item {
             width: 1
         }
         color: "#203040"
-        opacity: 0.5
+        opacity: 0.6
 
         Behavior on height {
             NumberAnimation {
