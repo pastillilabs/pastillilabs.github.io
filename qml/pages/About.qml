@@ -7,6 +7,12 @@ Item {
     property alias contentHeight: column.height
     property bool mobile: false
 
+    onMobileChanged: {
+        var pixelSize = mobile ? 15 : 20;
+        label1.font.pixelSize = pixelSize;
+        label2.font.pixelSize = pixelSize;
+    }
+
     Column {
         id: column
 
@@ -17,9 +23,11 @@ Item {
             verticalCenter: parent.verticalCenter
         }
 
-        spacing: 40
+        spacing: root.mobile ? 20 : 40
 
         Label {
+            id: label1
+
             anchors {
                 left: parent.left
                 right: parent.right
@@ -31,6 +39,8 @@ Item {
         }
 
         Label {
+            id: label2
+
             anchors {
                 left: parent.left
                 right: parent.right

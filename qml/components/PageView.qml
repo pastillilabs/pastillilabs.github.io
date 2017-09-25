@@ -45,6 +45,8 @@ Item {
 
         property real contentHeight: item ? item.contentHeight : 0
         property var currentItem: root.model.get(root.index)
+
+        onLoaded: item.mobile = root.mobile
     }
 }
 

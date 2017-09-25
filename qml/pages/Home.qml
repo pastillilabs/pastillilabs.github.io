@@ -19,7 +19,7 @@ Item {
             verticalCenter: parent.verticalCenter
         }
 
-        spacing: 40
+        spacing: root.mobile ? 20 : 40
 
         Label {
             id: label
