@@ -38,16 +38,19 @@
         }
         .loading-text {
             color: white;
-            display: table-cell;
-            text-align: center;
-            vertical-align: middle
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -moz-transform: translateX(-50%) translateY(-50%);
+            -webkit-transform: translateX(-50%) translateY(-50%);
+            transform: translateX(-50%) translateY(-50%);
         }
     </style>
   </head>
   <body data-qml="qml/index.qml">
     <script type="text/javascript" src="lib/qmlweb/qmlweb.js"></script>
     <div class="loading-text">
-        Loading...
+        <span>Loading...</span>
     </div>
   </body>
 </html>
