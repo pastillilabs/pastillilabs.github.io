@@ -3,10 +3,13 @@ import QtQuick 2.0
 Item {
     id: root
 
+    property ListModel contactLinks: ListModel {}
+    property string imgBase: ""
     property alias model: itemView.model
     property int selection: 0
 
     signal clicked(variant index)
+    signal contactLinkClicked(variant index)
 
     onClicked: selection = index
 
@@ -51,7 +54,7 @@ Item {
 
                     font {
                         bold: true
-                        pixelSize: 30
+                        pixelSize: 25
                     }
                     color: (itemArea.containsPress || root.selection === index) ? "#a0c0e0" : "white"
                     horizontalAlignment: Text.AlignHCenter
@@ -68,6 +71,34 @@ Item {
 
                     onClicked: root.clicked(index)
                 }
+            }
+        }
+    }
+
+    Row {
+        id: contactLinkRow
+
+        anchors {
+            bottom: parent.bottom
+            horizontalCenter: parent.horizontalCenter
+            margins: 30
+        }
+
+        spacing: 30
+
+        function handleClick(index) {
+            root.contactLinkClicked(index);
+        }
+
+        Repeater {
+            model: root.contactLinks
+
+            RoundButton {
+                width: 40
+                height: 40
+                source: imgBase + icon
+
+                onClicked: contactLinkRow.handleClick(index)
             }
         }
     }

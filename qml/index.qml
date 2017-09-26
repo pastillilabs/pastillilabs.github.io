@@ -7,8 +7,10 @@ Item {
     property bool mobile: width < 500 || height < 500
 
     onMobileChanged: {
-        pageView.mobile = mobile;
         dropdown.focus = false;
+        footer.mobile = mobile;
+        header.mobile = mobile;
+        pageView.mobile = mobile;
     }
 
     Models {
@@ -38,19 +40,18 @@ Item {
 
             index: header.selection
             model: models.pages
-            pagePath: Qt.resolvedUrl("pages/")
+            pageBase: Qt.resolvedUrl("pages/")
         }
 
         Header {
             id: header
 
-            height: hamburger ? 60 : 80
+            height: mobile ? 60 : 80
             anchors {
                 left: parent.left
                 right: parent.right
             }
 
-            hamburger: mobile
             model: models.pages
 
             onSelectionChanged: dropdown.focus = false
@@ -58,13 +59,16 @@ Item {
         }
 
         Footer {
+            id: footer
+
             anchors {
                 bottom: parent.bottom
                 left: parent.left
                 right: parent.right
             }
 
-            visible: !root.mobile
+            contactLinks: models.contactLinks
+            imgBase: Qt.resolvedUrl("../img/")
         }
     }
 
@@ -73,15 +77,19 @@ Item {
 
         anchors.fill: parent
 
+        contactLinks: models.contactLinks
         focus: false
-        model: parent.pageModel
+        imgBase: Qt.resolvedUrl("../img/")
+        model: models.pages
         visible: focus
 
         onClicked: focus = false
+        onContactLinkClicked: {
+            focus = false;
+            Qt.openUrlExternally(contactLinks.get(index).target);
+        }
         onSelectionChanged: header.selection = selection
         onVisibleChanged: selection = header.selection
-
-        Component.onCompleted: model = models.pages
     }
 }
 

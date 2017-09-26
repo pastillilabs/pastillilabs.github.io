@@ -2,7 +2,15 @@ import QtQuick 2.0
 import "components"
 
 Item {
+    id: root
+
     implicitHeight: 60
+
+    visible: !mobile
+
+    property ListModel contactLinks: ListModel {}
+    property string imgBase: ""
+    property bool mobile: false
 
     Row {
         anchors {
@@ -17,7 +25,7 @@ Item {
             width: 30
             height: 30
 
-            source: "../img/mono/pastillilabs.png"
+            source: imgBase + "mono/pastillilabs.png"
         }
 
         Label {
@@ -37,28 +45,16 @@ Item {
 
         spacing: 30
 
-        RoundButton {
-            width: 40
-            height: 40
-            source: "../img/mono/twitter.png"
+        Repeater {
+            model: root.contactLinks
 
-            onClicked: Qt.openUrlExternally("https://www.twitter.com/situationsapp")
-        }
+            RoundButton {
+                width: 40
+                height: 40
+                source: imgBase + icon
 
-        RoundButton {
-            width: 40
-            height: 40
-            source: "../img/mono/facebook.png"
-
-            onClicked: Qt.openUrlExternally("https://www.facebook.com/situationsapp")
-        }
-
-        RoundButton {
-            width: 40
-            height: 40
-            source: "../img/mono/mail.png"
-
-            onClicked: Qt.openUrlExternally("mailto:support@pastillilabs.com")
+                onClicked: Qt.openUrlExternally(target)
+            }
         }
     }
 }

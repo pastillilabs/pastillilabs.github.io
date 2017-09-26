@@ -6,7 +6,7 @@ Item {
 
     height: 80
 
-    property bool hamburger: false
+    property bool mobile: false
     property alias model: itemView.model
     property int selection: 0
 
@@ -20,7 +20,7 @@ Item {
         }
 
         spacing: 10
-        visible: !root.hamburger
+        visible: !root.mobile
 
         Repeater {
             id: itemView
@@ -84,7 +84,7 @@ Item {
         }
 
         source: "../img/mono/menu.png"
-        visible: root.hamburger
+        visible: root.mobile
 
         onClicked: root.menuClicked()
     }

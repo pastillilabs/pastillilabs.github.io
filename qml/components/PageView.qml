@@ -3,10 +3,10 @@ import QtQuick 2.0
 Item {
     id: root
 
-    property bool mobile: false
     property int index: 0
+    property bool mobile: false
     property ListModel model: ListModel {}
-    property string pagePath: ""
+    property string pageBase: ""
 
     onMobileChanged: {
         if(loader.item) {
@@ -41,7 +41,7 @@ Item {
 
         anchors.fill: parent
 
-        source: currentItem ? (root.pagePath + currentItem.target) : ""
+        source: currentItem ? (root.pageBase + currentItem.target) : ""
 
         property real contentHeight: item ? item.contentHeight : 0
         property var currentItem: root.model.get(root.index)
