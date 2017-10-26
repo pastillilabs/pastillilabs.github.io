@@ -1,8 +1,11 @@
 import QtQuick 2.0
 import "components"
+import "pages"
 
 Item {
     id: root
+
+    visible: false
 
     property bool mobile: width < 500 || height < 500
 
@@ -12,6 +15,8 @@ Item {
         header.mobile = mobile;
         pageView.mobile = mobile;
     }
+
+    Component.onCompleted: visible = true
 
     Models {
         id: models
