@@ -1727,6 +1727,64 @@ var core = _globals.core.core
 		this.parent._updateStyle(true)
 	} ))
 
+//=====[component core.Row]=====================
+
+	var RowBaseComponent = _globals.core.Layout
+	var RowBasePrototype = RowBaseComponent.prototype
+
+/**
+ * @constructor
+ * @extends {_globals.core.Layout}
+ */
+	var RowComponent = _globals.core.Row = function(parent, _delegate) {
+		RowBaseComponent.apply(this, arguments)
+
+	}
+	var RowPrototype = RowComponent.prototype = Object.create(RowBasePrototype)
+
+	RowPrototype.constructor = RowComponent
+
+	RowPrototype.componentName = 'core.Row'
+	RowPrototype.addChild = function(child) {
+		_globals.core.Item.prototype.addChild.apply(this, arguments)
+		child.onChanged('recursiveVisible', this._scheduleLayout.bind(this))
+		child.onChanged('width', this._scheduleLayout.bind(this))
+		child.onChanged('height', this._scheduleLayout.bind(this))
+	}
+	RowPrototype._layout = function() {
+		if (!this.recursiveVisible)
+			return
+
+		var children = this.children;
+		var p = 0
+		var h = 0
+		this.count = children.length
+		for(var i = 0; i < children.length; ++i) {
+			var c = children[i]
+			if (!('height' in c))
+				continue
+			var b = c.y + c.height
+			if (b > h)
+				h = b
+			c.viewX = p
+			if (c.recursiveVisible)
+				p += c.width + this.spacing
+		}
+		if (p > 0)
+			p -= this.spacing
+		this.contentWidth = p
+		this.contentHeight = h
+	}
+	_globals.core._protoOnKey(RowPrototype, 'Key', (function(key, event) {
+		if (!this.handleNavigationKeys)
+			return false;
+
+		switch(key) {
+			case 'Left':	return this.focusPrevChild()
+			case 'Right':	return this.focusNextChild()
+		}
+	} ))
+
 //=====[component src.UiIndex]=====================
 
 	var UiIndexBaseComponent = _globals.core.Item
@@ -1745,6 +1803,7 @@ var core = _globals.core.core
 	UiIndexPrototype.constructor = UiIndexComponent
 
 	UiIndexPrototype.componentName = 'src.UiIndex'
+	core.addProperty(UiIndexPrototype, 'bool', 'mobile')
 
 	UiIndexPrototype.__create = function(__closure) {
 		var $this = this;
@@ -1770,10 +1829,14 @@ var _this$child0 = new _globals.src.Background($this)
 
 		_this$child1.addChild(_this_child1$child0)
 		$this.addChild(_this$child1)
+		$this._setId('root')
 	}
 	UiIndexPrototype.__setup = function(__closure) {
 		var $this = this;
 	UiIndexBasePrototype.__setup.call(this, __closure.__base); delete __closure.__base
+//assigning mobile to (${context.system.device} == _globals.core.System.prototype.Mobile)
+			var update$_this$mobile = function() { $this.mobile = ($this._get('context')._get('system')._get('device') == _globals.core.System.prototype.Mobile); }
+			$this._replaceUpdater('mobile', [update$_this$mobile, [[$this._get('context')._get('system'), 'device']]])
 //assigning anchors.fill to (${context})
 			var update$_this$anchors_fill = function() { $this._get('anchors').fill = ($this._get('context')); }
 			$this._get('anchors')._replaceUpdater('fill', [update$_this$anchors_fill, [[$this, 'context']]])
@@ -1813,111 +1876,6 @@ var _this$child0 = new _globals.src.Background($this)
 			var _this_child1$child0 = __closure._this_child1$child0
 			_this_child1$child0.__setup(__closure.__closure__this_child1$child0)
 			delete __closure.__closure__this_child1$child0
-}
-
-
-//=====[component core.Rectangle]=====================
-
-	var RectangleBaseComponent = _globals.core.Item
-	var RectangleBasePrototype = RectangleBaseComponent.prototype
-
-/**
- * @constructor
- * @extends {_globals.core.Item}
- */
-	var RectangleComponent = _globals.core.Rectangle = function(parent, _delegate) {
-		RectangleBaseComponent.apply(this, arguments)
-
-	}
-	var RectanglePrototype = RectangleComponent.prototype = Object.create(RectangleBasePrototype)
-
-	{
-		var styleMap = RectanglePrototype._propertyToStyle = Object.create(RectangleBasePrototype._propertyToStyle)
-		styleMap['color'] = 'background-color'
-	}
-
-	RectanglePrototype.constructor = RectangleComponent
-
-	RectanglePrototype.componentName = 'core.Rectangle'
-	core.addProperty(RectanglePrototype, 'color', 'color', ("#0000"))
-	core.addLazyProperty(RectanglePrototype, 'border', (function(__parent) {
-		var lazy$border = new _globals.core.Border(__parent, true)
-		var __closure = { lazy$border : lazy$border }
-
-//creating component Border
-			lazy$border.__create(__closure.__closure_lazy$border = { })
-
-
-//setting up component Border
-			var lazy$border = __closure.lazy$border
-			lazy$border.__setup(__closure.__closure_lazy$border)
-			delete __closure.__closure_lazy$border
-
-
-
-		return lazy$border
-}))
-	core.addProperty(RectanglePrototype, 'Gradient', 'gradient')
-	_globals.core._protoOnChanged(RectanglePrototype, 'color', (function(value) {
-		this.style('background-color', _globals.core.normalizeColor(value))
-	} ))
-
-//=====[component controls.web.WebItem]=====================
-
-	var WebItemBaseComponent = _globals.core.Rectangle
-	var WebItemBasePrototype = WebItemBaseComponent.prototype
-
-/**
- * @constructor
- * @extends {_globals.core.Rectangle}
- */
-	var WebItemComponent = _globals.controls.web.WebItem = function(parent, _delegate) {
-		WebItemBaseComponent.apply(this, arguments)
-
-	}
-	var WebItemPrototype = WebItemComponent.prototype = Object.create(WebItemBasePrototype)
-
-	WebItemPrototype.constructor = WebItemComponent
-
-	WebItemPrototype.componentName = 'controls.web.WebItem'
-	core.addProperty(WebItemPrototype, 'Mixin', 'hoverMixin')
-	core.addProperty(WebItemPrototype, 'string', 'position')
-	core.addProperty(WebItemPrototype, 'string', 'title')
-	_globals.core._protoOnChanged(WebItemPrototype, 'position', (function(value) { this.style('position', value); } ))
-	_globals.core._protoOnChanged(WebItemPrototype, 'title', (function(value) { this.element.dom.setAttribute('title', value); } ))
-
-	WebItemPrototype.__create = function(__closure) {
-		var $this = this;
-		WebItemBasePrototype.__create.call(this, __closure.__base = { })
-//creating component controls.web.<anonymous>
-		var _this$hoverMixin = new _globals.controls.web.HoverClickMixin($this)
-		__closure._this$hoverMixin = _this$hoverMixin
-
-//creating component HoverClickMixin
-		_this$hoverMixin.__create(__closure.__closure__this$hoverMixin = { })
-
-		$this.hoverMixin = _this$hoverMixin
-		core.addAliasProperty($this, 'hover', function() { return $this._get('hoverMixin') }, 'value')
-		core.addAliasProperty($this, 'activeHoverEnabled', function() { return $this._get('hoverMixin') }, 'activeHoverEnabled')
-		core.addAliasProperty($this, 'activeHover', function() { return $this._get('hoverMixin') }, 'activeHover')
-		core.addAliasProperty($this, 'cursor', function() { return $this._get('hoverMixin') }, 'cursor')
-		core.addAliasProperty($this, 'clickable', function() { return $this._get('hoverMixin') }, 'clickable')
-		core.addAliasProperty($this, 'hoverable', function() { return $this._get('hoverMixin') }, 'enabled')
-	}
-	WebItemPrototype.__setup = function(__closure) {
-		var $this = this;
-	WebItemBasePrototype.__setup.call(this, __closure.__base); delete __closure.__base
-//assigning color to ("transparent")
-			$this._replaceUpdater('color'); $this.color = ("transparent");
-
-//setting up component HoverClickMixin
-			var _this$hoverMixin = __closure._this$hoverMixin
-			_this$hoverMixin.__setup(__closure.__closure__this$hoverMixin)
-			delete __closure.__closure__this$hoverMixin
-
-
-//assigning hoverMixin.cursor to ("pointer")
-			$this._get('hoverMixin')._replaceUpdater('cursor'); $this._get('hoverMixin').cursor = ("pointer");
 }
 
 
@@ -2193,6 +2151,223 @@ var _this$child0 = new _globals.src.Background($this)
 	_globals.core._protoOnChanged(BorderPrototype, 'width', (function(value) { this.parent.style({'border-width': value, 'margin-left': -value, 'margin-top': -value}) } ))
 	_globals.core._protoOnChanged(BorderPrototype, 'color', (function(value) { this.parent.style('border-color', _globals.core.normalizeColor(value)) } ))
 	_globals.core._protoOnChanged(BorderPrototype, 'style', (function(value) { this.parent.style('border-style', value) } ))
+
+//=====[component core.Rectangle]=====================
+
+	var RectangleBaseComponent = _globals.core.Item
+	var RectangleBasePrototype = RectangleBaseComponent.prototype
+
+/**
+ * @constructor
+ * @extends {_globals.core.Item}
+ */
+	var RectangleComponent = _globals.core.Rectangle = function(parent, _delegate) {
+		RectangleBaseComponent.apply(this, arguments)
+
+	}
+	var RectanglePrototype = RectangleComponent.prototype = Object.create(RectangleBasePrototype)
+
+	{
+		var styleMap = RectanglePrototype._propertyToStyle = Object.create(RectangleBasePrototype._propertyToStyle)
+		styleMap['color'] = 'background-color'
+	}
+
+	RectanglePrototype.constructor = RectangleComponent
+
+	RectanglePrototype.componentName = 'core.Rectangle'
+	core.addProperty(RectanglePrototype, 'color', 'color', ("#0000"))
+	core.addLazyProperty(RectanglePrototype, 'border', (function(__parent) {
+		var lazy$border = new _globals.core.Border(__parent, true)
+		var __closure = { lazy$border : lazy$border }
+
+//creating component Border
+			lazy$border.__create(__closure.__closure_lazy$border = { })
+
+
+//setting up component Border
+			var lazy$border = __closure.lazy$border
+			lazy$border.__setup(__closure.__closure_lazy$border)
+			delete __closure.__closure_lazy$border
+
+
+
+		return lazy$border
+}))
+	core.addProperty(RectanglePrototype, 'Gradient', 'gradient')
+	_globals.core._protoOnChanged(RectanglePrototype, 'color', (function(value) {
+		this.style('background-color', _globals.core.normalizeColor(value))
+	} ))
+
+//=====[component controls.web.WebItem]=====================
+
+	var WebItemBaseComponent = _globals.core.Rectangle
+	var WebItemBasePrototype = WebItemBaseComponent.prototype
+
+/**
+ * @constructor
+ * @extends {_globals.core.Rectangle}
+ */
+	var WebItemComponent = _globals.controls.web.WebItem = function(parent, _delegate) {
+		WebItemBaseComponent.apply(this, arguments)
+
+	}
+	var WebItemPrototype = WebItemComponent.prototype = Object.create(WebItemBasePrototype)
+
+	WebItemPrototype.constructor = WebItemComponent
+
+	WebItemPrototype.componentName = 'controls.web.WebItem'
+	core.addProperty(WebItemPrototype, 'Mixin', 'hoverMixin')
+	core.addProperty(WebItemPrototype, 'string', 'position')
+	core.addProperty(WebItemPrototype, 'string', 'title')
+	_globals.core._protoOnChanged(WebItemPrototype, 'position', (function(value) { this.style('position', value); } ))
+	_globals.core._protoOnChanged(WebItemPrototype, 'title', (function(value) { this.element.dom.setAttribute('title', value); } ))
+
+	WebItemPrototype.__create = function(__closure) {
+		var $this = this;
+		WebItemBasePrototype.__create.call(this, __closure.__base = { })
+//creating component controls.web.<anonymous>
+		var _this$hoverMixin = new _globals.controls.web.HoverClickMixin($this)
+		__closure._this$hoverMixin = _this$hoverMixin
+
+//creating component HoverClickMixin
+		_this$hoverMixin.__create(__closure.__closure__this$hoverMixin = { })
+
+		$this.hoverMixin = _this$hoverMixin
+		core.addAliasProperty($this, 'hover', function() { return $this._get('hoverMixin') }, 'value')
+		core.addAliasProperty($this, 'activeHoverEnabled', function() { return $this._get('hoverMixin') }, 'activeHoverEnabled')
+		core.addAliasProperty($this, 'activeHover', function() { return $this._get('hoverMixin') }, 'activeHover')
+		core.addAliasProperty($this, 'cursor', function() { return $this._get('hoverMixin') }, 'cursor')
+		core.addAliasProperty($this, 'clickable', function() { return $this._get('hoverMixin') }, 'clickable')
+		core.addAliasProperty($this, 'hoverable', function() { return $this._get('hoverMixin') }, 'enabled')
+	}
+	WebItemPrototype.__setup = function(__closure) {
+		var $this = this;
+	WebItemBasePrototype.__setup.call(this, __closure.__base); delete __closure.__base
+//assigning color to ("transparent")
+			$this._replaceUpdater('color'); $this.color = ("transparent");
+
+//setting up component HoverClickMixin
+			var _this$hoverMixin = __closure._this$hoverMixin
+			_this$hoverMixin.__setup(__closure.__closure__this$hoverMixin)
+			delete __closure.__closure__this$hoverMixin
+
+
+//assigning hoverMixin.cursor to ("pointer")
+			$this._get('hoverMixin')._replaceUpdater('cursor'); $this._get('hoverMixin').cursor = ("pointer");
+}
+
+
+//=====[component controls.web.WebLink]=====================
+
+	var WebLinkBaseComponent = _globals.controls.web.WebItem
+	var WebLinkBasePrototype = WebLinkBaseComponent.prototype
+
+/**
+ * @constructor
+ * @extends {_globals.controls.web.WebItem}
+ */
+	var WebLinkComponent = _globals.controls.web.WebLink = function(parent, _delegate) {
+		WebLinkBaseComponent.apply(this, arguments)
+
+	}
+	var WebLinkPrototype = WebLinkComponent.prototype = Object.create(WebLinkBasePrototype)
+
+	WebLinkPrototype.constructor = WebLinkComponent
+
+	WebLinkPrototype.componentName = 'controls.web.WebLink'
+	WebLinkPrototype.registerStyle = function(style,tag) {
+		style.addRule(tag, "text-decoration: none; position: absolute; visibility: inherit; border-style: solid; border-width: 0px; white-space: nowrap; border-radius: 0px; opacity: 1.0; transform: none; left: 0px; top: 0px; width: 0px; height: 0px;")
+	}
+	WebLinkPrototype.getTag = function() { return 'a' }
+	core.addProperty(WebLinkPrototype, 'string', 'href')
+	core.addProperty(WebLinkPrototype, 'string', 'target')
+	_globals.core._protoOnChanged(WebLinkPrototype, 'href', (function(value) { this.element.dom.setAttribute('href', value); } ))
+	_globals.core._protoOnChanged(WebLinkPrototype, 'target', (function(value) { this.element.dom.setAttribute('target', value); } ))
+
+//=====[component src.RoundButton]=====================
+
+	var RoundButtonBaseComponent = _globals.controls.web.WebLink
+	var RoundButtonBasePrototype = RoundButtonBaseComponent.prototype
+
+/**
+ * @constructor
+ * @extends {_globals.controls.web.WebLink}
+ */
+	var RoundButtonComponent = _globals.src.RoundButton = function(parent, _delegate) {
+		RoundButtonBaseComponent.apply(this, arguments)
+
+	}
+	var RoundButtonPrototype = RoundButtonComponent.prototype = Object.create(RoundButtonBasePrototype)
+
+	RoundButtonPrototype.constructor = RoundButtonComponent
+
+	RoundButtonPrototype.componentName = 'src.RoundButton'
+
+	RoundButtonPrototype.__create = function(__closure) {
+		var $this = this;
+		RoundButtonBasePrototype.__create.call(this, __closure.__base = { })
+var _this$child0 = new _globals.core.Rectangle($this)
+		__closure._this$child0 = _this$child0
+
+//creating component Rectangle
+		_this$child0.__create(__closure.__closure__this$child0 = { })
+
+		$this.addChild(_this$child0)
+		var _this$child1 = new _globals.core.Image($this)
+		__closure._this$child1 = _this$child1
+
+//creating component Image
+		_this$child1.__create(__closure.__closure__this$child1 = { })
+		_this$child1._setId('image')
+		$this.addChild(_this$child1)
+		$this._setId('root')
+		core.addAliasProperty($this, 'source', function() { return $this._get('image') }, 'source')
+	}
+	RoundButtonPrototype.__setup = function(__closure) {
+		var $this = this;
+	RoundButtonBasePrototype.__setup.call(this, __closure.__base); delete __closure.__base
+//assigning width to (${context.system.device} == _globals.core.System.prototype.Mobile ? 40 : 50)
+			var update$_this$width = function() { $this.width = ($this._get('context')._get('system')._get('device') == _globals.core.System.prototype.Mobile ? 40 : 50); }
+			$this._replaceUpdater('width', [update$_this$width, [[$this._get('context')._get('system'), 'device']]])
+//assigning height to (${context.system.device} == _globals.core.System.prototype.Mobile ? 40 : 50)
+			var update$_this$height = function() { $this.height = ($this._get('context')._get('system')._get('device') == _globals.core.System.prototype.Mobile ? 40 : 50); }
+			$this._replaceUpdater('height', [update$_this$height, [[$this._get('context')._get('system'), 'device']]])
+
+//setting up component Rectangle
+			var _this$child0 = __closure._this$child0
+			_this$child0.__setup(__closure.__closure__this$child0)
+			delete __closure.__closure__this$child0
+
+//assigning opacity to (0.6)
+			_this$child0._replaceUpdater('opacity'); _this$child0.opacity = (0.6);
+//assigning border.color to (${root.hover} ? "white" : "transparent")
+			var update$_this_child0$border_color = function() { _this$child0._get('border').color = (_this$child0._get('root')._get('hover') ? "white" : "transparent"); }
+			_this$child0._get('border')._replaceUpdater('color', [update$_this_child0$border_color, [[_this$child0._get('root'), 'hover']]])
+//assigning color to ("#203040")
+			_this$child0._replaceUpdater('color'); _this$child0.color = ("#203040");
+//assigning radius to (Math.min((${width}),(${height})) / 2)
+			var update$_this_child0$radius = function() { _this$child0.radius = (Math.min((_this$child0._get('width')),(_this$child0._get('height'))) / 2); }
+			_this$child0._replaceUpdater('radius', [update$_this_child0$radius, [[_this$child0, 'height'],[_this$child0, 'width']]])
+//assigning border.width to (${root.hover} ? 2 : 0)
+			var update$_this_child0$border_width = function() { _this$child0._get('border').width = (_this$child0._get('root')._get('hover') ? 2 : 0); }
+			_this$child0._get('border')._replaceUpdater('width', [update$_this_child0$border_width, [[_this$child0._get('root'), 'hover']]])
+//assigning anchors.fill to (${parent})
+			var update$_this_child0$anchors_fill = function() { _this$child0._get('anchors').fill = (_this$child0._get('parent')); }
+			_this$child0._get('anchors')._replaceUpdater('fill', [update$_this_child0$anchors_fill, [[_this$child0, 'parent']]])
+
+
+//setting up component Image
+			var _this$child1 = __closure._this$child1
+			_this$child1.__setup(__closure.__closure__this$child1)
+			delete __closure.__closure__this$child1
+
+//assigning anchors.margins to (10)
+			_this$child1._get('anchors')._replaceUpdater('margins'); _this$child1._get('anchors').margins = (10);
+//assigning anchors.fill to (${parent})
+			var update$_this_child1$anchors_fill = function() { _this$child1._get('anchors').fill = (_this$child1._get('parent')); }
+			_this$child1._get('anchors')._replaceUpdater('fill', [update$_this_child1$anchors_fill, [[_this$child1, 'parent']]])
+}
+
 
 //=====[component core.Effects]=====================
 
@@ -3056,33 +3231,6 @@ core.addAliasProperty($this, 'hover', function() { return $this }, 'containsMous
 	core.addProperty(TransformPrototype, 'real', 'skewX')
 	core.addProperty(TransformPrototype, 'real', 'skewY')
 
-//=====[component controls.web.WebLink]=====================
-
-	var WebLinkBaseComponent = _globals.controls.web.WebItem
-	var WebLinkBasePrototype = WebLinkBaseComponent.prototype
-
-/**
- * @constructor
- * @extends {_globals.controls.web.WebItem}
- */
-	var WebLinkComponent = _globals.controls.web.WebLink = function(parent, _delegate) {
-		WebLinkBaseComponent.apply(this, arguments)
-
-	}
-	var WebLinkPrototype = WebLinkComponent.prototype = Object.create(WebLinkBasePrototype)
-
-	WebLinkPrototype.constructor = WebLinkComponent
-
-	WebLinkPrototype.componentName = 'controls.web.WebLink'
-	WebLinkPrototype.registerStyle = function(style,tag) {
-		style.addRule(tag, "text-decoration: none; position: absolute; visibility: inherit; border-style: solid; border-width: 0px; white-space: nowrap; border-radius: 0px; opacity: 1.0; transform: none; left: 0px; top: 0px; width: 0px; height: 0px;")
-	}
-	WebLinkPrototype.getTag = function() { return 'a' }
-	core.addProperty(WebLinkPrototype, 'string', 'href')
-	core.addProperty(WebLinkPrototype, 'string', 'target')
-	_globals.core._protoOnChanged(WebLinkPrototype, 'href', (function(value) { this.element.dom.setAttribute('href', value); } ))
-	_globals.core._protoOnChanged(WebLinkPrototype, 'target', (function(value) { this.element.dom.setAttribute('target', value); } ))
-
 //=====[component src.PageMain]=====================
 
 	var PageMainBaseComponent = _globals.core.Item
@@ -3101,6 +3249,7 @@ core.addAliasProperty($this, 'hover', function() { return $this }, 'containsMous
 	PageMainPrototype.constructor = PageMainComponent
 
 	PageMainPrototype.componentName = 'src.PageMain'
+	core.addProperty(PageMainPrototype, 'bool', 'mobile')
 
 	PageMainPrototype.__create = function(__closure) {
 		var $this = this;
@@ -3145,10 +3294,41 @@ var _this$child0 = new _globals.core.Item($this)
 		_this_child0$child1._setId('content')
 		_this$child0.addChild(_this_child0$child1)
 		$this.addChild(_this$child0)
+		var _this$child1 = new _globals.core.Row($this)
+		__closure._this$child1 = _this$child1
+
+//creating component Row
+		_this$child1.__create(__closure.__closure__this$child1 = { })
+		var _this_child1$child0 = new _globals.src.RoundButton(_this$child1)
+		__closure._this_child1$child0 = _this_child1$child0
+
+//creating component RoundButton
+		_this_child1$child0.__create(__closure.__closure__this_child1$child0 = { })
+
+		_this$child1.addChild(_this_child1$child0)
+		var _this_child1$child1 = new _globals.src.RoundButton(_this$child1)
+		__closure._this_child1$child1 = _this_child1$child1
+
+//creating component RoundButton
+		_this_child1$child1.__create(__closure.__closure__this_child1$child1 = { })
+
+		_this$child1.addChild(_this_child1$child1)
+		var _this_child1$child2 = new _globals.src.RoundButton(_this$child1)
+		__closure._this_child1$child2 = _this_child1$child2
+
+//creating component RoundButton
+		_this_child1$child2.__create(__closure.__closure__this_child1$child2 = { })
+
+		_this$child1.addChild(_this_child1$child2)
+		$this.addChild(_this$child1)
+		$this._setId('root')
 	}
 	PageMainPrototype.__setup = function(__closure) {
 		var $this = this;
 	PageMainBasePrototype.__setup.call(this, __closure.__base); delete __closure.__base
+//assigning mobile to (${context.system.device} == _globals.core.System.prototype.Mobile)
+			var update$_this$mobile = function() { $this.mobile = ($this._get('context')._get('system')._get('device') == _globals.core.System.prototype.Mobile); }
+			$this._replaceUpdater('mobile', [update$_this$mobile, [[$this._get('context')._get('system'), 'device']]])
 //assigning anchors.fill to (${parent})
 			var update$_this$anchors_fill = function() { $this._get('anchors').fill = ($this._get('parent')); }
 			$this._get('anchors')._replaceUpdater('fill', [update$_this$anchors_fill, [[$this, 'parent']]])
@@ -3167,9 +3347,9 @@ var _this$child0 = new _globals.core.Item($this)
 //assigning anchors.left to (${parent.left})
 			var update$_this_child0$anchors_left = function() { _this$child0._get('anchors').left = (_this$child0._get('parent')._get('left')); }
 			_this$child0._get('anchors')._replaceUpdater('left', [update$_this_child0$anchors_left, [[_this$child0._get('parent'), 'left']]])
-//assigning height to (${content.height} + 100)
-			var update$_this_child0$height = function() { _this$child0.height = (_this$child0._get('content')._get('height') + 100); }
-			_this$child0._replaceUpdater('height', [update$_this_child0$height, [[_this$child0._get('content'), 'height']]])
+//assigning height to (${content.height} + (${root.mobile} ? 80 : 100))
+			var update$_this_child0$height = function() { _this$child0.height = (_this$child0._get('content')._get('height') + (_this$child0._get('root')._get('mobile') ? 80 : 100)); }
+			_this$child0._replaceUpdater('height', [update$_this_child0$height, [[_this$child0._get('content'), 'height'],[_this$child0._get('root'), 'mobile']]])
 
 //setting up component Rectangle
 			var _this_child0$child0 = __closure._this_child0$child0
@@ -3200,8 +3380,9 @@ var _this$child0 = new _globals.core.Item($this)
 //assigning anchors.verticalCenter to (${parent.verticalCenter})
 			var update$_this_child0_child1$anchors_verticalCenter = function() { _this_child0$child1._get('anchors').verticalCenter = (_this_child0$child1._get('parent')._get('verticalCenter')); }
 			_this_child0$child1._get('anchors')._replaceUpdater('verticalCenter', [update$_this_child0_child1$anchors_verticalCenter, [[_this_child0$child1._get('parent'), 'verticalCenter']]])
-//assigning spacing to (40)
-			_this_child0$child1._replaceUpdater('spacing'); _this_child0$child1.spacing = (40);
+//assigning spacing to (${root.mobile} ? 20 : 40)
+			var update$_this_child0_child1$spacing = function() { _this_child0$child1.spacing = (_this_child0$child1._get('root')._get('mobile') ? 20 : 40); }
+			_this_child0$child1._replaceUpdater('spacing', [update$_this_child0_child1$spacing, [[_this_child0$child1._get('root'), 'mobile']]])
 //assigning anchors.right to (${parent.right})
 			var update$_this_child0_child1$anchors_right = function() { _this_child0$child1._get('anchors').right = (_this_child0$child1._get('parent')._get('right')); }
 			_this_child0$child1._get('anchors')._replaceUpdater('right', [update$_this_child0_child1$anchors_right, [[_this_child0$child1._get('parent'), 'right']]])
@@ -3226,8 +3407,9 @@ var _this$child0 = new _globals.core.Item($this)
 			_this_child0_child1$child0._replaceUpdater('horizontalAlignment'); _this_child0_child1$child0.horizontalAlignment = (_globals.core.Text.prototype.AlignHCenter);
 //assigning wrapMode to (_globals.core.Text.prototype.Wrap)
 			_this_child0_child1$child0._replaceUpdater('wrapMode'); _this_child0_child1$child0.wrapMode = (_globals.core.Text.prototype.Wrap);
-//assigning font.pixelSize to (40)
-			_this_child0_child1$child0._get('font')._replaceUpdater('pixelSize'); _this_child0_child1$child0._get('font').pixelSize = (40);
+//assigning font.pixelSize to (${root.mobile} ? 30 : 40)
+			var update$_this_child0_child1_child0$font_pixelSize = function() { _this_child0_child1$child0._get('font').pixelSize = (_this_child0_child1$child0._get('root')._get('mobile') ? 30 : 40); }
+			_this_child0_child1$child0._get('font')._replaceUpdater('pixelSize', [update$_this_child0_child1_child0$font_pixelSize, [[_this_child0_child1$child0._get('root'), 'mobile']]])
 //assigning verticalAlignment to (_globals.core.Text.prototype.AlignVCenter)
 			_this_child0_child1$child0._replaceUpdater('verticalAlignment'); _this_child0_child1$child0.verticalAlignment = (_globals.core.Text.prototype.AlignVCenter);
 //assigning anchors.left to (${parent.left})
@@ -3247,17 +3429,80 @@ var _this$child0 = new _globals.core.Item($this)
 			_this_child0_child1$child1.__setup(__closure.__closure__this_child0_child1$child1)
 			delete __closure.__closure__this_child0_child1$child1
 
-//assigning href to ("https://play.google.com/store/apps/details?id=com.pastillilabs.situations2")
-			_this_child0_child1$child1._replaceUpdater('href'); _this_child0_child1$child1.href = ("https://play.google.com/store/apps/details?id=com.pastillilabs.situations2");
-//assigning width to (202)
-			_this_child0_child1$child1._replaceUpdater('width'); _this_child0_child1$child1.width = (202);
 //assigning anchors.horizontalCenter to (${parent.horizontalCenter})
 			var update$_this_child0_child1_child1$anchors_horizontalCenter = function() { _this_child0_child1$child1._get('anchors').horizontalCenter = (_this_child0_child1$child1._get('parent')._get('horizontalCenter')); }
 			_this_child0_child1$child1._get('anchors')._replaceUpdater('horizontalCenter', [update$_this_child0_child1_child1$anchors_horizontalCenter, [[_this_child0_child1$child1._get('parent'), 'horizontalCenter']]])
+//assigning target to (${href})
+			var update$_this_child0_child1_child1$target = function() { _this_child0_child1$child1.target = (_this_child0_child1$child1._get('href')); }
+			_this_child0_child1$child1._replaceUpdater('target', [update$_this_child0_child1_child1$target, [[_this_child0_child1$child1, 'href']]])
 //assigning source to ("img/en-play-badge.png")
 			_this_child0_child1$child1._replaceUpdater('source'); _this_child0_child1$child1.source = ("img/en-play-badge.png");
 //assigning height to (60)
 			_this_child0_child1$child1._replaceUpdater('height'); _this_child0_child1$child1.height = (60);
+//assigning width to (202)
+			_this_child0_child1$child1._replaceUpdater('width'); _this_child0_child1$child1.width = (202);
+//assigning href to ("https://play.google.com/store/apps/details?id=com.pastillilabs.situations2")
+			_this_child0_child1$child1._replaceUpdater('href'); _this_child0_child1$child1.href = ("https://play.google.com/store/apps/details?id=com.pastillilabs.situations2");
+
+
+
+
+//setting up component Row
+			var _this$child1 = __closure._this$child1
+			_this$child1.__setup(__closure.__closure__this$child1)
+			delete __closure.__closure__this$child1
+
+//assigning anchors.margins to (10)
+			_this$child1._get('anchors')._replaceUpdater('margins'); _this$child1._get('anchors').margins = (10);
+//assigning anchors.right to (${parent.right})
+			var update$_this_child1$anchors_right = function() { _this$child1._get('anchors').right = (_this$child1._get('parent')._get('right')); }
+			_this$child1._get('anchors')._replaceUpdater('right', [update$_this_child1$anchors_right, [[_this$child1._get('parent'), 'right']]])
+//assigning spacing to (20)
+			_this$child1._replaceUpdater('spacing'); _this$child1.spacing = (20);
+//assigning anchors.bottom to (${parent.bottom})
+			var update$_this_child1$anchors_bottom = function() { _this$child1._get('anchors').bottom = (_this$child1._get('parent')._get('bottom')); }
+			_this$child1._get('anchors')._replaceUpdater('bottom', [update$_this_child1$anchors_bottom, [[_this$child1._get('parent'), 'bottom']]])
+
+//setting up component RoundButton
+			var _this_child1$child0 = __closure._this_child1$child0
+			_this_child1$child0.__setup(__closure.__closure__this_child1$child0)
+			delete __closure.__closure__this_child1$child0
+
+//assigning source to ("img/mono/twitter.png")
+			_this_child1$child0._replaceUpdater('source'); _this_child1$child0.source = ("img/mono/twitter.png");
+//assigning href to ("https://www.twitter.com/situationsapp")
+			_this_child1$child0._replaceUpdater('href'); _this_child1$child0.href = ("https://www.twitter.com/situationsapp");
+//assigning target to (${href})
+			var update$_this_child1_child0$target = function() { _this_child1$child0.target = (_this_child1$child0._get('href')); }
+			_this_child1$child0._replaceUpdater('target', [update$_this_child1_child0$target, [[_this_child1$child0, 'href']]])
+
+
+//setting up component RoundButton
+			var _this_child1$child1 = __closure._this_child1$child1
+			_this_child1$child1.__setup(__closure.__closure__this_child1$child1)
+			delete __closure.__closure__this_child1$child1
+
+//assigning source to ("img/mono/facebook.png")
+			_this_child1$child1._replaceUpdater('source'); _this_child1$child1.source = ("img/mono/facebook.png");
+//assigning href to ("https://www.facebook.com/situationsapp")
+			_this_child1$child1._replaceUpdater('href'); _this_child1$child1.href = ("https://www.facebook.com/situationsapp");
+//assigning target to (${href})
+			var update$_this_child1_child1$target = function() { _this_child1$child1.target = (_this_child1$child1._get('href')); }
+			_this_child1$child1._replaceUpdater('target', [update$_this_child1_child1$target, [[_this_child1$child1, 'href']]])
+
+
+//setting up component RoundButton
+			var _this_child1$child2 = __closure._this_child1$child2
+			_this_child1$child2.__setup(__closure.__closure__this_child1$child2)
+			delete __closure.__closure__this_child1$child2
+
+//assigning source to ("img/mono/mail.png")
+			_this_child1$child2._replaceUpdater('source'); _this_child1$child2.source = ("img/mono/mail.png");
+//assigning href to ("mailto:support@pastillilabs.com")
+			_this_child1$child2._replaceUpdater('href'); _this_child1$child2.href = ("mailto:support@pastillilabs.com");
+//assigning target to (${href})
+			var update$_this_child1_child2$target = function() { _this_child1$child2.target = (_this_child1$child2._get('href')); }
+			_this_child1$child2._replaceUpdater('target', [update$_this_child1_child2$target, [[_this_child1$child2, 'href']]])
 }
 
 
