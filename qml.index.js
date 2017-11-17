@@ -1813,7 +1813,7 @@ var core = _globals.core.core
 				pageStack.pageName = value.page;
             }
 			else {
-				pageStack.pageName = 'main';
+				pageStack.pageName = "main";
             }
             
 			window.scrollTo(0, 0);
@@ -4370,8 +4370,8 @@ var _this$child0 = new _globals.core.Text($this)
 //assigning width to (${textItem.paintedWidth} + 20)
 			var update$_this$width = function() { $this.width = ($this._get('textItem')._get('paintedWidth') + 20); }
 			$this._replaceUpdater('width', [update$_this$width, [[$this._get('textItem'), 'paintedWidth']]])
-//assigning href to ("http://pastillilabs.github.io/" + ${page})
-			var update$_this$href = function() { $this.href = ("http://pastillilabs.github.io/" + $this._get('page')); }
+//assigning href to ("https://pastillilabs.github.io/" + ${page})
+			var update$_this$href = function() { $this.href = ("https://pastillilabs.github.io/" + $this._get('page')); }
 			$this._replaceUpdater('href', [update$_this$href, [[$this, 'page']]])
 //assigning radius to (5)
 			$this._replaceUpdater('radius'); $this.radius = (5);
