@@ -1804,6 +1804,19 @@ var core = _globals.core.core
 
 	UiIndexPrototype.componentName = 'src.UiIndex'
 	core.addProperty(UiIndexPrototype, 'bool', 'mobile')
+	core.addProperty(UiIndexPrototype, 'Object', 'state')
+	_globals.core._protoOnChanged(UiIndexPrototype, 'state', (function(value) {
+		if(value) {
+			if(value.page && value.page !== "") {
+				pages.pageName = value.page;
+            }
+			else {
+				pages.pageName = 'main';
+            }
+            
+			window.scrollTo(0, 0);
+		}
+	} ))
 
 	UiIndexPrototype.__create = function(__closure) {
 		var $this = this;
@@ -1828,6 +1841,13 @@ var _this$child0 = new _globals.src.Background($this)
 		_this_child1$child0.__create(__closure.__closure__this_child1$child0 = { })
 
 		_this$child1.addChild(_this_child1$child0)
+		var _this_child1$child1 = new _globals.src.PageHelp(_this$child1)
+		__closure._this_child1$child1 = _this_child1$child1
+
+//creating component PageHelp
+		_this_child1$child1.__create(__closure.__closure__this_child1$child1 = { })
+
+		_this$child1.addChild(_this_child1$child1)
 		$this.addChild(_this$child1)
 		$this._setId('root')
 	}
@@ -1837,9 +1857,31 @@ var _this$child0 = new _globals.src.Background($this)
 //assigning mobile to (${context.system.device} == _globals.core.System.prototype.Mobile)
 			var update$_this$mobile = function() { $this.mobile = ($this._get('context')._get('system')._get('device') == _globals.core.System.prototype.Mobile); }
 			$this._replaceUpdater('mobile', [update$_this$mobile, [[$this._get('context')._get('system'), 'device']]])
+//assigning state to (${context.location.state})
+			var update$_this$state = function() { $this.state = ($this._get('context')._get('location')._get('state')); }
+			$this._replaceUpdater('state', [update$_this$state, [[$this._get('context')._get('location'), 'state']]])
 //assigning anchors.fill to (${context})
 			var update$_this$anchors_fill = function() { $this._get('anchors').fill = ($this._get('context')); }
 			$this._get('anchors')._replaceUpdater('fill', [update$_this$anchors_fill, [[$this, 'context']]])
+			$this._context._onCompleted((function() {
+		if(!window.location.hostname) {
+			return;
+        }
+
+		var path = window.location.pathname.split("/");
+		var state = {};
+		if(path[1]) {
+			state.page = path[1];
+        }
+		if(path[2]) {
+			state.section = path[2];
+        }
+		if(path[3]) {
+			state.element = path[3];
+        }
+
+		this._context.location.pushState(state, window.location.pathname, window.location.pathname);
+	} ).bind($this))
 
 //setting up component Background
 			var _this$child0 = __closure._this$child0
@@ -1876,6 +1918,51 @@ var _this$child0 = new _globals.src.Background($this)
 			var _this_child1$child0 = __closure._this_child1$child0
 			_this_child1$child0.__setup(__closure.__closure__this_child1$child0)
 			delete __closure.__closure__this_child1$child0
+
+
+
+//setting up component PageHelp
+			var _this_child1$child1 = __closure._this_child1$child1
+			_this_child1$child1.__setup(__closure.__closure__this_child1$child1)
+			delete __closure.__closure__this_child1$child1
+}
+
+
+//=====[component src.PageHelp]=====================
+
+	var PageHelpBaseComponent = _globals.core.Item
+	var PageHelpBasePrototype = PageHelpBaseComponent.prototype
+
+/**
+ * @constructor
+ * @extends {_globals.core.Item}
+ */
+	var PageHelpComponent = _globals.src.PageHelp = function(parent, _delegate) {
+		PageHelpBaseComponent.apply(this, arguments)
+
+	}
+	var PageHelpPrototype = PageHelpComponent.prototype = Object.create(PageHelpBasePrototype)
+
+	PageHelpPrototype.constructor = PageHelpComponent
+
+	PageHelpPrototype.componentName = 'src.PageHelp'
+	core.addProperty(PageHelpPrototype, 'bool', 'mobile')
+	core.addProperty(PageHelpPrototype, 'string', 'url', ("help"))
+
+	PageHelpPrototype.__create = function(__closure) {
+		var $this = this;
+		PageHelpBasePrototype.__create.call(this, __closure.__base = { })
+$this._setId('root')
+	}
+	PageHelpPrototype.__setup = function(__closure) {
+		var $this = this;
+	PageHelpBasePrototype.__setup.call(this, __closure.__base); delete __closure.__base
+//assigning mobile to (${context.system.device} == _globals.core.System.prototype.Mobile)
+			var update$_this$mobile = function() { $this.mobile = ($this._get('context')._get('system')._get('device') == _globals.core.System.prototype.Mobile); }
+			$this._replaceUpdater('mobile', [update$_this$mobile, [[$this._get('context')._get('system'), 'device']]])
+//assigning anchors.fill to (${parent})
+			var update$_this$anchors_fill = function() { $this._get('anchors').fill = ($this._get('parent')); }
+			$this._get('anchors')._replaceUpdater('fill', [update$_this$anchors_fill, [[$this, 'parent']]])
 }
 
 
@@ -3250,6 +3337,7 @@ core.addAliasProperty($this, 'hover', function() { return $this }, 'containsMous
 
 	PageMainPrototype.componentName = 'src.PageMain'
 	core.addProperty(PageMainPrototype, 'bool', 'mobile')
+	core.addProperty(PageMainPrototype, 'string', 'url', ("main"))
 
 	PageMainPrototype.__create = function(__closure) {
 		var $this = this;
