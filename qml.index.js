@@ -1806,12 +1806,14 @@ var core = _globals.core.core
 	core.addProperty(UiIndexPrototype, 'bool', 'mobile')
 	core.addProperty(UiIndexPrototype, 'Object', 'state')
 	_globals.core._protoOnChanged(UiIndexPrototype, 'state', (function(value) {
+	var pageStack = this._get('pageStack', true)
+
 		if(value) {
 			if(value.page && value.page !== "") {
-				pages.pageName = value.page;
+				pageStack.pageName = value.page;
             }
 			else {
-				pages.pageName = 'main';
+				pageStack.pageName = 'main';
             }
             
 			window.scrollTo(0, 0);
@@ -1848,7 +1850,28 @@ var _this$child0 = new _globals.src.Background($this)
 		_this_child1$child1.__create(__closure.__closure__this_child1$child1 = { })
 
 		_this$child1.addChild(_this_child1$child1)
+		_this$child1._setId('pageStack')
 		$this.addChild(_this$child1)
+		var _this$child2 = new _globals.core.Row($this)
+		__closure._this$child2 = _this$child2
+
+//creating component Row
+		_this$child2.__create(__closure.__closure__this$child2 = { })
+		var _this_child2$child0 = new _globals.src.MenuButton(_this$child2)
+		__closure._this_child2$child0 = _this_child2$child0
+
+//creating component MenuButton
+		_this_child2$child0.__create(__closure.__closure__this_child2$child0 = { })
+
+		_this$child2.addChild(_this_child2$child0)
+		var _this_child2$child1 = new _globals.src.MenuButton(_this$child2)
+		__closure._this_child2$child1 = _this_child2$child1
+
+//creating component MenuButton
+		_this_child2$child1.__create(__closure.__closure__this_child2$child1 = { })
+
+		_this$child2.addChild(_this_child2$child1)
+		$this.addChild(_this$child2)
 		$this._setId('root')
 	}
 	UiIndexPrototype.__setup = function(__closure) {
@@ -1860,9 +1883,9 @@ var _this$child0 = new _globals.src.Background($this)
 //assigning state to (${context.location.state})
 			var update$_this$state = function() { $this.state = ($this._get('context')._get('location')._get('state')); }
 			$this._replaceUpdater('state', [update$_this$state, [[$this._get('context')._get('location'), 'state']]])
-//assigning anchors.fill to (${context})
-			var update$_this$anchors_fill = function() { $this._get('anchors').fill = ($this._get('context')); }
-			$this._get('anchors')._replaceUpdater('fill', [update$_this$anchors_fill, [[$this, 'context']]])
+//assigning anchors.fill to (${parent})
+			var update$_this$anchors_fill = function() { $this._get('anchors').fill = ($this._get('parent')); }
+			$this._get('anchors')._replaceUpdater('fill', [update$_this$anchors_fill, [[$this, 'parent']]])
 			$this._context._onCompleted((function() {
 		if(!window.location.hostname) {
 			return;
@@ -1925,8 +1948,94 @@ var _this$child0 = new _globals.src.Background($this)
 			var _this_child1$child1 = __closure._this_child1$child1
 			_this_child1$child1.__setup(__closure.__closure__this_child1$child1)
 			delete __closure.__closure__this_child1$child1
+
+
+
+
+//setting up component Row
+			var _this$child2 = __closure._this$child2
+			_this$child2.__setup(__closure.__closure__this$child2)
+			delete __closure.__closure__this$child2
+
+//assigning y to (10)
+			_this$child2._replaceUpdater('y'); _this$child2.y = (10);
+//assigning anchors.right to (${parent.right})
+			var update$_this_child2$anchors_right = function() { _this$child2._get('anchors').right = (_this$child2._get('parent')._get('right')); }
+			_this$child2._get('anchors')._replaceUpdater('right', [update$_this_child2$anchors_right, [[_this$child2._get('parent'), 'right']]])
+//assigning spacing to (20)
+			_this$child2._replaceUpdater('spacing'); _this$child2.spacing = (20);
+//assigning anchors.rightMargin to (20)
+			_this$child2._get('anchors')._replaceUpdater('rightMargin'); _this$child2._get('anchors').rightMargin = (20);
+
+//setting up component MenuButton
+			var _this_child2$child0 = __closure._this_child2$child0
+			_this_child2$child0.__setup(__closure.__closure__this_child2$child0)
+			delete __closure.__closure__this_child2$child0
+
+//assigning text to (_globals.qsTr(("Home")))
+			var update$_this_child2_child0$text = function() { _this_child2$child0.text = (_globals.qsTr(("Home"))); }
+			_this_child2$child0._replaceUpdater('text', [update$_this_child2_child0$text, [[_this_child2$child0._context, 'language']]])
+//assigning page to ("main")
+			_this_child2$child0._replaceUpdater('page'); _this_child2$child0.page = ("main");
+
+
+//setting up component MenuButton
+			var _this_child2$child1 = __closure._this_child2$child1
+			_this_child2$child1.__setup(__closure.__closure__this_child2$child1)
+			delete __closure.__closure__this_child2$child1
+
+//assigning text to (_globals.qsTr(("Help")))
+			var update$_this_child2_child1$text = function() { _this_child2$child1.text = (_globals.qsTr(("Help"))); }
+			_this_child2$child1._replaceUpdater('text', [update$_this_child2_child1$text, [[_this_child2$child1._context, 'language']]])
+//assigning page to ("help")
+			_this_child2$child1._replaceUpdater('page'); _this_child2$child1.page = ("help");
 }
 
+
+//=====[component core.Animation]=====================
+
+	var AnimationBaseComponent = _globals.core.Object
+	var AnimationBasePrototype = AnimationBaseComponent.prototype
+
+/**
+ * @constructor
+ * @extends {_globals.core.Object}
+ */
+	var AnimationComponent = _globals.core.Animation = function(parent, _delegate) {
+		AnimationBaseComponent.apply(this, arguments)
+	//custom constructor:
+	{ this._disabled = 0; this._native = false }
+
+	}
+	var AnimationPrototype = AnimationComponent.prototype = Object.create(AnimationBasePrototype)
+
+	AnimationPrototype.constructor = AnimationComponent
+
+	AnimationPrototype.componentName = 'core.Animation'
+	AnimationPrototype.interpolate = function(dst,src,t) {
+		return t * (dst - src) + src;
+	}
+	AnimationPrototype.disable = function() { ++this._disabled; this._updateAnimation() }
+	AnimationPrototype.active = function() {
+		return this.enabled() && this.duration > 0
+	}
+	AnimationPrototype.enabled = function() { return this._disabled == 0 }
+	AnimationPrototype.complete = function() { }
+	AnimationPrototype._updateAnimation = function() {
+		if (this._target)
+			this._target.updateAnimation(this._property, this)
+	}
+	AnimationPrototype.enable = function() { --this._disabled; this._updateAnimation() }
+	core.addProperty(AnimationPrototype, 'int', 'delay', (0))
+	core.addProperty(AnimationPrototype, 'int', 'duration', (200))
+	core.addProperty(AnimationPrototype, 'bool', 'cssTransition', (true))
+	core.addProperty(AnimationPrototype, 'bool', 'running', (false))
+	core.addProperty(AnimationPrototype, 'string', 'easing', ("ease"))
+	_globals.core._protoOnChanged(AnimationPrototype, 'easing', (function(value) { this._updateAnimation() } ))
+	_globals.core._protoOnChanged(AnimationPrototype, 'duration', (function(value) { this._updateAnimation() } ))
+	_globals.core._protoOnChanged(AnimationPrototype, 'delay', (function(value) { this._updateAnimation() } ))
+	_globals.core._protoOnChanged(AnimationPrototype, 'cssTransition', (function(value) { this._updateAnimation() } ))
+	_globals.core._protoOnChanged(AnimationPrototype, 'running', (function(value) { this._updateAnimation() } ))
 
 //=====[component src.PageHelp]=====================
 
@@ -4205,6 +4314,118 @@ var _this$child0 = new _globals.core.Image($this)
 //assigning anchors.centerIn to (${parent})
 			var update$_this_child1_child0$anchors_centerIn = function() { _this_child1$child0._get('anchors').centerIn = (_this_child1$child0._get('parent')); }
 			_this_child1$child0._get('anchors')._replaceUpdater('centerIn', [update$_this_child1_child0$anchors_centerIn, [[_this_child1$child0, 'parent']]])
+}
+
+
+//=====[component src.MenuButton]=====================
+
+	var MenuButtonBaseComponent = _globals.controls.web.WebLink
+	var MenuButtonBasePrototype = MenuButtonBaseComponent.prototype
+
+/**
+ * @constructor
+ * @extends {_globals.controls.web.WebLink}
+ */
+	var MenuButtonComponent = _globals.src.MenuButton = function(parent, _delegate) {
+		MenuButtonBaseComponent.apply(this, arguments)
+
+	}
+	var MenuButtonPrototype = MenuButtonComponent.prototype = Object.create(MenuButtonBasePrototype)
+
+	MenuButtonPrototype.constructor = MenuButtonComponent
+
+	MenuButtonPrototype.componentName = 'src.MenuButton'
+	core.addProperty(MenuButtonPrototype, 'string', 'page')
+	_globals.core._protoOn(MenuButtonPrototype, 'clicked', (function(e) {
+		if(this.parent.parent.newWindow) {
+			return;
+        }
+        
+		e.preventDefault();
+		this.parent.parent.open = false;
+		this._context.location.pushState({ page: this.page }, "Situations - " + this.text, this.href);
+	} ))
+
+	MenuButtonPrototype.__create = function(__closure) {
+		var $this = this;
+		MenuButtonBasePrototype.__create.call(this, __closure.__base = { })
+var _this$child0 = new _globals.core.Text($this)
+		__closure._this$child0 = _this$child0
+
+//creating component Text
+		_this$child0.__create(__closure.__closure__this$child0 = { })
+		_this$child0._setId('textItem')
+		$this.addChild(_this$child0)
+		$this._setId('root')
+		core.addAliasProperty($this, 'text', function() { return $this._get('textItem') }, 'text')
+	}
+	MenuButtonPrototype.__setup = function(__closure) {
+		var $this = this;
+	MenuButtonBasePrototype.__setup.call(this, __closure.__base); delete __closure.__base
+//assigning color to (${hover} ? "#20304080" : "transparent")
+			var update$_this$color = function() { $this.color = ($this._get('hover') ? "#20304080" : "transparent"); }
+			$this._replaceUpdater('color', [update$_this$color, [[$this, 'hover']]])
+//assigning height to (40)
+			$this._replaceUpdater('height'); $this.height = (40);
+//assigning width to (${textItem.paintedWidth} + 20)
+			var update$_this$width = function() { $this.width = ($this._get('textItem')._get('paintedWidth') + 20); }
+			$this._replaceUpdater('width', [update$_this$width, [[$this._get('textItem'), 'paintedWidth']]])
+//assigning href to ("http://pastillilabs.github.io/" + ${page})
+			var update$_this$href = function() { $this.href = ("http://pastillilabs.github.io/" + $this._get('page')); }
+			$this._replaceUpdater('href', [update$_this$href, [[$this, 'page']]])
+//assigning radius to (5)
+			$this._replaceUpdater('radius'); $this.radius = (5);
+
+//setting up component Text
+			var _this$child0 = __closure._this$child0
+			_this$child0.__setup(__closure.__closure__this$child0)
+			delete __closure.__closure__this$child0
+
+//assigning color to (${parent.hover} ? "white" : "black")
+			var update$_this_child0$color = function() { _this$child0.color = (_this$child0._get('parent')._get('hover') ? "white" : "black"); }
+			_this$child0._replaceUpdater('color', [update$_this_child0$color, [[_this$child0._get('parent'), 'hover']]])
+//assigning font.pointSize to (15)
+			_this$child0._get('font')._replaceUpdater('pointSize'); _this$child0._get('font').pointSize = (15);
+//assigning anchors.verticalCenter to (${parent.verticalCenter})
+			var update$_this_child0$anchors_verticalCenter = function() { _this$child0._get('anchors').verticalCenter = (_this$child0._get('parent')._get('verticalCenter')); }
+			_this$child0._get('anchors')._replaceUpdater('verticalCenter', [update$_this_child0$anchors_verticalCenter, [[_this$child0._get('parent'), 'verticalCenter']]])
+//assigning font.bold to (true)
+			_this$child0._get('font')._replaceUpdater('bold'); _this$child0._get('font').bold = (true);
+//assigning x to (10)
+			_this$child0._replaceUpdater('x'); _this$child0.x = (10);
+	var behavior__this_child0_on_color = new _globals.core.Animation(_this$child0)
+	var behavior__this_child0_on_color__closure = { behavior__this_child0_on_color: behavior__this_child0_on_color }
+
+//creating component Animation
+	behavior__this_child0_on_color.__create(behavior__this_child0_on_color__closure.__closure_behavior__this_child0_on_color = { })
+
+
+//setting up component Animation
+	var behavior__this_child0_on_color = behavior__this_child0_on_color__closure.behavior__this_child0_on_color
+	behavior__this_child0_on_color.__setup(behavior__this_child0_on_color__closure.__closure_behavior__this_child0_on_color)
+	delete behavior__this_child0_on_color__closure.__closure_behavior__this_child0_on_color
+
+//assigning duration to (400)
+	behavior__this_child0_on_color._replaceUpdater('duration'); behavior__this_child0_on_color.duration = (400);
+
+	_this$child0.setAnimation('color', behavior__this_child0_on_color);
+
+	var behavior__this_on_background = new _globals.core.Animation($this)
+	var behavior__this_on_background__closure = { behavior__this_on_background: behavior__this_on_background }
+
+//creating component Animation
+	behavior__this_on_background.__create(behavior__this_on_background__closure.__closure_behavior__this_on_background = { })
+
+
+//setting up component Animation
+	var behavior__this_on_background = behavior__this_on_background__closure.behavior__this_on_background
+	behavior__this_on_background.__setup(behavior__this_on_background__closure.__closure_behavior__this_on_background)
+	delete behavior__this_on_background__closure.__closure_behavior__this_on_background
+
+//assigning duration to (400)
+	behavior__this_on_background._replaceUpdater('duration'); behavior__this_on_background.duration = (400);
+
+	$this.setAnimation('background', behavior__this_on_background);
 }
 
 
