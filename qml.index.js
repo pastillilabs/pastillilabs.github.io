@@ -4343,6 +4343,8 @@ var _this$child0 = new _globals.core.Image($this)
         
 		e.preventDefault();
 		this.parent.parent.open = false;
+        console.log(JSON.stringify(this.page));
+        console.log(JSON.stringify(this.href));
 		this._context.location.pushState({ page: this.page }, "Situations - " + this.text, this.href);
 	} ))
 
