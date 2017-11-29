@@ -137,6 +137,10 @@ exports.core.keyCodes = {
 	230: 'RightAlt'
 }
 
+exports.closeApp = function() {
+	close()
+}
+
 
 if (!Function.prototype.bind) {
 	Function.prototype.bind = function(oThis) {
@@ -227,13 +231,11 @@ CoreObjectComponentPrototype.__setup = function() { }
 
 ///@private gets object by id
 CoreObjectComponentPrototype._get = function(name, unsafe) {
-	var result = this[name]
-	if (result !== undefined)
-		return result
+	if (name in this) //do not remove in here, properties may contain undefined!
+		return this[name]
 
-	result = this._local[name]
-	if (result !== undefined)
-		return result
+	if (name in this._local)
+		return this._local[name]
 
 	if (unsafe)
 		return null
@@ -1836,12 +1838,12 @@ var _this$child0 = new _globals.src.Background($this)
 //creating component PageStack
 		_this$child1.__create(__closure.__closure__this$child1 = { })
 	core.addProperty(_this$child1, 'string', 'pageName')
-		var _this_child1$child0 = new _globals.src.PageMain(_this$child1)
+		var _this_child1$child0 = new _globals.src.PageHome(_this$child1)
 		__closure._this_child1$child0 = _this_child1$child0
 
-//creating component PageMain
+//creating component PageHome
 		_this_child1$child0.__create(__closure.__closure__this_child1$child0 = { })
-		_this_child1$child0._setId('mainPage')
+		_this_child1$child0._setId('homePage')
 		_this$child1.addChild(_this_child1$child0)
 		var _this_child1$child1 = new _globals.src.PageHelp(_this$child1)
 		__closure._this_child1$child1 = _this_child1$child1
@@ -1951,7 +1953,7 @@ var _this$child0 = new _globals.src.Background($this)
 			}
 		} ).bind(_this$child1))
 
-//setting up component PageMain
+//setting up component PageHome
 			var _this_child1$child0 = __closure._this_child1$child0
 			_this_child1$child0.__setup(__closure.__closure__this_child1$child0)
 			delete __closure.__closure__this_child1$child0
@@ -1996,9 +1998,9 @@ var _this$child0 = new _globals.src.Background($this)
 //assigning text to (_globals.qsTr(("Home")))
 			var update$_this_child2_child0$text = function() { _this_child2$child0.text = (_globals.qsTr(("Home"))); }
 			_this_child2$child0._replaceUpdater('text', [update$_this_child2_child0$text, [[_this_child2$child0._context, 'language']]])
-//assigning page to (${mainPage.url})
-			var update$_this_child2_child0$page = function() { _this_child2$child0.page = (_this_child2$child0._get('mainPage')._get('url')); }
-			_this_child2$child0._replaceUpdater('page', [update$_this_child2_child0$page, [[_this_child2$child0._get('mainPage'), 'url']]])
+//assigning page to (${homePage.url})
+			var update$_this_child2_child0$page = function() { _this_child2$child0.page = (_this_child2$child0._get('homePage')._get('url')); }
+			_this_child2$child0._replaceUpdater('page', [update$_this_child2_child0$page, [[_this_child2$child0._get('homePage'), 'url']]])
 
 
 //setting up component MenuButton
@@ -2111,72 +2113,91 @@ $this._setId('root')
 }
 
 
-//=====[component controls.web.HoverClickMixin]=====================
+//=====[component src.Heading]=====================
 
-	var HoverClickMixinBaseComponent = _globals.core.Object
-	var HoverClickMixinBasePrototype = HoverClickMixinBaseComponent.prototype
+	var HeadingBaseComponent = _globals.core.Item
+	var HeadingBasePrototype = HeadingBaseComponent.prototype
 
 /**
  * @constructor
- * @extends {_globals.core.Object}
+ * @extends {_globals.core.Item}
  */
-	var HoverClickMixinComponent = _globals.controls.web.HoverClickMixin = function(parent, _delegate) {
-		HoverClickMixinBaseComponent.apply(this, arguments)
-	//custom constructor:
-	{
-		this.element = this.parent.element;
-		this.parent.style('cursor', this.cursor)
-		this._bindClick(this.clickable)
-		this._bindHover(this.enabled)
-		this._bindActiveHover(this.activeHoverEnabled)
-	}
+	var HeadingComponent = _globals.src.Heading = function(parent, _delegate) {
+		HeadingBaseComponent.apply(this, arguments)
 
 	}
-	var HoverClickMixinPrototype = HoverClickMixinComponent.prototype = Object.create(HoverClickMixinBasePrototype)
+	var HeadingPrototype = HeadingComponent.prototype = Object.create(HeadingBasePrototype)
 
-	HoverClickMixinPrototype.constructor = HoverClickMixinComponent
+	HeadingPrototype.constructor = HeadingComponent
 
-	HoverClickMixinPrototype.componentName = 'controls.web.HoverClickMixin'
-	HoverClickMixinPrototype._bindActiveHover = function(value) {
-		if (value && !this._hmActiveHoverBinder) {
-			this._hmActiveHoverBinder = new _globals.core.EventBinder(this.parent.element)
-			this._hmActiveHoverBinder.on('mouseover', function() { this.activeHover = true }.bind(this))
-			this._hmActiveHoverBinder.on('mouseout', function() { this.activeHover = false }.bind(this))
-		}
-		if (this._hmActiveHoverBinder)
-		{
-			this._hmActiveHoverBinder.enable(value)
-		}
+	HeadingPrototype.componentName = 'src.Heading'
+
+	HeadingPrototype.__create = function(__closure) {
+		var $this = this;
+		HeadingBasePrototype.__create.call(this, __closure.__base = { })
+var _this$child0 = new _globals.core.Image($this)
+		__closure._this$child0 = _this$child0
+
+//creating component Image
+		_this$child0.__create(__closure.__closure__this$child0 = { })
+		_this$child0._setId('image')
+		$this.addChild(_this$child0)
+		var _this$child1 = new _globals.src.Label($this)
+		__closure._this$child1 = _this$child1
+
+//creating component Label
+		_this$child1.__create(__closure.__closure__this$child1 = { })
+		_this$child1._setId('label')
+		$this.addChild(_this$child1)
+		core.addAliasProperty($this, 'text', function() { return $this._get('label') }, 'text')
+		core.addAliasProperty($this, 'font', function() { return $this._get('label') }, 'font')
+		core.addAliasProperty($this, 'imageSource', function() { return $this._get('image') }, 'source')
 	}
-	HoverClickMixinPrototype._bindClick = function(value) {
-		if (value && !this._hmClickBinder) {
-			this._hmClickBinder = new _globals.core.EventBinder(this.element)
-			this._hmClickBinder.on('click', _globals.core.createSignalForwarder(this.parent, 'clicked').bind(this))
-		}
-		if (this._hmClickBinder)
-			this._hmClickBinder.enable(value)
-	}
-	HoverClickMixinPrototype._bindHover = function(value) {
-		if (value && !this._hmHoverBinder) {
-			this._hmHoverBinder = new _globals.core.EventBinder(this.parent.element)
-			this._hmHoverBinder.on('mouseenter', function() { this.value = true }.bind(this))
-			this._hmHoverBinder.on('mouseleave', function() { this.value = false }.bind(this))
-		}
-		if (this._hmHoverBinder)
-			this._hmHoverBinder.enable(value)
-	}
-	core.addProperty(HoverClickMixinPrototype, 'bool', 'enabled', (true))
-	core.addProperty(HoverClickMixinPrototype, 'bool', 'clickable', (true))
-	core.addProperty(HoverClickMixinPrototype, 'bool', 'activeHoverEnabled', (false))
-	core.addProperty(HoverClickMixinPrototype, 'bool', 'value')
-	core.addProperty(HoverClickMixinPrototype, 'bool', 'activeHover', (false))
-	core.addProperty(HoverClickMixinPrototype, 'string', 'cursor')
-	_globals.core._protoOnChanged(HoverClickMixinPrototype, 'clickable', (function(value) { this._bindClick(value) } ))
-	_globals.core._protoOnChanged(HoverClickMixinPrototype, 'cursor', (function(value) {
-		this.parent.style('cursor', value)
-	} ))
-	_globals.core._protoOnChanged(HoverClickMixinPrototype, 'activeHoverEnabled', (function(value) { this._bindActiveHover(value) } ))
-	_globals.core._protoOnChanged(HoverClickMixinPrototype, 'enabled', (function(value) { this._bindHover(value) } ))
+	HeadingPrototype.__setup = function(__closure) {
+		var $this = this;
+	HeadingBasePrototype.__setup.call(this, __closure.__base); delete __closure.__base
+//assigning height to (Math.max((${image.height}),(${label.height})))
+			var update$_this$height = function() { $this.height = (Math.max(($this._get('image')._get('height')),($this._get('label')._get('height')))); }
+			$this._replaceUpdater('height', [update$_this$height, [[$this._get('label'), 'height'],[$this._get('image'), 'height']]])
+
+//setting up component Image
+			var _this$child0 = __closure._this$child0
+			_this$child0.__setup(__closure.__closure__this$child0)
+			delete __closure.__closure__this$child0
+
+//assigning width to (50)
+			_this$child0._replaceUpdater('width'); _this$child0.width = (50);
+//assigning height to (50)
+			_this$child0._replaceUpdater('height'); _this$child0.height = (50);
+//assigning anchors.left to (${parent.left})
+			var update$_this_child0$anchors_left = function() { _this$child0._get('anchors').left = (_this$child0._get('parent')._get('left')); }
+			_this$child0._get('anchors')._replaceUpdater('left', [update$_this_child0$anchors_left, [[_this$child0._get('parent'), 'left']]])
+
+
+//setting up component Label
+			var _this$child1 = __closure._this$child1
+			_this$child1.__setup(__closure.__closure__this$child1)
+			delete __closure.__closure__this$child1
+
+//assigning anchors.verticalCenter to (${parent.verticalCenter})
+			var update$_this_child1$anchors_verticalCenter = function() { _this$child1._get('anchors').verticalCenter = (_this$child1._get('parent')._get('verticalCenter')); }
+			_this$child1._get('anchors')._replaceUpdater('verticalCenter', [update$_this_child1$anchors_verticalCenter, [[_this$child1._get('parent'), 'verticalCenter']]])
+//assigning anchors.leftMargin to (20)
+			_this$child1._get('anchors')._replaceUpdater('leftMargin'); _this$child1._get('anchors').leftMargin = (20);
+//assigning anchors.right to (${parent.right})
+			var update$_this_child1$anchors_right = function() { _this$child1._get('anchors').right = (_this$child1._get('parent')._get('right')); }
+			_this$child1._get('anchors')._replaceUpdater('right', [update$_this_child1$anchors_right, [[_this$child1._get('parent'), 'right']]])
+//assigning wrapMode to (_globals.core.Text.prototype.Wrap)
+			_this$child1._replaceUpdater('wrapMode'); _this$child1.wrapMode = (_globals.core.Text.prototype.Wrap);
+//assigning font.pixelSize to (24)
+			_this$child1._get('font')._replaceUpdater('pixelSize'); _this$child1._get('font').pixelSize = (24);
+//assigning font.bold to (true)
+			_this$child1._get('font')._replaceUpdater('bold'); _this$child1._get('font').bold = (true);
+//assigning anchors.left to (${image.right})
+			var update$_this_child1$anchors_left = function() { _this$child1._get('anchors').left = (_this$child1._get('image')._get('right')); }
+			_this$child1._get('anchors')._replaceUpdater('left', [update$_this_child1$anchors_left, [[_this$child1._get('image'), 'right']]])
+}
+
 
 //=====[component core.Column]=====================
 
@@ -2283,106 +2304,545 @@ $this._setId('root')
 	_globals.core._protoOnChanged(FontPrototype, 'letterSpacing', (function(value) { this.parent.style('letter-spacing', value + "px"); this.parent._updateSize() } ))
 	_globals.core._protoOnChanged(FontPrototype, 'underline', (function(value) { this.parent.style('text-decoration', value? 'underline': ''); this.parent._updateSize() } ))
 
-//=====[component core.Border]=====================
+//=====[component src.PageHome]=====================
 
-	var BorderBaseComponent = _globals.core.Object
-	var BorderBasePrototype = BorderBaseComponent.prototype
+	var PageHomeBaseComponent = _globals.core.Item
+	var PageHomeBasePrototype = PageHomeBaseComponent.prototype
 
 /**
  * @constructor
- * @extends {_globals.core.Object}
+ * @extends {_globals.core.Item}
  */
-	var BorderComponent = _globals.core.Border = function(parent, _delegate) {
-		BorderBaseComponent.apply(this, arguments)
+	var PageHomeComponent = _globals.src.PageHome = function(parent, _delegate) {
+		PageHomeBaseComponent.apply(this, arguments)
 
 	}
-	var BorderPrototype = BorderComponent.prototype = Object.create(BorderBasePrototype)
+	var PageHomePrototype = PageHomeComponent.prototype = Object.create(PageHomeBasePrototype)
 
-	BorderPrototype.constructor = BorderComponent
+	PageHomePrototype.constructor = PageHomeComponent
 
-	BorderPrototype.componentName = 'core.Border'
-	core.addProperty(BorderPrototype, 'int', 'width')
-	core.addProperty(BorderPrototype, 'color', 'color')
-	core.addProperty(BorderPrototype, 'string', 'style')
-	core.addLazyProperty(BorderPrototype, 'left', (function(__parent) {
-		var lazy$left = new _globals.core.BorderSide(__parent, true)
-		var __closure = { lazy$left : lazy$left }
+	PageHomePrototype.componentName = 'src.PageHome'
+	core.addProperty(PageHomePrototype, 'bool', 'mobile')
+	core.addProperty(PageHomePrototype, 'string', 'url', ("home"))
 
-//creating component BorderSide
-			lazy$left.__create(__closure.__closure_lazy$left = { })
+	PageHomePrototype.__create = function(__closure) {
+		var $this = this;
+		PageHomeBasePrototype.__create.call(this, __closure.__base = { })
+var _this$child0 = new _globals.core.Item($this)
+		__closure._this$child0 = _this$child0
+
+//creating component Item
+		_this$child0.__create(__closure.__closure__this$child0 = { })
+		var _this_child0$child0 = new _globals.core.Rectangle(_this$child0)
+		__closure._this_child0$child0 = _this_child0$child0
+
+//creating component Rectangle
+		_this_child0$child0.__create(__closure.__closure__this_child0$child0 = { })
+
+		_this$child0.addChild(_this_child0$child0)
+		var _this_child0$child1 = new _globals.core.Column(_this$child0)
+		__closure._this_child0$child1 = _this_child0$child1
+
+//creating component Column
+		_this_child0$child1.__create(__closure.__closure__this_child0$child1 = { })
+		var _this_child0_child1$child0 = new _globals.core.Text(_this_child0$child1)
+		__closure._this_child0_child1$child0 = _this_child0_child1$child0
+
+//creating component Text
+		_this_child0_child1$child0.__create(__closure.__closure__this_child0_child1$child0 = { })
+		var _this_child0_child1_child0$child0 = new _globals.core.MouseArea(_this_child0_child1$child0)
+		__closure._this_child0_child1_child0$child0 = _this_child0_child1_child0$child0
+
+//creating component MouseArea
+		_this_child0_child1_child0$child0.__create(__closure.__closure__this_child0_child1_child0$child0 = { })
+
+		_this_child0_child1$child0.addChild(_this_child0_child1_child0$child0)
+		_this_child0$child1.addChild(_this_child0_child1$child0)
+		var _this_child0_child1$child1 = new _globals.src.ImageButton(_this_child0$child1)
+		__closure._this_child0_child1$child1 = _this_child0_child1$child1
+
+//creating component ImageButton
+		_this_child0_child1$child1.__create(__closure.__closure__this_child0_child1$child1 = { })
+
+		_this_child0$child1.addChild(_this_child0_child1$child1)
+		_this_child0$child1._setId('content')
+		_this$child0.addChild(_this_child0$child1)
+		$this.addChild(_this$child0)
+		var _this$child1 = new _globals.core.Row($this)
+		__closure._this$child1 = _this$child1
+
+//creating component Row
+		_this$child1.__create(__closure.__closure__this$child1 = { })
+		var _this_child1$child0 = new _globals.src.RoundButton(_this$child1)
+		__closure._this_child1$child0 = _this_child1$child0
+
+//creating component RoundButton
+		_this_child1$child0.__create(__closure.__closure__this_child1$child0 = { })
+
+		_this$child1.addChild(_this_child1$child0)
+		var _this_child1$child1 = new _globals.src.RoundButton(_this$child1)
+		__closure._this_child1$child1 = _this_child1$child1
+
+//creating component RoundButton
+		_this_child1$child1.__create(__closure.__closure__this_child1$child1 = { })
+
+		_this$child1.addChild(_this_child1$child1)
+		var _this_child1$child2 = new _globals.src.RoundButton(_this$child1)
+		__closure._this_child1$child2 = _this_child1$child2
+
+//creating component RoundButton
+		_this_child1$child2.__create(__closure.__closure__this_child1$child2 = { })
+
+		_this$child1.addChild(_this_child1$child2)
+		$this.addChild(_this$child1)
+		$this._setId('root')
+	}
+	PageHomePrototype.__setup = function(__closure) {
+		var $this = this;
+	PageHomeBasePrototype.__setup.call(this, __closure.__base); delete __closure.__base
+//assigning mobile to (${context.system.device} == _globals.core.System.prototype.Mobile)
+			var update$_this$mobile = function() { $this.mobile = ($this._get('context')._get('system')._get('device') == _globals.core.System.prototype.Mobile); }
+			$this._replaceUpdater('mobile', [update$_this$mobile, [[$this._get('context')._get('system'), 'device']]])
+//assigning anchors.fill to (${parent})
+			var update$_this$anchors_fill = function() { $this._get('anchors').fill = ($this._get('parent')); }
+			$this._get('anchors')._replaceUpdater('fill', [update$_this$anchors_fill, [[$this, 'parent']]])
+
+//setting up component Item
+			var _this$child0 = __closure._this$child0
+			_this$child0.__setup(__closure.__closure__this$child0)
+			delete __closure.__closure__this$child0
+
+//assigning anchors.right to (${parent.right})
+			var update$_this_child0$anchors_right = function() { _this$child0._get('anchors').right = (_this$child0._get('parent')._get('right')); }
+			_this$child0._get('anchors')._replaceUpdater('right', [update$_this_child0$anchors_right, [[_this$child0._get('parent'), 'right']]])
+//assigning anchors.verticalCenter to (${parent.verticalCenter})
+			var update$_this_child0$anchors_verticalCenter = function() { _this$child0._get('anchors').verticalCenter = (_this$child0._get('parent')._get('verticalCenter')); }
+			_this$child0._get('anchors')._replaceUpdater('verticalCenter', [update$_this_child0$anchors_verticalCenter, [[_this$child0._get('parent'), 'verticalCenter']]])
+//assigning anchors.left to (${parent.left})
+			var update$_this_child0$anchors_left = function() { _this$child0._get('anchors').left = (_this$child0._get('parent')._get('left')); }
+			_this$child0._get('anchors')._replaceUpdater('left', [update$_this_child0$anchors_left, [[_this$child0._get('parent'), 'left']]])
+//assigning height to (${content.height} + (${root.mobile} ? 80 : 100))
+			var update$_this_child0$height = function() { _this$child0.height = (_this$child0._get('content')._get('height') + (_this$child0._get('root')._get('mobile') ? 80 : 100)); }
+			_this$child0._replaceUpdater('height', [update$_this_child0$height, [[_this$child0._get('content'), 'height'],[_this$child0._get('root'), 'mobile']]])
+
+//setting up component Rectangle
+			var _this_child0$child0 = __closure._this_child0$child0
+			_this_child0$child0.__setup(__closure.__closure__this_child0$child0)
+			delete __closure.__closure__this_child0$child0
+
+//assigning border.width to (1)
+			_this_child0$child0._get('border')._replaceUpdater('width'); _this_child0$child0._get('border').width = (1);
+//assigning border.color to ("black")
+			_this_child0$child0._get('border')._replaceUpdater('color'); _this_child0$child0._get('border').color = ("black");
+//assigning opacity to (0.3)
+			_this_child0$child0._replaceUpdater('opacity'); _this_child0$child0.opacity = (0.3);
+//assigning color to ("#203040")
+			_this_child0$child0._replaceUpdater('color'); _this_child0$child0.color = ("#203040");
+//assigning anchors.fill to (${parent})
+			var update$_this_child0_child0$anchors_fill = function() { _this_child0$child0._get('anchors').fill = (_this_child0$child0._get('parent')); }
+			_this_child0$child0._get('anchors')._replaceUpdater('fill', [update$_this_child0_child0$anchors_fill, [[_this_child0$child0, 'parent']]])
 
 
-//setting up component BorderSide
-			var lazy$left = __closure.lazy$left
-			lazy$left.__setup(__closure.__closure_lazy$left)
-			delete __closure.__closure_lazy$left
+//setting up component Column
+			var _this_child0$child1 = __closure._this_child0$child1
+			_this_child0$child1.__setup(__closure.__closure__this_child0$child1)
+			delete __closure.__closure__this_child0$child1
 
-//assigning name to ("left")
-			lazy$left._replaceUpdater('name'); lazy$left.name = ("left");
+//assigning anchors.margins to (${parent.width} * 0.1)
+			var update$_this_child0_child1$anchors_margins = function() { _this_child0$child1._get('anchors').margins = (_this_child0$child1._get('parent')._get('width') * 0.1); }
+			_this_child0$child1._get('anchors')._replaceUpdater('margins', [update$_this_child0_child1$anchors_margins, [[_this_child0$child1._get('parent'), 'width']]])
+//assigning anchors.verticalCenter to (${parent.verticalCenter})
+			var update$_this_child0_child1$anchors_verticalCenter = function() { _this_child0$child1._get('anchors').verticalCenter = (_this_child0$child1._get('parent')._get('verticalCenter')); }
+			_this_child0$child1._get('anchors')._replaceUpdater('verticalCenter', [update$_this_child0_child1$anchors_verticalCenter, [[_this_child0$child1._get('parent'), 'verticalCenter']]])
+//assigning spacing to (${root.mobile} ? 20 : 40)
+			var update$_this_child0_child1$spacing = function() { _this_child0$child1.spacing = (_this_child0$child1._get('root')._get('mobile') ? 20 : 40); }
+			_this_child0$child1._replaceUpdater('spacing', [update$_this_child0_child1$spacing, [[_this_child0$child1._get('root'), 'mobile']]])
+//assigning anchors.right to (${parent.right})
+			var update$_this_child0_child1$anchors_right = function() { _this_child0$child1._get('anchors').right = (_this_child0$child1._get('parent')._get('right')); }
+			_this_child0$child1._get('anchors')._replaceUpdater('right', [update$_this_child0_child1$anchors_right, [[_this_child0$child1._get('parent'), 'right']]])
+//assigning anchors.left to (${parent.left})
+			var update$_this_child0_child1$anchors_left = function() { _this_child0$child1._get('anchors').left = (_this_child0$child1._get('parent')._get('left')); }
+			_this_child0$child1._get('anchors')._replaceUpdater('left', [update$_this_child0_child1$anchors_left, [[_this_child0$child1._get('parent'), 'left']]])
+
+//setting up component Text
+			var _this_child0_child1$child0 = __closure._this_child0_child1$child0
+			_this_child0_child1$child0.__setup(__closure.__closure__this_child0_child1$child0)
+			delete __closure.__closure__this_child0_child1$child0
+
+//assigning color to ("white")
+			_this_child0_child1$child0._replaceUpdater('color'); _this_child0_child1$child0.color = ("white");
+//assigning text to (_globals.qsTr(("Put the smart on your smartphone!")))
+			var update$_this_child0_child1_child0$text = function() { _this_child0_child1$child0.text = (_globals.qsTr(("Put the smart on your smartphone!"))); }
+			_this_child0_child1$child0._replaceUpdater('text', [update$_this_child0_child1_child0$text, [[_this_child0_child1$child0._context, 'language']]])
+//assigning anchors.right to (${parent.right})
+			var update$_this_child0_child1_child0$anchors_right = function() { _this_child0_child1$child0._get('anchors').right = (_this_child0_child1$child0._get('parent')._get('right')); }
+			_this_child0_child1$child0._get('anchors')._replaceUpdater('right', [update$_this_child0_child1_child0$anchors_right, [[_this_child0_child1$child0._get('parent'), 'right']]])
+//assigning horizontalAlignment to (_globals.core.Text.prototype.AlignHCenter)
+			_this_child0_child1$child0._replaceUpdater('horizontalAlignment'); _this_child0_child1$child0.horizontalAlignment = (_globals.core.Text.prototype.AlignHCenter);
+//assigning wrapMode to (_globals.core.Text.prototype.Wrap)
+			_this_child0_child1$child0._replaceUpdater('wrapMode'); _this_child0_child1$child0.wrapMode = (_globals.core.Text.prototype.Wrap);
+//assigning font.pixelSize to (${root.mobile} ? 30 : 40)
+			var update$_this_child0_child1_child0$font_pixelSize = function() { _this_child0_child1$child0._get('font').pixelSize = (_this_child0_child1$child0._get('root')._get('mobile') ? 30 : 40); }
+			_this_child0_child1$child0._get('font')._replaceUpdater('pixelSize', [update$_this_child0_child1_child0$font_pixelSize, [[_this_child0_child1$child0._get('root'), 'mobile']]])
+//assigning verticalAlignment to (_globals.core.Text.prototype.AlignVCenter)
+			_this_child0_child1$child0._replaceUpdater('verticalAlignment'); _this_child0_child1$child0.verticalAlignment = (_globals.core.Text.prototype.AlignVCenter);
+//assigning anchors.left to (${parent.left})
+			var update$_this_child0_child1_child0$anchors_left = function() { _this_child0_child1$child0._get('anchors').left = (_this_child0_child1$child0._get('parent')._get('left')); }
+			_this_child0_child1$child0._get('anchors')._replaceUpdater('left', [update$_this_child0_child1_child0$anchors_left, [[_this_child0_child1$child0._get('parent'), 'left']]])
+
+//setting up component MouseArea
+			var _this_child0_child1_child0$child0 = __closure._this_child0_child1_child0$child0
+			_this_child0_child1_child0$child0.__setup(__closure.__closure__this_child0_child1_child0$child0)
+			delete __closure.__closure__this_child0_child1_child0$child0
 
 
-		return lazy$left
+
+
+//setting up component ImageButton
+			var _this_child0_child1$child1 = __closure._this_child0_child1$child1
+			_this_child0_child1$child1.__setup(__closure.__closure__this_child0_child1$child1)
+			delete __closure.__closure__this_child0_child1$child1
+
+//assigning anchors.horizontalCenter to (${parent.horizontalCenter})
+			var update$_this_child0_child1_child1$anchors_horizontalCenter = function() { _this_child0_child1$child1._get('anchors').horizontalCenter = (_this_child0_child1$child1._get('parent')._get('horizontalCenter')); }
+			_this_child0_child1$child1._get('anchors')._replaceUpdater('horizontalCenter', [update$_this_child0_child1_child1$anchors_horizontalCenter, [[_this_child0_child1$child1._get('parent'), 'horizontalCenter']]])
+//assigning target to (${href})
+			var update$_this_child0_child1_child1$target = function() { _this_child0_child1$child1.target = (_this_child0_child1$child1._get('href')); }
+			_this_child0_child1$child1._replaceUpdater('target', [update$_this_child0_child1_child1$target, [[_this_child0_child1$child1, 'href']]])
+//assigning source to ("img/en-play-badge.png")
+			_this_child0_child1$child1._replaceUpdater('source'); _this_child0_child1$child1.source = ("img/en-play-badge.png");
+//assigning height to (60)
+			_this_child0_child1$child1._replaceUpdater('height'); _this_child0_child1$child1.height = (60);
+//assigning width to (202)
+			_this_child0_child1$child1._replaceUpdater('width'); _this_child0_child1$child1.width = (202);
+//assigning href to ("https://play.google.com/store/apps/details?id=com.pastillilabs.situations2")
+			_this_child0_child1$child1._replaceUpdater('href'); _this_child0_child1$child1.href = ("https://play.google.com/store/apps/details?id=com.pastillilabs.situations2");
+
+
+
+
+//setting up component Row
+			var _this$child1 = __closure._this$child1
+			_this$child1.__setup(__closure.__closure__this$child1)
+			delete __closure.__closure__this$child1
+
+//assigning anchors.margins to (10)
+			_this$child1._get('anchors')._replaceUpdater('margins'); _this$child1._get('anchors').margins = (10);
+//assigning anchors.horizontalCenter to (${parent.horizontalCenter})
+			var update$_this_child1$anchors_horizontalCenter = function() { _this$child1._get('anchors').horizontalCenter = (_this$child1._get('parent')._get('horizontalCenter')); }
+			_this$child1._get('anchors')._replaceUpdater('horizontalCenter', [update$_this_child1$anchors_horizontalCenter, [[_this$child1._get('parent'), 'horizontalCenter']]])
+//assigning spacing to (20)
+			_this$child1._replaceUpdater('spacing'); _this$child1.spacing = (20);
+//assigning anchors.bottom to (${parent.bottom})
+			var update$_this_child1$anchors_bottom = function() { _this$child1._get('anchors').bottom = (_this$child1._get('parent')._get('bottom')); }
+			_this$child1._get('anchors')._replaceUpdater('bottom', [update$_this_child1$anchors_bottom, [[_this$child1._get('parent'), 'bottom']]])
+
+//setting up component RoundButton
+			var _this_child1$child0 = __closure._this_child1$child0
+			_this_child1$child0.__setup(__closure.__closure__this_child1$child0)
+			delete __closure.__closure__this_child1$child0
+
+//assigning source to ("img/mono/twitter.png")
+			_this_child1$child0._replaceUpdater('source'); _this_child1$child0.source = ("img/mono/twitter.png");
+//assigning href to ("https://www.twitter.com/situationsapp")
+			_this_child1$child0._replaceUpdater('href'); _this_child1$child0.href = ("https://www.twitter.com/situationsapp");
+//assigning target to (${href})
+			var update$_this_child1_child0$target = function() { _this_child1$child0.target = (_this_child1$child0._get('href')); }
+			_this_child1$child0._replaceUpdater('target', [update$_this_child1_child0$target, [[_this_child1$child0, 'href']]])
+
+
+//setting up component RoundButton
+			var _this_child1$child1 = __closure._this_child1$child1
+			_this_child1$child1.__setup(__closure.__closure__this_child1$child1)
+			delete __closure.__closure__this_child1$child1
+
+//assigning source to ("img/mono/facebook.png")
+			_this_child1$child1._replaceUpdater('source'); _this_child1$child1.source = ("img/mono/facebook.png");
+//assigning href to ("https://www.facebook.com/situationsapp")
+			_this_child1$child1._replaceUpdater('href'); _this_child1$child1.href = ("https://www.facebook.com/situationsapp");
+//assigning target to (${href})
+			var update$_this_child1_child1$target = function() { _this_child1$child1.target = (_this_child1$child1._get('href')); }
+			_this_child1$child1._replaceUpdater('target', [update$_this_child1_child1$target, [[_this_child1$child1, 'href']]])
+
+
+//setting up component RoundButton
+			var _this_child1$child2 = __closure._this_child1$child2
+			_this_child1$child2.__setup(__closure.__closure__this_child1$child2)
+			delete __closure.__closure__this_child1$child2
+
+//assigning source to ("img/mono/mail.png")
+			_this_child1$child2._replaceUpdater('source'); _this_child1$child2.source = ("img/mono/mail.png");
+//assigning href to ("mailto:support@pastillilabs.com")
+			_this_child1$child2._replaceUpdater('href'); _this_child1$child2.href = ("mailto:support@pastillilabs.com");
+//assigning target to (${href})
+			var update$_this_child1_child2$target = function() { _this_child1$child2.target = (_this_child1$child2._get('href')); }
+			_this_child1$child2._replaceUpdater('target', [update$_this_child1_child2$target, [[_this_child1$child2, 'href']]])
+}
+
+
+//=====[component core.Text]=====================
+
+	var TextBaseComponent = _globals.core.Item
+	var TextBasePrototype = TextBaseComponent.prototype
+
+/**
+ * @constructor
+ * @extends {_globals.core.Item}
+ */
+	var TextComponent = _globals.core.Text = function(parent, _delegate) {
+		TextBaseComponent.apply(this, arguments)
+	//custom constructor:
+	{
+		this._context.backend.initText(this)
+		if (this.text.length > 0)
+			this._setText(this.text)
+	}
+
+	}
+	var TextPrototype = TextComponent.prototype = Object.create(TextBasePrototype)
+
+	TextPrototype.constructor = TextComponent
+
+	TextPrototype.componentName = 'core.Text'
+	TextPrototype.on = function(name,callback) {
+		if (!this._updateSizeNeeded) {
+			if (name == 'boxChanged')
+				this._enableSizeUpdate()
+		}
+		_globals.core.Object.prototype.on.apply(this, arguments)
+	}
+	TextPrototype.onChanged = function(name,callback) {
+		if (!this._updateSizeNeeded) {
+			switch(name) {
+				case "right":
+				case "width":
+				case "bottom":
+				case "height":
+				case "verticalCenter":
+				case "horizontalCenter":
+					this._enableSizeUpdate()
+			}
+		}
+		_globals.core.Object.prototype.onChanged.apply(this, arguments);
+	}
+	TextPrototype.registerStyle = function(style,tag) {
+		style.addRule(tag, 'width: auto; height: auto;')
+	}
+	TextPrototype._scheduleUpdateSize = function() {
+		this._context.delayedAction('text:update-size', this, this._updateSizeImpl)
+	}
+	TextPrototype._setText = function(html) {
+		this._context.backend.setText(this, html)
+	}
+	TextPrototype._updateSize = function() {
+		if (this.recursiveVisible && (this._updateSizeNeeded || this.clip))
+			this._scheduleUpdateSize()
+	}
+	TextPrototype.getClass = function() { return 'core-text' }
+	TextPrototype._updateWSHandling = function() {
+		var text = this.textFormat === this.Text
+		switch(this.wrapMode) {
+		case this.NoWrap:
+			this.style({'white-space': text? 'pre': 'nowrap', 'word-break': '' })
+			break
+		case this.Wrap:
+		case this.WordWrap:
+			this.style({'white-space': text? 'pre-wrap': 'normal', 'word-break': '' })
+			break
+		case this.WrapAnywhere:
+			this.style({ 'white-space': text? 'pre-wrap': 'normal', 'word-break': 'break-all' })
+			break
+		}
+		this._updateSize();
+	}
+	TextPrototype._updateSizeImpl = function() {
+		if (this.text.length === 0) {
+			this.paintedWidth = 0
+			this.paintedHeight = 0
+			return
+		}
+
+		this._context.backend.layoutText(this)
+	}
+	TextPrototype._updateStyle = function() {
+		if (this.shadow && !this.shadow._empty())
+			this.style('text-shadow', this.shadow._getFilterStyle())
+		else
+			this.style('text-shadow', '')
+		_globals.core.Item.prototype._updateStyle.apply(this, arguments)
+	}
+	TextPrototype._enableSizeUpdate = function() {
+		this._updateSizeNeeded = true
+		this._updateSize()
+	}
+	core.addProperty(TextPrototype, 'string', 'text')
+	core.addProperty(TextPrototype, 'color', 'color')
+	core.addLazyProperty(TextPrototype, 'shadow', (function(__parent) {
+		var lazy$shadow = new _globals.core.Shadow(__parent, true)
+		var __closure = { lazy$shadow : lazy$shadow }
+
+//creating component Shadow
+			lazy$shadow.__create(__closure.__closure_lazy$shadow = { })
+
+
+//setting up component Shadow
+			var lazy$shadow = __closure.lazy$shadow
+			lazy$shadow.__setup(__closure.__closure_lazy$shadow)
+			delete __closure.__closure_lazy$shadow
+
+
+
+		return lazy$shadow
 }))
-	core.addLazyProperty(BorderPrototype, 'right', (function(__parent) {
-		var lazy$right = new _globals.core.BorderSide(__parent, true)
-		var __closure = { lazy$right : lazy$right }
+	core.addLazyProperty(TextPrototype, 'font', (function(__parent) {
+		var lazy$font = new _globals.core.Font(__parent, true)
+		var __closure = { lazy$font : lazy$font }
 
-//creating component BorderSide
-			lazy$right.__create(__closure.__closure_lazy$right = { })
-
-
-//setting up component BorderSide
-			var lazy$right = __closure.lazy$right
-			lazy$right.__setup(__closure.__closure_lazy$right)
-			delete __closure.__closure_lazy$right
-
-//assigning name to ("right")
-			lazy$right._replaceUpdater('name'); lazy$right.name = ("right");
+//creating component Font
+			lazy$font.__create(__closure.__closure_lazy$font = { })
 
 
-		return lazy$right
+//setting up component Font
+			var lazy$font = __closure.lazy$font
+			lazy$font.__setup(__closure.__closure_lazy$font)
+			delete __closure.__closure_lazy$font
+
+
+
+		return lazy$font
 }))
-	core.addLazyProperty(BorderPrototype, 'top', (function(__parent) {
-		var lazy$top = new _globals.core.BorderSide(__parent, true)
-		var __closure = { lazy$top : lazy$top }
+	core.addProperty(TextPrototype, 'int', 'paintedWidth')
+	core.addProperty(TextPrototype, 'int', 'paintedHeight')
+/** @const @type {number} */
+	TextPrototype.AlignTop = 0
+/** @const @type {number} */
+	TextComponent.AlignTop = 0
+/** @const @type {number} */
+	TextPrototype.AlignBottom = 1
+/** @const @type {number} */
+	TextComponent.AlignBottom = 1
+/** @const @type {number} */
+	TextPrototype.AlignVCenter = 2
+/** @const @type {number} */
+	TextComponent.AlignVCenter = 2
+	core.addProperty(TextPrototype, 'enum', 'verticalAlignment')
+/** @const @type {number} */
+	TextPrototype.Html = 0
+/** @const @type {number} */
+	TextComponent.Html = 0
+/** @const @type {number} */
+	TextPrototype.Text = 1
+/** @const @type {number} */
+	TextComponent.Text = 1
+	core.addProperty(TextPrototype, 'enum', 'textFormat')
+/** @const @type {number} */
+	TextPrototype.AlignLeft = 0
+/** @const @type {number} */
+	TextComponent.AlignLeft = 0
+/** @const @type {number} */
+	TextPrototype.AlignRight = 1
+/** @const @type {number} */
+	TextComponent.AlignRight = 1
+/** @const @type {number} */
+	TextPrototype.AlignHCenter = 2
+/** @const @type {number} */
+	TextComponent.AlignHCenter = 2
+/** @const @type {number} */
+	TextPrototype.AlignJustify = 3
+/** @const @type {number} */
+	TextComponent.AlignJustify = 3
+	core.addProperty(TextPrototype, 'enum', 'horizontalAlignment')
+/** @const @type {number} */
+	TextPrototype.NoWrap = 0
+/** @const @type {number} */
+	TextComponent.NoWrap = 0
+/** @const @type {number} */
+	TextPrototype.WordWrap = 1
+/** @const @type {number} */
+	TextComponent.WordWrap = 1
+/** @const @type {number} */
+	TextPrototype.WrapAnywhere = 2
+/** @const @type {number} */
+	TextComponent.WrapAnywhere = 2
+/** @const @type {number} */
+	TextPrototype.Wrap = 3
+/** @const @type {number} */
+	TextComponent.Wrap = 3
+	core.addProperty(TextPrototype, 'enum', 'wrapMode')
+	_globals.core._protoOnChanged(TextPrototype, 'wrapMode', (function(value) {
+		this._updateWSHandling()
+	} ))
+	_globals.core._protoOnChanged(TextPrototype, 'textFormat', (function(value) {
+		this._updateWSHandling()
+	} ))
+	_globals.core._protoOnChanged(TextPrototype, 'verticalAlignment', (function(value) {
+		this.verticalAlignment = value;
+		this._enableSizeUpdate()
+	} ))
+	_globals.core._protoOnChanged(TextPrototype, 'horizontalAlignment', (function(value) {
+		switch(value) {
+		case this.AlignLeft:	this.style('text-align', 'left'); break
+		case this.AlignRight:	this.style('text-align', 'right'); break
+		case this.AlignHCenter:	this.style('text-align', 'center'); break
+		case this.AlignJustify:	this.style('text-align', 'justify'); break
+		}
+	} ))
+	_globals.core._protoOnChanged(TextPrototype, 'recursiveVisible', (function(value) {
+		if (value)
+			this._updateSize()
+	} ))
+	_globals.core._protoOnChanged(TextPrototype, 'width', (function(value) { this._updateSize() } ))
+	_globals.core._protoOnChanged(TextPrototype, 'text', (function(value) { this._setText(value); this._updateSize() } ))
+	_globals.core._protoOnChanged(TextPrototype, 'color', (function(value) { this.style('color', _globals.core.normalizeColor(value)) } ))
 
-//creating component BorderSide
-			lazy$top.__create(__closure.__closure_lazy$top = { })
+	TextPrototype.__create = function(__closure) {
+		var $this = this;
+		TextBasePrototype.__create.call(this, __closure.__base = { })
+
+	}
+	TextPrototype.__setup = function(__closure) {
+		var $this = this;
+	TextBasePrototype.__setup.call(this, __closure.__base); delete __closure.__base
+//assigning width to (${paintedWidth})
+			var update$_this$width = function() { $this.width = ($this._get('paintedWidth')); }
+			$this._replaceUpdater('width', [update$_this$width, [[$this, 'paintedWidth']]])
+//assigning height to (${paintedHeight})
+			var update$_this$height = function() { $this.height = ($this._get('paintedHeight')); }
+			$this._replaceUpdater('height', [update$_this$height, [[$this, 'paintedHeight']]])
+}
 
 
-//setting up component BorderSide
-			var lazy$top = __closure.lazy$top
-			lazy$top.__setup(__closure.__closure_lazy$top)
-			delete __closure.__closure_lazy$top
+//=====[component src.Label]=====================
 
-//assigning name to ("top")
-			lazy$top._replaceUpdater('name'); lazy$top.name = ("top");
+	var LabelBaseComponent = _globals.core.Text
+	var LabelBasePrototype = LabelBaseComponent.prototype
 
+/**
+ * @constructor
+ * @extends {_globals.core.Text}
+ */
+	var LabelComponent = _globals.src.Label = function(parent, _delegate) {
+		LabelBaseComponent.apply(this, arguments)
 
-		return lazy$top
-}))
-	core.addLazyProperty(BorderPrototype, 'bottom', (function(__parent) {
-		var lazy$bottom = new _globals.core.BorderSide(__parent, true)
-		var __closure = { lazy$bottom : lazy$bottom }
+	}
+	var LabelPrototype = LabelComponent.prototype = Object.create(LabelBasePrototype)
 
-//creating component BorderSide
-			lazy$bottom.__create(__closure.__closure_lazy$bottom = { })
+	LabelPrototype.constructor = LabelComponent
 
+	LabelPrototype.componentName = 'src.Label'
 
-//setting up component BorderSide
-			var lazy$bottom = __closure.lazy$bottom
-			lazy$bottom.__setup(__closure.__closure_lazy$bottom)
-			delete __closure.__closure_lazy$bottom
+	LabelPrototype.__create = function(__closure) {
+		var $this = this;
+		LabelBasePrototype.__create.call(this, __closure.__base = { })
 
-//assigning name to ("bottom")
-			lazy$bottom._replaceUpdater('name'); lazy$bottom.name = ("bottom");
+	}
+	LabelPrototype.__setup = function(__closure) {
+		var $this = this;
+	LabelBasePrototype.__setup.call(this, __closure.__base); delete __closure.__base
+//assigning font.pixelSize to (20)
+			$this._get('font')._replaceUpdater('pixelSize'); $this._get('font').pixelSize = (20);
+}
 
-
-		return lazy$bottom
-}))
-	_globals.core._protoOnChanged(BorderPrototype, 'width', (function(value) { this.parent.style({'border-width': value, 'margin-left': -value, 'margin-top': -value}) } ))
-	_globals.core._protoOnChanged(BorderPrototype, 'color', (function(value) { this.parent.style('border-color', _globals.core.normalizeColor(value)) } ))
-	_globals.core._protoOnChanged(BorderPrototype, 'style', (function(value) { this.parent.style('border-style', value) } ))
 
 //=====[component core.Rectangle]=====================
 
@@ -2719,7 +3179,49 @@ var _this$child0 = new _globals.core.Rectangle($this)
 	PageAboutPrototype.__create = function(__closure) {
 		var $this = this;
 		PageAboutBasePrototype.__create.call(this, __closure.__base = { })
-$this._setId('root')
+var _this$child0 = new _globals.core.Rectangle($this)
+		__closure._this$child0 = _this$child0
+
+//creating component Rectangle
+		_this$child0.__create(__closure.__closure__this$child0 = { })
+
+		$this.addChild(_this$child0)
+		var _this$child1 = new _globals.core.Column($this)
+		__closure._this$child1 = _this$child1
+
+//creating component Column
+		_this$child1.__create(__closure.__closure__this$child1 = { })
+		var _this_child1$child0 = new _globals.src.Heading(_this$child1)
+		__closure._this_child1$child0 = _this_child1$child0
+
+//creating component Heading
+		_this_child1$child0.__create(__closure.__closure__this_child1$child0 = { })
+
+		_this$child1.addChild(_this_child1$child0)
+		var _this_child1$child1 = new _globals.src.Label(_this$child1)
+		__closure._this_child1$child1 = _this_child1$child1
+
+//creating component Label
+		_this_child1$child1.__create(__closure.__closure__this_child1$child1 = { })
+
+		_this$child1.addChild(_this_child1$child1)
+		var _this_child1$child2 = new _globals.src.Label(_this$child1)
+		__closure._this_child1$child2 = _this_child1$child2
+
+//creating component Label
+		_this_child1$child2.__create(__closure.__closure__this_child1$child2 = { })
+
+		_this$child1.addChild(_this_child1$child2)
+		var _this_child1$child3 = new _globals.src.Heading(_this$child1)
+		__closure._this_child1$child3 = _this_child1$child3
+
+//creating component Heading
+		_this_child1$child3.__create(__closure.__closure__this_child1$child3 = { })
+
+		_this$child1.addChild(_this_child1$child3)
+		_this$child1._setId('content')
+		$this.addChild(_this$child1)
+		$this._setId('root')
 	}
 	PageAboutPrototype.__setup = function(__closure) {
 		var $this = this;
@@ -2730,6 +3232,114 @@ $this._setId('root')
 //assigning anchors.fill to (${parent})
 			var update$_this$anchors_fill = function() { $this._get('anchors').fill = ($this._get('parent')); }
 			$this._get('anchors')._replaceUpdater('fill', [update$_this$anchors_fill, [[$this, 'parent']]])
+
+//setting up component Rectangle
+			var _this$child0 = __closure._this$child0
+			_this$child0.__setup(__closure.__closure__this$child0)
+			delete __closure.__closure__this$child0
+
+//assigning opacity to (0.7)
+			_this$child0._replaceUpdater('opacity'); _this$child0.opacity = (0.7);
+//assigning color to ("white")
+			_this$child0._replaceUpdater('color'); _this$child0.color = ("white");
+//assigning height to (${content.height} + 100)
+			var update$_this_child0$height = function() { _this$child0.height = (_this$child0._get('content')._get('height') + 100); }
+			_this$child0._replaceUpdater('height', [update$_this_child0$height, [[_this$child0._get('content'), 'height']]])
+//assigning width to (${content.width} + 100)
+			var update$_this_child0$width = function() { _this$child0.width = (_this$child0._get('content')._get('width') + 100); }
+			_this$child0._replaceUpdater('width', [update$_this_child0$width, [[_this$child0._get('content'), 'width']]])
+//assigning radius to (10)
+			_this$child0._replaceUpdater('radius'); _this$child0.radius = (10);
+//assigning anchors.centerIn to (${parent})
+			var update$_this_child0$anchors_centerIn = function() { _this$child0._get('anchors').centerIn = (_this$child0._get('parent')); }
+			_this$child0._get('anchors')._replaceUpdater('centerIn', [update$_this_child0$anchors_centerIn, [[_this$child0, 'parent']]])
+
+
+//setting up component Column
+			var _this$child1 = __closure._this$child1
+			_this$child1.__setup(__closure.__closure__this$child1)
+			delete __closure.__closure__this$child1
+
+//assigning width to (Math.min((${root.width} - 200),(500)))
+			var update$_this_child1$width = function() { _this$child1.width = (Math.min((_this$child1._get('root')._get('width') - 200),(500))); }
+			_this$child1._replaceUpdater('width', [update$_this_child1$width, [[_this$child1._get('root'), 'width']]])
+//assigning anchors.verticalCenter to (${parent.verticalCenter})
+			var update$_this_child1$anchors_verticalCenter = function() { _this$child1._get('anchors').verticalCenter = (_this$child1._get('parent')._get('verticalCenter')); }
+			_this$child1._get('anchors')._replaceUpdater('verticalCenter', [update$_this_child1$anchors_verticalCenter, [[_this$child1._get('parent'), 'verticalCenter']]])
+//assigning anchors.horizontalCenter to (${parent.horizontalCenter})
+			var update$_this_child1$anchors_horizontalCenter = function() { _this$child1._get('anchors').horizontalCenter = (_this$child1._get('parent')._get('horizontalCenter')); }
+			_this$child1._get('anchors')._replaceUpdater('horizontalCenter', [update$_this_child1$anchors_horizontalCenter, [[_this$child1._get('parent'), 'horizontalCenter']]])
+//assigning spacing to (20)
+			_this$child1._replaceUpdater('spacing'); _this$child1.spacing = (20);
+
+//setting up component Heading
+			var _this_child1$child0 = __closure._this_child1$child0
+			_this_child1$child0.__setup(__closure.__closure__this_child1$child0)
+			delete __closure.__closure__this_child1$child0
+
+//assigning text to (_globals.qsTr(("We are Pastilli Labs")))
+			var update$_this_child1_child0$text = function() { _this_child1$child0.text = (_globals.qsTr(("We are Pastilli Labs"))); }
+			_this_child1$child0._replaceUpdater('text', [update$_this_child1_child0$text, [[_this_child1$child0._context, 'language']]])
+//assigning anchors.right to (${parent.right})
+			var update$_this_child1_child0$anchors_right = function() { _this_child1$child0._get('anchors').right = (_this_child1$child0._get('parent')._get('right')); }
+			_this_child1$child0._get('anchors')._replaceUpdater('right', [update$_this_child1_child0$anchors_right, [[_this_child1$child0._get('parent'), 'right']]])
+//assigning imageSource to ("img/mono/pastillilabs.png")
+			_this_child1$child0._replaceUpdater('imageSource'); _this_child1$child0.imageSource = ("img/mono/pastillilabs.png");
+//assigning anchors.left to (${parent.left})
+			var update$_this_child1_child0$anchors_left = function() { _this_child1$child0._get('anchors').left = (_this_child1$child0._get('parent')._get('left')); }
+			_this_child1$child0._get('anchors')._replaceUpdater('left', [update$_this_child1_child0$anchors_left, [[_this_child1$child0._get('parent'), 'left']]])
+
+
+//setting up component Label
+			var _this_child1$child1 = __closure._this_child1$child1
+			_this_child1$child1.__setup(__closure.__closure__this_child1$child1)
+			delete __closure.__closure__this_child1$child1
+
+//assigning text to (_globals.qsTr(("We develop easy to use high quality cross-platform mobile software.")))
+			var update$_this_child1_child1$text = function() { _this_child1$child1.text = (_globals.qsTr(("We develop easy to use high quality cross-platform mobile software."))); }
+			_this_child1$child1._replaceUpdater('text', [update$_this_child1_child1$text, [[_this_child1$child1._context, 'language']]])
+//assigning anchors.right to (${parent.right})
+			var update$_this_child1_child1$anchors_right = function() { _this_child1$child1._get('anchors').right = (_this_child1$child1._get('parent')._get('right')); }
+			_this_child1$child1._get('anchors')._replaceUpdater('right', [update$_this_child1_child1$anchors_right, [[_this_child1$child1._get('parent'), 'right']]])
+//assigning wrapMode to (_globals.core.Text.prototype.Wrap)
+			_this_child1$child1._replaceUpdater('wrapMode'); _this_child1$child1.wrapMode = (_globals.core.Text.prototype.Wrap);
+//assigning anchors.left to (${parent.left})
+			var update$_this_child1_child1$anchors_left = function() { _this_child1$child1._get('anchors').left = (_this_child1$child1._get('parent')._get('left')); }
+			_this_child1$child1._get('anchors')._replaceUpdater('left', [update$_this_child1_child1$anchors_left, [[_this_child1$child1._get('parent'), 'left']]])
+
+
+//setting up component Label
+			var _this_child1$child2 = __closure._this_child1$child2
+			_this_child1$child2.__setup(__closure.__closure__this_child1$child2)
+			delete __closure.__closure__this_child1$child2
+
+//assigning text to (_globals.qsTr(("Our showcase application Situations is a powerful automation tool currently available for Android and Sailfish platforms.")))
+			var update$_this_child1_child2$text = function() { _this_child1$child2.text = (_globals.qsTr(("Our showcase application Situations is a powerful automation tool currently available for Android and Sailfish platforms."))); }
+			_this_child1$child2._replaceUpdater('text', [update$_this_child1_child2$text, [[_this_child1$child2._context, 'language']]])
+//assigning anchors.right to (${parent.right})
+			var update$_this_child1_child2$anchors_right = function() { _this_child1$child2._get('anchors').right = (_this_child1$child2._get('parent')._get('right')); }
+			_this_child1$child2._get('anchors')._replaceUpdater('right', [update$_this_child1_child2$anchors_right, [[_this_child1$child2._get('parent'), 'right']]])
+//assigning wrapMode to (_globals.core.Text.prototype.Wrap)
+			_this_child1$child2._replaceUpdater('wrapMode'); _this_child1$child2.wrapMode = (_globals.core.Text.prototype.Wrap);
+//assigning anchors.left to (${parent.left})
+			var update$_this_child1_child2$anchors_left = function() { _this_child1$child2._get('anchors').left = (_this_child1$child2._get('parent')._get('left')); }
+			_this_child1$child2._get('anchors')._replaceUpdater('left', [update$_this_child1_child2$anchors_left, [[_this_child1$child2._get('parent'), 'left']]])
+
+
+//setting up component Heading
+			var _this_child1$child3 = __closure._this_child1$child3
+			_this_child1$child3.__setup(__closure.__closure__this_child1$child3)
+			delete __closure.__closure__this_child1$child3
+
+//assigning text to (_globals.qsTr(("Contact us")))
+			var update$_this_child1_child3$text = function() { _this_child1$child3.text = (_globals.qsTr(("Contact us"))); }
+			_this_child1$child3._replaceUpdater('text', [update$_this_child1_child3$text, [[_this_child1$child3._context, 'language']]])
+//assigning anchors.right to (${parent.right})
+			var update$_this_child1_child3$anchors_right = function() { _this_child1$child3._get('anchors').right = (_this_child1$child3._get('parent')._get('right')); }
+			_this_child1$child3._get('anchors')._replaceUpdater('right', [update$_this_child1_child3$anchors_right, [[_this_child1$child3._get('parent'), 'right']]])
+//assigning anchors.left to (${parent.left})
+			var update$_this_child1_child3$anchors_left = function() { _this_child1$child3._get('anchors').left = (_this_child1$child3._get('parent')._get('left')); }
+			_this_child1$child3._get('anchors')._replaceUpdater('left', [update$_this_child1_child3$anchors_left, [[_this_child1$child3._get('parent'), 'left']]])
 }
 
 
@@ -3155,21 +3765,12 @@ core.addAliasProperty($this, 'hover', function() { return $this }, 'containsMous
 	core.addProperty(ContextPrototype, 'System', 'system')
 	core.addProperty(ContextPrototype, 'Location', 'location')
 	core.addProperty(ContextPrototype, 'Stylesheet', 'stylesheet')
-	core.addProperty(ContextPrototype, 'Orientation', 'orientation')
 	core.addProperty(ContextPrototype, 'string', 'buildIdentifier', "Powered by PureQML No-Partnership Edition Engine")
 	_globals.core._protoOnChanged(ContextPrototype, 'fullscreen', (function(value) { if (value) this.backend.enterFullscreenMode(this.element); else this.backend.exitFullscreenMode(); } ))
 
 	ContextPrototype.__create = function(__closure) {
 		var $this = this;
 		ContextBasePrototype.__create.call(this, __closure.__base = { })
-//creating component core.<anonymous>
-		var _this$orientation = new _globals.html5.Orientation($this)
-		__closure._this$orientation = _this$orientation
-
-//creating component Orientation
-		_this$orientation.__create(__closure.__closure__this$orientation = { })
-
-		$this.orientation = _this$orientation
 //creating component core.<anonymous>
 		var _this$stylesheet = new _globals.html5.Stylesheet($this)
 		__closure._this$stylesheet = _this$stylesheet
@@ -3198,13 +3799,6 @@ core.addAliasProperty($this, 'hover', function() { return $this }, 'containsMous
 	ContextPrototype.__setup = function(__closure) {
 		var $this = this;
 	ContextBasePrototype.__setup.call(this, __closure.__base); delete __closure.__base
-//setting up component Orientation
-			var _this$orientation = __closure._this$orientation
-			_this$orientation.__setup(__closure.__closure__this$orientation)
-			delete __closure.__closure__this$orientation
-
-
-
 //setting up component Stylesheet
 			var _this$stylesheet = __closure._this$stylesheet
 			_this$stylesheet.__setup(__closure.__closure__this$stylesheet)
@@ -3225,222 +3819,6 @@ core.addAliasProperty($this, 'hover', function() { return $this }, 'containsMous
 			var _this$location = __closure._this$location
 			_this$location.__setup(__closure.__closure__this$location)
 			delete __closure.__closure__this$location
-}
-
-
-//=====[component core.Text]=====================
-
-	var TextBaseComponent = _globals.core.Item
-	var TextBasePrototype = TextBaseComponent.prototype
-
-/**
- * @constructor
- * @extends {_globals.core.Item}
- */
-	var TextComponent = _globals.core.Text = function(parent, _delegate) {
-		TextBaseComponent.apply(this, arguments)
-	//custom constructor:
-	{
-		this._context.backend.initText(this)
-		if (this.text.length > 0)
-			this._setText(this.text)
-	}
-
-	}
-	var TextPrototype = TextComponent.prototype = Object.create(TextBasePrototype)
-
-	TextPrototype.constructor = TextComponent
-
-	TextPrototype.componentName = 'core.Text'
-	TextPrototype.on = function(name,callback) {
-		if (!this._updateSizeNeeded) {
-			if (name == 'boxChanged')
-				this._enableSizeUpdate()
-		}
-		_globals.core.Object.prototype.on.apply(this, arguments)
-	}
-	TextPrototype.onChanged = function(name,callback) {
-		if (!this._updateSizeNeeded) {
-			switch(name) {
-				case "right":
-				case "width":
-				case "bottom":
-				case "height":
-				case "verticalCenter":
-				case "horizontalCenter":
-					this._enableSizeUpdate()
-			}
-		}
-		_globals.core.Object.prototype.onChanged.apply(this, arguments);
-	}
-	TextPrototype.registerStyle = function(style,tag) {
-		style.addRule(tag, 'width: auto; height: auto;')
-	}
-	TextPrototype._scheduleUpdateSize = function() {
-		this._context.delayedAction('text:update-size', this, this._updateSizeImpl)
-	}
-	TextPrototype._setText = function(html) {
-		this._context.backend.setText(this, html)
-	}
-	TextPrototype.getClass = function() { return 'core-text' }
-	TextPrototype._updateSize = function() {
-		if (this.recursiveVisible && (this._updateSizeNeeded || this.clip))
-			this._scheduleUpdateSize()
-	}
-	TextPrototype._updateSizeImpl = function() {
-		if (this.text.length === 0) {
-			this.paintedWidth = 0
-			this.paintedHeight = 0
-			return
-		}
-
-		this._context.backend.layoutText(this)
-	}
-	TextPrototype._updateStyle = function() {
-		if (this.shadow && !this.shadow._empty())
-			this.style('text-shadow', this.shadow._getFilterStyle())
-		else
-			this.style('text-shadow', '')
-		_globals.core.Item.prototype._updateStyle.apply(this, arguments)
-	}
-	TextPrototype._enableSizeUpdate = function() {
-		this._updateSizeNeeded = true
-		this._updateSize()
-	}
-	core.addProperty(TextPrototype, 'string', 'text')
-	core.addProperty(TextPrototype, 'color', 'color')
-	core.addLazyProperty(TextPrototype, 'shadow', (function(__parent) {
-		var lazy$shadow = new _globals.core.Shadow(__parent, true)
-		var __closure = { lazy$shadow : lazy$shadow }
-
-//creating component Shadow
-			lazy$shadow.__create(__closure.__closure_lazy$shadow = { })
-
-
-//setting up component Shadow
-			var lazy$shadow = __closure.lazy$shadow
-			lazy$shadow.__setup(__closure.__closure_lazy$shadow)
-			delete __closure.__closure_lazy$shadow
-
-
-
-		return lazy$shadow
-}))
-	core.addLazyProperty(TextPrototype, 'font', (function(__parent) {
-		var lazy$font = new _globals.core.Font(__parent, true)
-		var __closure = { lazy$font : lazy$font }
-
-//creating component Font
-			lazy$font.__create(__closure.__closure_lazy$font = { })
-
-
-//setting up component Font
-			var lazy$font = __closure.lazy$font
-			lazy$font.__setup(__closure.__closure_lazy$font)
-			delete __closure.__closure_lazy$font
-
-
-
-		return lazy$font
-}))
-	core.addProperty(TextPrototype, 'int', 'paintedWidth')
-	core.addProperty(TextPrototype, 'int', 'paintedHeight')
-/** @const @type {number} */
-	TextPrototype.AlignTop = 0
-/** @const @type {number} */
-	TextComponent.AlignTop = 0
-/** @const @type {number} */
-	TextPrototype.AlignBottom = 1
-/** @const @type {number} */
-	TextComponent.AlignBottom = 1
-/** @const @type {number} */
-	TextPrototype.AlignVCenter = 2
-/** @const @type {number} */
-	TextComponent.AlignVCenter = 2
-	core.addProperty(TextPrototype, 'enum', 'verticalAlignment')
-/** @const @type {number} */
-	TextPrototype.AlignLeft = 0
-/** @const @type {number} */
-	TextComponent.AlignLeft = 0
-/** @const @type {number} */
-	TextPrototype.AlignRight = 1
-/** @const @type {number} */
-	TextComponent.AlignRight = 1
-/** @const @type {number} */
-	TextPrototype.AlignHCenter = 2
-/** @const @type {number} */
-	TextComponent.AlignHCenter = 2
-/** @const @type {number} */
-	TextPrototype.AlignJustify = 3
-/** @const @type {number} */
-	TextComponent.AlignJustify = 3
-	core.addProperty(TextPrototype, 'enum', 'horizontalAlignment')
-/** @const @type {number} */
-	TextPrototype.NoWrap = 0
-/** @const @type {number} */
-	TextComponent.NoWrap = 0
-/** @const @type {number} */
-	TextPrototype.WordWrap = 1
-/** @const @type {number} */
-	TextComponent.WordWrap = 1
-/** @const @type {number} */
-	TextPrototype.WrapAnywhere = 2
-/** @const @type {number} */
-	TextComponent.WrapAnywhere = 2
-/** @const @type {number} */
-	TextPrototype.Wrap = 3
-/** @const @type {number} */
-	TextComponent.Wrap = 3
-	core.addProperty(TextPrototype, 'enum', 'wrapMode')
-	_globals.core._protoOnChanged(TextPrototype, 'wrapMode', (function(value) {
-		switch(value) {
-		case this.NoWrap:
-			this.style({'white-space': 'nowrap', 'word-break': '' })
-			break
-		case this.Wrap:
-		case this.WordWrap:
-			this.style({'white-space': 'normal', 'word-break': '' })
-			break
-		case this.WrapAnywhere:
-			this.style({ 'white-space': 'normal', 'word-break': 'break-all' })
-			break
-		}
-		this._updateSize();
-	} ))
-	_globals.core._protoOnChanged(TextPrototype, 'verticalAlignment', (function(value) {
-		this.verticalAlignment = value;
-		this._enableSizeUpdate()
-	} ))
-	_globals.core._protoOnChanged(TextPrototype, 'horizontalAlignment', (function(value) {
-		switch(value) {
-		case this.AlignLeft:	this.style('text-align', 'left'); break
-		case this.AlignRight:	this.style('text-align', 'right'); break
-		case this.AlignHCenter:	this.style('text-align', 'center'); break
-		case this.AlignJustify:	this.style('text-align', 'justify'); break
-		}
-	} ))
-	_globals.core._protoOnChanged(TextPrototype, 'recursiveVisible', (function(value) {
-		if (value)
-			this._updateSize()
-	} ))
-	_globals.core._protoOnChanged(TextPrototype, 'width', (function(value) { this._updateSize() } ))
-	_globals.core._protoOnChanged(TextPrototype, 'text', (function(value) { this._setText(value); this._updateSize() } ))
-	_globals.core._protoOnChanged(TextPrototype, 'color', (function(value) { this.style('color', _globals.core.normalizeColor(value)) } ))
-
-	TextPrototype.__create = function(__closure) {
-		var $this = this;
-		TextBasePrototype.__create.call(this, __closure.__base = { })
-
-	}
-	TextPrototype.__setup = function(__closure) {
-		var $this = this;
-	TextBasePrototype.__setup.call(this, __closure.__base); delete __closure.__base
-//assigning width to (${paintedWidth})
-			var update$_this$width = function() { $this.width = ($this._get('paintedWidth')); }
-			$this._replaceUpdater('width', [update$_this$width, [[$this, 'paintedWidth']]])
-//assigning height to (${paintedHeight})
-			var update$_this$height = function() { $this.height = ($this._get('paintedHeight')); }
-			$this._replaceUpdater('height', [update$_this$height, [[$this, 'paintedHeight']]])
 }
 
 
@@ -3500,282 +3878,6 @@ core.addAliasProperty($this, 'hover', function() { return $this }, 'containsMous
 	core.addProperty(TransformPrototype, 'real', 'scaleY')
 	core.addProperty(TransformPrototype, 'real', 'skewX')
 	core.addProperty(TransformPrototype, 'real', 'skewY')
-
-//=====[component src.PageMain]=====================
-
-	var PageMainBaseComponent = _globals.core.Item
-	var PageMainBasePrototype = PageMainBaseComponent.prototype
-
-/**
- * @constructor
- * @extends {_globals.core.Item}
- */
-	var PageMainComponent = _globals.src.PageMain = function(parent, _delegate) {
-		PageMainBaseComponent.apply(this, arguments)
-
-	}
-	var PageMainPrototype = PageMainComponent.prototype = Object.create(PageMainBasePrototype)
-
-	PageMainPrototype.constructor = PageMainComponent
-
-	PageMainPrototype.componentName = 'src.PageMain'
-	core.addProperty(PageMainPrototype, 'bool', 'mobile')
-	core.addProperty(PageMainPrototype, 'string', 'url', ("main"))
-
-	PageMainPrototype.__create = function(__closure) {
-		var $this = this;
-		PageMainBasePrototype.__create.call(this, __closure.__base = { })
-var _this$child0 = new _globals.core.Item($this)
-		__closure._this$child0 = _this$child0
-
-//creating component Item
-		_this$child0.__create(__closure.__closure__this$child0 = { })
-		var _this_child0$child0 = new _globals.core.Rectangle(_this$child0)
-		__closure._this_child0$child0 = _this_child0$child0
-
-//creating component Rectangle
-		_this_child0$child0.__create(__closure.__closure__this_child0$child0 = { })
-
-		_this$child0.addChild(_this_child0$child0)
-		var _this_child0$child1 = new _globals.core.Column(_this$child0)
-		__closure._this_child0$child1 = _this_child0$child1
-
-//creating component Column
-		_this_child0$child1.__create(__closure.__closure__this_child0$child1 = { })
-		var _this_child0_child1$child0 = new _globals.core.Text(_this_child0$child1)
-		__closure._this_child0_child1$child0 = _this_child0_child1$child0
-
-//creating component Text
-		_this_child0_child1$child0.__create(__closure.__closure__this_child0_child1$child0 = { })
-		var _this_child0_child1_child0$child0 = new _globals.core.MouseArea(_this_child0_child1$child0)
-		__closure._this_child0_child1_child0$child0 = _this_child0_child1_child0$child0
-
-//creating component MouseArea
-		_this_child0_child1_child0$child0.__create(__closure.__closure__this_child0_child1_child0$child0 = { })
-
-		_this_child0_child1$child0.addChild(_this_child0_child1_child0$child0)
-		_this_child0$child1.addChild(_this_child0_child1$child0)
-		var _this_child0_child1$child1 = new _globals.src.ImageButton(_this_child0$child1)
-		__closure._this_child0_child1$child1 = _this_child0_child1$child1
-
-//creating component ImageButton
-		_this_child0_child1$child1.__create(__closure.__closure__this_child0_child1$child1 = { })
-
-		_this_child0$child1.addChild(_this_child0_child1$child1)
-		_this_child0$child1._setId('content')
-		_this$child0.addChild(_this_child0$child1)
-		$this.addChild(_this$child0)
-		var _this$child1 = new _globals.core.Row($this)
-		__closure._this$child1 = _this$child1
-
-//creating component Row
-		_this$child1.__create(__closure.__closure__this$child1 = { })
-		var _this_child1$child0 = new _globals.src.RoundButton(_this$child1)
-		__closure._this_child1$child0 = _this_child1$child0
-
-//creating component RoundButton
-		_this_child1$child0.__create(__closure.__closure__this_child1$child0 = { })
-
-		_this$child1.addChild(_this_child1$child0)
-		var _this_child1$child1 = new _globals.src.RoundButton(_this$child1)
-		__closure._this_child1$child1 = _this_child1$child1
-
-//creating component RoundButton
-		_this_child1$child1.__create(__closure.__closure__this_child1$child1 = { })
-
-		_this$child1.addChild(_this_child1$child1)
-		var _this_child1$child2 = new _globals.src.RoundButton(_this$child1)
-		__closure._this_child1$child2 = _this_child1$child2
-
-//creating component RoundButton
-		_this_child1$child2.__create(__closure.__closure__this_child1$child2 = { })
-
-		_this$child1.addChild(_this_child1$child2)
-		$this.addChild(_this$child1)
-		$this._setId('root')
-	}
-	PageMainPrototype.__setup = function(__closure) {
-		var $this = this;
-	PageMainBasePrototype.__setup.call(this, __closure.__base); delete __closure.__base
-//assigning mobile to (${context.system.device} == _globals.core.System.prototype.Mobile)
-			var update$_this$mobile = function() { $this.mobile = ($this._get('context')._get('system')._get('device') == _globals.core.System.prototype.Mobile); }
-			$this._replaceUpdater('mobile', [update$_this$mobile, [[$this._get('context')._get('system'), 'device']]])
-//assigning anchors.fill to (${parent})
-			var update$_this$anchors_fill = function() { $this._get('anchors').fill = ($this._get('parent')); }
-			$this._get('anchors')._replaceUpdater('fill', [update$_this$anchors_fill, [[$this, 'parent']]])
-
-//setting up component Item
-			var _this$child0 = __closure._this$child0
-			_this$child0.__setup(__closure.__closure__this$child0)
-			delete __closure.__closure__this$child0
-
-//assigning anchors.right to (${parent.right})
-			var update$_this_child0$anchors_right = function() { _this$child0._get('anchors').right = (_this$child0._get('parent')._get('right')); }
-			_this$child0._get('anchors')._replaceUpdater('right', [update$_this_child0$anchors_right, [[_this$child0._get('parent'), 'right']]])
-//assigning anchors.verticalCenter to (${parent.verticalCenter})
-			var update$_this_child0$anchors_verticalCenter = function() { _this$child0._get('anchors').verticalCenter = (_this$child0._get('parent')._get('verticalCenter')); }
-			_this$child0._get('anchors')._replaceUpdater('verticalCenter', [update$_this_child0$anchors_verticalCenter, [[_this$child0._get('parent'), 'verticalCenter']]])
-//assigning anchors.left to (${parent.left})
-			var update$_this_child0$anchors_left = function() { _this$child0._get('anchors').left = (_this$child0._get('parent')._get('left')); }
-			_this$child0._get('anchors')._replaceUpdater('left', [update$_this_child0$anchors_left, [[_this$child0._get('parent'), 'left']]])
-//assigning height to (${content.height} + (${root.mobile} ? 80 : 100))
-			var update$_this_child0$height = function() { _this$child0.height = (_this$child0._get('content')._get('height') + (_this$child0._get('root')._get('mobile') ? 80 : 100)); }
-			_this$child0._replaceUpdater('height', [update$_this_child0$height, [[_this$child0._get('content'), 'height'],[_this$child0._get('root'), 'mobile']]])
-
-//setting up component Rectangle
-			var _this_child0$child0 = __closure._this_child0$child0
-			_this_child0$child0.__setup(__closure.__closure__this_child0$child0)
-			delete __closure.__closure__this_child0$child0
-
-//assigning border.width to (1)
-			_this_child0$child0._get('border')._replaceUpdater('width'); _this_child0$child0._get('border').width = (1);
-//assigning border.color to ("black")
-			_this_child0$child0._get('border')._replaceUpdater('color'); _this_child0$child0._get('border').color = ("black");
-//assigning opacity to (0.6)
-			_this_child0$child0._replaceUpdater('opacity'); _this_child0$child0.opacity = (0.6);
-//assigning color to ("#203040")
-			_this_child0$child0._replaceUpdater('color'); _this_child0$child0.color = ("#203040");
-//assigning anchors.fill to (${parent})
-			var update$_this_child0_child0$anchors_fill = function() { _this_child0$child0._get('anchors').fill = (_this_child0$child0._get('parent')); }
-			_this_child0$child0._get('anchors')._replaceUpdater('fill', [update$_this_child0_child0$anchors_fill, [[_this_child0$child0, 'parent']]])
-
-
-//setting up component Column
-			var _this_child0$child1 = __closure._this_child0$child1
-			_this_child0$child1.__setup(__closure.__closure__this_child0$child1)
-			delete __closure.__closure__this_child0$child1
-
-//assigning anchors.margins to (${parent.width} * 0.1)
-			var update$_this_child0_child1$anchors_margins = function() { _this_child0$child1._get('anchors').margins = (_this_child0$child1._get('parent')._get('width') * 0.1); }
-			_this_child0$child1._get('anchors')._replaceUpdater('margins', [update$_this_child0_child1$anchors_margins, [[_this_child0$child1._get('parent'), 'width']]])
-//assigning anchors.verticalCenter to (${parent.verticalCenter})
-			var update$_this_child0_child1$anchors_verticalCenter = function() { _this_child0$child1._get('anchors').verticalCenter = (_this_child0$child1._get('parent')._get('verticalCenter')); }
-			_this_child0$child1._get('anchors')._replaceUpdater('verticalCenter', [update$_this_child0_child1$anchors_verticalCenter, [[_this_child0$child1._get('parent'), 'verticalCenter']]])
-//assigning spacing to (${root.mobile} ? 20 : 40)
-			var update$_this_child0_child1$spacing = function() { _this_child0$child1.spacing = (_this_child0$child1._get('root')._get('mobile') ? 20 : 40); }
-			_this_child0$child1._replaceUpdater('spacing', [update$_this_child0_child1$spacing, [[_this_child0$child1._get('root'), 'mobile']]])
-//assigning anchors.right to (${parent.right})
-			var update$_this_child0_child1$anchors_right = function() { _this_child0$child1._get('anchors').right = (_this_child0$child1._get('parent')._get('right')); }
-			_this_child0$child1._get('anchors')._replaceUpdater('right', [update$_this_child0_child1$anchors_right, [[_this_child0$child1._get('parent'), 'right']]])
-//assigning anchors.left to (${parent.left})
-			var update$_this_child0_child1$anchors_left = function() { _this_child0$child1._get('anchors').left = (_this_child0$child1._get('parent')._get('left')); }
-			_this_child0$child1._get('anchors')._replaceUpdater('left', [update$_this_child0_child1$anchors_left, [[_this_child0$child1._get('parent'), 'left']]])
-
-//setting up component Text
-			var _this_child0_child1$child0 = __closure._this_child0_child1$child0
-			_this_child0_child1$child0.__setup(__closure.__closure__this_child0_child1$child0)
-			delete __closure.__closure__this_child0_child1$child0
-
-//assigning color to ("white")
-			_this_child0_child1$child0._replaceUpdater('color'); _this_child0_child1$child0.color = ("white");
-//assigning text to (_globals.qsTr(("Put the smart on your smartphone!")))
-			var update$_this_child0_child1_child0$text = function() { _this_child0_child1$child0.text = (_globals.qsTr(("Put the smart on your smartphone!"))); }
-			_this_child0_child1$child0._replaceUpdater('text', [update$_this_child0_child1_child0$text, [[_this_child0_child1$child0._context, 'language']]])
-//assigning anchors.right to (${parent.right})
-			var update$_this_child0_child1_child0$anchors_right = function() { _this_child0_child1$child0._get('anchors').right = (_this_child0_child1$child0._get('parent')._get('right')); }
-			_this_child0_child1$child0._get('anchors')._replaceUpdater('right', [update$_this_child0_child1_child0$anchors_right, [[_this_child0_child1$child0._get('parent'), 'right']]])
-//assigning horizontalAlignment to (_globals.core.Text.prototype.AlignHCenter)
-			_this_child0_child1$child0._replaceUpdater('horizontalAlignment'); _this_child0_child1$child0.horizontalAlignment = (_globals.core.Text.prototype.AlignHCenter);
-//assigning wrapMode to (_globals.core.Text.prototype.Wrap)
-			_this_child0_child1$child0._replaceUpdater('wrapMode'); _this_child0_child1$child0.wrapMode = (_globals.core.Text.prototype.Wrap);
-//assigning font.pixelSize to (${root.mobile} ? 30 : 40)
-			var update$_this_child0_child1_child0$font_pixelSize = function() { _this_child0_child1$child0._get('font').pixelSize = (_this_child0_child1$child0._get('root')._get('mobile') ? 30 : 40); }
-			_this_child0_child1$child0._get('font')._replaceUpdater('pixelSize', [update$_this_child0_child1_child0$font_pixelSize, [[_this_child0_child1$child0._get('root'), 'mobile']]])
-//assigning verticalAlignment to (_globals.core.Text.prototype.AlignVCenter)
-			_this_child0_child1$child0._replaceUpdater('verticalAlignment'); _this_child0_child1$child0.verticalAlignment = (_globals.core.Text.prototype.AlignVCenter);
-//assigning anchors.left to (${parent.left})
-			var update$_this_child0_child1_child0$anchors_left = function() { _this_child0_child1$child0._get('anchors').left = (_this_child0_child1$child0._get('parent')._get('left')); }
-			_this_child0_child1$child0._get('anchors')._replaceUpdater('left', [update$_this_child0_child1_child0$anchors_left, [[_this_child0_child1$child0._get('parent'), 'left']]])
-
-//setting up component MouseArea
-			var _this_child0_child1_child0$child0 = __closure._this_child0_child1_child0$child0
-			_this_child0_child1_child0$child0.__setup(__closure.__closure__this_child0_child1_child0$child0)
-			delete __closure.__closure__this_child0_child1_child0$child0
-
-
-
-
-//setting up component ImageButton
-			var _this_child0_child1$child1 = __closure._this_child0_child1$child1
-			_this_child0_child1$child1.__setup(__closure.__closure__this_child0_child1$child1)
-			delete __closure.__closure__this_child0_child1$child1
-
-//assigning anchors.horizontalCenter to (${parent.horizontalCenter})
-			var update$_this_child0_child1_child1$anchors_horizontalCenter = function() { _this_child0_child1$child1._get('anchors').horizontalCenter = (_this_child0_child1$child1._get('parent')._get('horizontalCenter')); }
-			_this_child0_child1$child1._get('anchors')._replaceUpdater('horizontalCenter', [update$_this_child0_child1_child1$anchors_horizontalCenter, [[_this_child0_child1$child1._get('parent'), 'horizontalCenter']]])
-//assigning target to (${href})
-			var update$_this_child0_child1_child1$target = function() { _this_child0_child1$child1.target = (_this_child0_child1$child1._get('href')); }
-			_this_child0_child1$child1._replaceUpdater('target', [update$_this_child0_child1_child1$target, [[_this_child0_child1$child1, 'href']]])
-//assigning source to ("img/en-play-badge.png")
-			_this_child0_child1$child1._replaceUpdater('source'); _this_child0_child1$child1.source = ("img/en-play-badge.png");
-//assigning height to (60)
-			_this_child0_child1$child1._replaceUpdater('height'); _this_child0_child1$child1.height = (60);
-//assigning width to (202)
-			_this_child0_child1$child1._replaceUpdater('width'); _this_child0_child1$child1.width = (202);
-//assigning href to ("https://play.google.com/store/apps/details?id=com.pastillilabs.situations2")
-			_this_child0_child1$child1._replaceUpdater('href'); _this_child0_child1$child1.href = ("https://play.google.com/store/apps/details?id=com.pastillilabs.situations2");
-
-
-
-
-//setting up component Row
-			var _this$child1 = __closure._this$child1
-			_this$child1.__setup(__closure.__closure__this$child1)
-			delete __closure.__closure__this$child1
-
-//assigning anchors.margins to (10)
-			_this$child1._get('anchors')._replaceUpdater('margins'); _this$child1._get('anchors').margins = (10);
-//assigning anchors.horizontalCenter to (${parent.horizontalCenter})
-			var update$_this_child1$anchors_horizontalCenter = function() { _this$child1._get('anchors').horizontalCenter = (_this$child1._get('parent')._get('horizontalCenter')); }
-			_this$child1._get('anchors')._replaceUpdater('horizontalCenter', [update$_this_child1$anchors_horizontalCenter, [[_this$child1._get('parent'), 'horizontalCenter']]])
-//assigning spacing to (20)
-			_this$child1._replaceUpdater('spacing'); _this$child1.spacing = (20);
-//assigning anchors.bottom to (${parent.bottom})
-			var update$_this_child1$anchors_bottom = function() { _this$child1._get('anchors').bottom = (_this$child1._get('parent')._get('bottom')); }
-			_this$child1._get('anchors')._replaceUpdater('bottom', [update$_this_child1$anchors_bottom, [[_this$child1._get('parent'), 'bottom']]])
-
-//setting up component RoundButton
-			var _this_child1$child0 = __closure._this_child1$child0
-			_this_child1$child0.__setup(__closure.__closure__this_child1$child0)
-			delete __closure.__closure__this_child1$child0
-
-//assigning source to ("img/mono/twitter.png")
-			_this_child1$child0._replaceUpdater('source'); _this_child1$child0.source = ("img/mono/twitter.png");
-//assigning href to ("https://www.twitter.com/situationsapp")
-			_this_child1$child0._replaceUpdater('href'); _this_child1$child0.href = ("https://www.twitter.com/situationsapp");
-//assigning target to (${href})
-			var update$_this_child1_child0$target = function() { _this_child1$child0.target = (_this_child1$child0._get('href')); }
-			_this_child1$child0._replaceUpdater('target', [update$_this_child1_child0$target, [[_this_child1$child0, 'href']]])
-
-
-//setting up component RoundButton
-			var _this_child1$child1 = __closure._this_child1$child1
-			_this_child1$child1.__setup(__closure.__closure__this_child1$child1)
-			delete __closure.__closure__this_child1$child1
-
-//assigning source to ("img/mono/facebook.png")
-			_this_child1$child1._replaceUpdater('source'); _this_child1$child1.source = ("img/mono/facebook.png");
-//assigning href to ("https://www.facebook.com/situationsapp")
-			_this_child1$child1._replaceUpdater('href'); _this_child1$child1.href = ("https://www.facebook.com/situationsapp");
-//assigning target to (${href})
-			var update$_this_child1_child1$target = function() { _this_child1$child1.target = (_this_child1$child1._get('href')); }
-			_this_child1$child1._replaceUpdater('target', [update$_this_child1_child1$target, [[_this_child1$child1, 'href']]])
-
-
-//setting up component RoundButton
-			var _this_child1$child2 = __closure._this_child1$child2
-			_this_child1$child2.__setup(__closure.__closure__this_child1$child2)
-			delete __closure.__closure__this_child1$child2
-
-//assigning source to ("img/mono/mail.png")
-			_this_child1$child2._replaceUpdater('source'); _this_child1$child2.source = ("img/mono/mail.png");
-//assigning href to ("mailto:support@pastillilabs.com")
-			_this_child1$child2._replaceUpdater('href'); _this_child1$child2.href = ("mailto:support@pastillilabs.com");
-//assigning target to (${href})
-			var update$_this_child1_child2$target = function() { _this_child1$child2.target = (_this_child1$child2._get('href')); }
-			_this_child1$child2._replaceUpdater('target', [update$_this_child1_child2$target, [[_this_child1$child2, 'href']]])
-}
-
 
 //=====[component core.BorderSide]=====================
 
@@ -4133,6 +4235,107 @@ var _this$child0 = new _globals.core.Item($this)
 	}
 	core.addProperty(AnchorLinePrototype, 'int', 'boxIndex')
 
+//=====[component core.Border]=====================
+
+	var BorderBaseComponent = _globals.core.Object
+	var BorderBasePrototype = BorderBaseComponent.prototype
+
+/**
+ * @constructor
+ * @extends {_globals.core.Object}
+ */
+	var BorderComponent = _globals.core.Border = function(parent, _delegate) {
+		BorderBaseComponent.apply(this, arguments)
+
+	}
+	var BorderPrototype = BorderComponent.prototype = Object.create(BorderBasePrototype)
+
+	BorderPrototype.constructor = BorderComponent
+
+	BorderPrototype.componentName = 'core.Border'
+	core.addProperty(BorderPrototype, 'int', 'width')
+	core.addProperty(BorderPrototype, 'color', 'color')
+	core.addProperty(BorderPrototype, 'string', 'style')
+	core.addLazyProperty(BorderPrototype, 'left', (function(__parent) {
+		var lazy$left = new _globals.core.BorderSide(__parent, true)
+		var __closure = { lazy$left : lazy$left }
+
+//creating component BorderSide
+			lazy$left.__create(__closure.__closure_lazy$left = { })
+
+
+//setting up component BorderSide
+			var lazy$left = __closure.lazy$left
+			lazy$left.__setup(__closure.__closure_lazy$left)
+			delete __closure.__closure_lazy$left
+
+//assigning name to ("left")
+			lazy$left._replaceUpdater('name'); lazy$left.name = ("left");
+
+
+		return lazy$left
+}))
+	core.addLazyProperty(BorderPrototype, 'right', (function(__parent) {
+		var lazy$right = new _globals.core.BorderSide(__parent, true)
+		var __closure = { lazy$right : lazy$right }
+
+//creating component BorderSide
+			lazy$right.__create(__closure.__closure_lazy$right = { })
+
+
+//setting up component BorderSide
+			var lazy$right = __closure.lazy$right
+			lazy$right.__setup(__closure.__closure_lazy$right)
+			delete __closure.__closure_lazy$right
+
+//assigning name to ("right")
+			lazy$right._replaceUpdater('name'); lazy$right.name = ("right");
+
+
+		return lazy$right
+}))
+	core.addLazyProperty(BorderPrototype, 'top', (function(__parent) {
+		var lazy$top = new _globals.core.BorderSide(__parent, true)
+		var __closure = { lazy$top : lazy$top }
+
+//creating component BorderSide
+			lazy$top.__create(__closure.__closure_lazy$top = { })
+
+
+//setting up component BorderSide
+			var lazy$top = __closure.lazy$top
+			lazy$top.__setup(__closure.__closure_lazy$top)
+			delete __closure.__closure_lazy$top
+
+//assigning name to ("top")
+			lazy$top._replaceUpdater('name'); lazy$top.name = ("top");
+
+
+		return lazy$top
+}))
+	core.addLazyProperty(BorderPrototype, 'bottom', (function(__parent) {
+		var lazy$bottom = new _globals.core.BorderSide(__parent, true)
+		var __closure = { lazy$bottom : lazy$bottom }
+
+//creating component BorderSide
+			lazy$bottom.__create(__closure.__closure_lazy$bottom = { })
+
+
+//setting up component BorderSide
+			var lazy$bottom = __closure.lazy$bottom
+			lazy$bottom.__setup(__closure.__closure_lazy$bottom)
+			delete __closure.__closure_lazy$bottom
+
+//assigning name to ("bottom")
+			lazy$bottom._replaceUpdater('name'); lazy$bottom.name = ("bottom");
+
+
+		return lazy$bottom
+}))
+	_globals.core._protoOnChanged(BorderPrototype, 'width', (function(value) { this.parent.style({'border-width': value, 'margin-left': -value, 'margin-top': -value}) } ))
+	_globals.core._protoOnChanged(BorderPrototype, 'color', (function(value) { this.parent.style('border-color', _globals.core.normalizeColor(value)) } ))
+	_globals.core._protoOnChanged(BorderPrototype, 'style', (function(value) { this.parent.style('border-style', value) } ))
+
 //=====[component core.RAIIEventEmitter]=====================
 
 	var RAIIEventEmitterBaseComponent = _globals.core.EventEmitter
@@ -4298,6 +4501,73 @@ var _this$child0 = new _globals.core.Image($this)
 			return selector
 	}
 
+//=====[component controls.web.HoverClickMixin]=====================
+
+	var HoverClickMixinBaseComponent = _globals.core.Object
+	var HoverClickMixinBasePrototype = HoverClickMixinBaseComponent.prototype
+
+/**
+ * @constructor
+ * @extends {_globals.core.Object}
+ */
+	var HoverClickMixinComponent = _globals.controls.web.HoverClickMixin = function(parent, _delegate) {
+		HoverClickMixinBaseComponent.apply(this, arguments)
+	//custom constructor:
+	{
+		this.element = this.parent.element;
+		this.parent.style('cursor', this.cursor)
+		this._bindClick(this.clickable)
+		this._bindHover(this.enabled)
+		this._bindActiveHover(this.activeHoverEnabled)
+	}
+
+	}
+	var HoverClickMixinPrototype = HoverClickMixinComponent.prototype = Object.create(HoverClickMixinBasePrototype)
+
+	HoverClickMixinPrototype.constructor = HoverClickMixinComponent
+
+	HoverClickMixinPrototype.componentName = 'controls.web.HoverClickMixin'
+	HoverClickMixinPrototype._bindActiveHover = function(value) {
+		if (value && !this._hmActiveHoverBinder) {
+			this._hmActiveHoverBinder = new _globals.core.EventBinder(this.parent.element)
+			this._hmActiveHoverBinder.on('mouseover', function() { this.activeHover = true }.bind(this))
+			this._hmActiveHoverBinder.on('mouseout', function() { this.activeHover = false }.bind(this))
+		}
+		if (this._hmActiveHoverBinder)
+		{
+			this._hmActiveHoverBinder.enable(value)
+		}
+	}
+	HoverClickMixinPrototype._bindClick = function(value) {
+		if (value && !this._hmClickBinder) {
+			this._hmClickBinder = new _globals.core.EventBinder(this.element)
+			this._hmClickBinder.on('click', _globals.core.createSignalForwarder(this.parent, 'clicked').bind(this))
+		}
+		if (this._hmClickBinder)
+			this._hmClickBinder.enable(value)
+	}
+	HoverClickMixinPrototype._bindHover = function(value) {
+		if (value && !this._hmHoverBinder) {
+			this._hmHoverBinder = new _globals.core.EventBinder(this.parent.element)
+			this._hmHoverBinder.on('mouseenter', function() { this.value = true }.bind(this))
+			this._hmHoverBinder.on('mouseleave', function() { this.value = false }.bind(this))
+		}
+		if (this._hmHoverBinder)
+			this._hmHoverBinder.enable(value)
+	}
+	core.addProperty(HoverClickMixinPrototype, 'bool', 'enabled', (true))
+	core.addProperty(HoverClickMixinPrototype, 'bool', 'clickable', (true))
+	core.addProperty(HoverClickMixinPrototype, 'bool', 'activeHoverEnabled', (false))
+	core.addProperty(HoverClickMixinPrototype, 'bool', 'value')
+	core.addProperty(HoverClickMixinPrototype, 'bool', 'activeHover', (false))
+	core.addProperty(HoverClickMixinPrototype, 'string', 'cursor')
+	_globals.core._protoOnChanged(HoverClickMixinPrototype, 'clickable', (function(value) { this._bindClick(value) } ))
+	_globals.core._protoOnChanged(HoverClickMixinPrototype, 'cursor', (function(value) {
+		this.parent.style('cursor', value)
+	} ))
+	_globals.core._protoOnChanged(HoverClickMixinPrototype, 'activeHoverEnabled', (function(value) { this._bindActiveHover(value) } ))
+	_globals.core._protoOnChanged(HoverClickMixinPrototype, 'enabled', (function(value) { this._bindHover(value) } ))
+
 //=====[component src.Background]=====================
 
 	var BackgroundBaseComponent = _globals.core.Rectangle
@@ -4438,8 +4708,9 @@ var _this$child0 = new _globals.core.Text($this)
 	MenuButtonBasePrototype.__setup.call(this, __closure.__base); delete __closure.__base
 //assigning border.color to ("white")
 			$this._get('border')._replaceUpdater('color'); $this._get('border').color = ("white");
-//assigning color to ("#20304080")
-			$this._replaceUpdater('color'); $this.color = ("#20304080");
+//assigning color to (${hover} ? "transparent" : "#20304080")
+			var update$_this$color = function() { $this.color = ($this._get('hover') ? "transparent" : "#20304080"); }
+			$this._replaceUpdater('color', [update$_this$color, [[$this, 'hover']]])
 //assigning height to (40)
 			$this._replaceUpdater('height'); $this.height = (40);
 //assigning width to (${textItem.paintedWidth} + 40)
@@ -4461,31 +4732,13 @@ var _this$child0 = new _globals.core.Text($this)
 
 //assigning color to ("white")
 			_this$child0._replaceUpdater('color'); _this$child0.color = ("white");
+//assigning x to (20)
+			_this$child0._replaceUpdater('x'); _this$child0.x = (20);
 //assigning font.pointSize to (14)
 			_this$child0._get('font')._replaceUpdater('pointSize'); _this$child0._get('font').pointSize = (14);
 //assigning anchors.verticalCenter to (${parent.verticalCenter})
 			var update$_this_child0$anchors_verticalCenter = function() { _this$child0._get('anchors').verticalCenter = (_this$child0._get('parent')._get('verticalCenter')); }
 			_this$child0._get('anchors')._replaceUpdater('verticalCenter', [update$_this_child0$anchors_verticalCenter, [[_this$child0._get('parent'), 'verticalCenter']]])
-//assigning font.bold to (true)
-			_this$child0._get('font')._replaceUpdater('bold'); _this$child0._get('font').bold = (true);
-//assigning x to (20)
-			_this$child0._replaceUpdater('x'); _this$child0.x = (20);
-	var behavior__this_child0_on_color = new _globals.core.Animation(_this$child0)
-	var behavior__this_child0_on_color__closure = { behavior__this_child0_on_color: behavior__this_child0_on_color }
-
-//creating component Animation
-	behavior__this_child0_on_color.__create(behavior__this_child0_on_color__closure.__closure_behavior__this_child0_on_color = { })
-
-
-//setting up component Animation
-	var behavior__this_child0_on_color = behavior__this_child0_on_color__closure.behavior__this_child0_on_color
-	behavior__this_child0_on_color.__setup(behavior__this_child0_on_color__closure.__closure_behavior__this_child0_on_color)
-	delete behavior__this_child0_on_color__closure.__closure_behavior__this_child0_on_color
-
-//assigning duration to (400)
-	behavior__this_child0_on_color._replaceUpdater('duration'); behavior__this_child0_on_color.duration = (400);
-
-	_this$child0.setAnimation('color', behavior__this_child0_on_color);
 
 	var behavior__this_on_background = new _globals.core.Animation($this)
 	var behavior__this_on_background__closure = { behavior__this_on_background: behavior__this_on_background }
@@ -4499,8 +4752,8 @@ var _this$child0 = new _globals.core.Text($this)
 	behavior__this_on_background.__setup(behavior__this_on_background__closure.__closure_behavior__this_on_background)
 	delete behavior__this_on_background__closure.__closure_behavior__this_on_background
 
-//assigning duration to (400)
-	behavior__this_on_background._replaceUpdater('duration'); behavior__this_on_background.duration = (400);
+//assigning duration to (250)
+	behavior__this_on_background._replaceUpdater('duration'); behavior__this_on_background.duration = (250);
 
 	$this.setAnimation('background', behavior__this_on_background);
 }
@@ -4569,51 +4822,17 @@ var _this$child0 = new _globals.core.Text($this)
 		var $this = this;
 	LocationBasePrototype.__setup.call(this, __closure.__base); delete __closure.__base
 $this._context._onCompleted((function() {
+	var context = this._get('context', true)
+
 		var location = window.location
 		this.updateActualValues()
 		var self = this
-		window.onhashchange = function() { self.hash = location.hash }
-		window.onpopstate = function() { self.updateActualValues() }
+		var context = this._context
+		context.window.on("hashchange", function() { self.hash = location.hash }.bind(this))
+		context.window.on("popstate", function() { self.updateActualValues() }.bind(this))
 	} ).bind($this))
 }
 
-
-//=====[component html5.Orientation]=====================
-
-	var OrientationBaseComponent = _globals.core.Object
-	var OrientationBasePrototype = OrientationBaseComponent.prototype
-
-/**
- * @constructor
- * @extends {_globals.core.Object}
- */
-	var OrientationComponent = _globals.html5.Orientation = function(parent, _delegate) {
-		OrientationBaseComponent.apply(this, arguments)
-
-	}
-	var OrientationPrototype = OrientationComponent.prototype = Object.create(OrientationBasePrototype)
-
-	OrientationPrototype.constructor = OrientationComponent
-
-	OrientationPrototype.componentName = 'html5.Orientation'
-	OrientationPrototype.onChanged = function(name,callback) {
-		if (!this._orientationEnabled) {
-			var self = this
-			window.ondeviceorientation = function(e) {
-				self.absolute = e.absolute
-				self.alpha = e.alpha
-				self.beta = e.beta
-				self.gamma = e.gamma
-			}
-			this._orientationEnabled = true;
-		}
-
-		_globals.core.Object.prototype.onChanged.apply(this, arguments);
-	}
-	core.addProperty(OrientationPrototype, 'real', 'alpha')
-	core.addProperty(OrientationPrototype, 'real', 'beta')
-	core.addProperty(OrientationPrototype, 'real', 'gamma')
-	core.addProperty(OrientationPrototype, 'bool', 'absolute')
 _globals.core.model = (function() {/** @const */
 var exports = {};
 exports._get = function(name) { return exports[name] }
@@ -5276,6 +5495,17 @@ ElementPrototype.remove = function() {
 		dom.parentNode.removeChild(dom)
 }
 
+exports.Document = function(context, dom) {
+	_globals.core.RAIIEventEmitter.apply(this)
+	this._context = context
+	this.dom = dom
+
+	registerGenericListener(this)
+}
+
+var DocumentPrototype = exports.Document.prototype = Object.create(_globals.core.RAIIEventEmitter.prototype)
+DocumentPrototype.constructor = exports.Document
+
 exports.Window = function(context, dom) {
 	_globals.core.RAIIEventEmitter.apply(this)
 	this._context = context
@@ -5317,6 +5547,9 @@ exports.init = function(ctx) {
 		prefix += '-'
 		log('Context: using prefix', prefix)
 	}
+
+	var doc = new _globals.html5.html.Document(ctx, document)
+	ctx.document = doc
 
 	var win = new _globals.html5.html.Window(ctx, window)
 	ctx.window = win
@@ -5496,9 +5729,8 @@ exports.layoutText = function(text) {
 
 	var dom = element.dom
 
-	var isHtml = text.text.search(/[\<\&]/) >= 0 //dubious check
-/*
-	uncomment me
+	var isHtml = text.textFormat === text.Html || text.text.search(/[\<\&]/) >= 0 //dubious check
+
 	if (!wrap && textCanvasContext !== null && !isHtml) {
 		var font = text.font
 		var fontSize
@@ -5518,7 +5750,6 @@ exports.layoutText = function(text) {
 		layoutTextSetStyle(text, {})
 		return
 	}
-*/
 	var removedChildren = element.removeChildren(text)
 
 	if (!wrap)
