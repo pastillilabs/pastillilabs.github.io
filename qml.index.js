@@ -1785,8 +1785,8 @@ var _this$child0 = new _globals.core.ScrollView($this)
 //assigning text to (_globals.qsTr(("How it works")))
 			var update$_this_child0_child0_child0_child0_child1_child0$text = function() { _this_child0_child0_child0_child0_child1$child0.text = (_globals.qsTr(("How it works"))); }
 			_this_child0_child0_child0_child0_child1$child0._replaceUpdater('text', [update$_this_child0_child0_child0_child0_child1_child0$text, [[_this_child0_child0_child0_child0_child1$child0._context, 'language']]])
-//assigning imageSource to ("img/mono/heading_pastillilabs.png")
-			_this_child0_child0_child0_child0_child1$child0._replaceUpdater('imageSource'); _this_child0_child0_child0_child0_child1$child0.imageSource = ("img/mono/heading_pastillilabs.png");
+//assigning imageSource to ("img/mono/heading_works.png")
+			_this_child0_child0_child0_child0_child1$child0._replaceUpdater('imageSource'); _this_child0_child0_child0_child0_child1$child0.imageSource = ("img/mono/heading_works.png");
 
 
 //setting up component Paragraph
@@ -1794,8 +1794,8 @@ var _this$child0 = new _globals.core.ScrollView($this)
 			_this_child0_child0_child0_child0_child1$child1.__setup(__closure.__closure__this_child0_child0_child0_child0_child1$child1)
 			delete __closure.__closure__this_child0_child0_child0_child0_child1$child1
 
-//assigning text to (_globals.qsTr(("Situations app follows the instructions you give it. You can define multiple <b>situations</b> which are collections of <b>conditions</b> and <b>actions</b>. They define <b>what</b> happens and <b>when</b>.")))
-			var update$_this_child0_child0_child0_child0_child1_child1$text = function() { _this_child0_child0_child0_child0_child1$child1.text = (_globals.qsTr(("Situations app follows the instructions you give it. You can define multiple <b>situations</b> which are collections of <b>conditions</b> and <b>actions</b>. They define <b>what</b> happens and <b>when</b>."))); }
+//assigning text to (_globals.qsTr(("Situations app simply follows your instructions. You can set up multiple <b>situations</b> which are collections of <b>conditions</b> and <b>actions</b>. They define <b>what</b> happens and <b>when</b>.")))
+			var update$_this_child0_child0_child0_child0_child1_child1$text = function() { _this_child0_child0_child0_child0_child1$child1.text = (_globals.qsTr(("Situations app simply follows your instructions. You can set up multiple <b>situations</b> which are collections of <b>conditions</b> and <b>actions</b>. They define <b>what</b> happens and <b>when</b>."))); }
 			_this_child0_child0_child0_child0_child1$child1._replaceUpdater('text', [update$_this_child0_child0_child0_child0_child1_child1$text, [[_this_child0_child0_child0_child0_child1$child1._context, 'language']]])
 
 
@@ -1804,8 +1804,8 @@ var _this$child0 = new _globals.core.ScrollView($this)
 			_this_child0_child0_child0_child0_child1$child2.__setup(__closure.__closure__this_child0_child0_child0_child0_child1$child2)
 			delete __closure.__closure__this_child0_child0_child0_child0_child1$child2
 
-//assigning text to (_globals.qsTr(("<b>Conditions</b> can be anything from time periods & calendar events to device settings and what ever the device can observe about its surroundings or location.")))
-			var update$_this_child0_child0_child0_child0_child1_child2$text = function() { _this_child0_child0_child0_child0_child1$child2.text = (_globals.qsTr(("<b>Conditions</b> can be anything from time periods & calendar events to device settings and what ever the device can observe about its surroundings or location."))); }
+//assigning text to (_globals.qsTr(("<b>Conditions</b> can be anything from time periods & calendar events to device settings, connectivity and location.")))
+			var update$_this_child0_child0_child0_child0_child1_child2$text = function() { _this_child0_child0_child0_child0_child1$child2.text = (_globals.qsTr(("<b>Conditions</b> can be anything from time periods & calendar events to device settings, connectivity and location."))); }
 			_this_child0_child0_child0_child0_child1$child2._replaceUpdater('text', [update$_this_child0_child0_child0_child0_child1_child2$text, [[_this_child0_child0_child0_child0_child1$child2._context, 'language']]])
 
 
