@@ -2283,7 +2283,6 @@ var _this$child0 = new _globals.core.ScrollView($this)
 	UiIndexPrototype.componentName = 'src.UiIndex'
 	core.addProperty(UiIndexPrototype, 'bool', 'mobile')
 	core.addProperty(UiIndexPrototype, 'Object', 'state')
-	core.addProperty(UiIndexPrototype, 'string', 'baseUrl', ("https://pastillilabs.github.io/"))
 	_globals.core._protoOnChanged(UiIndexPrototype, 'state', (function(value) {
 	var homePage = this._get('homePage', true), pageStack = this._get('pageStack', true)
 
@@ -2380,8 +2379,6 @@ var _this$child0 = new _globals.src.Background($this)
 			var update$_this$anchors_fill = function() { $this._get('anchors').fill = ($this._get('parent')); }
 			$this._get('anchors')._replaceUpdater('fill', [update$_this$anchors_fill, [[$this, 'parent']]])
 			$this._context._onCompleted((function() {
-        console.log("JOU");
-        console.log(window.location.hostname);
 		if(!window.location.hostname) {
 			return;
         }
@@ -2478,9 +2475,6 @@ var _this$child0 = new _globals.src.Background($this)
 			_this_child2$child0._replaceUpdater('margins'); _this_child2$child0.margins = (5);
 //assigning imageSource to ("img/mono/menu_home.png")
 			_this_child2$child0._replaceUpdater('imageSource'); _this_child2$child0.imageSource = ("img/mono/menu_home.png");
-//assigning baseUrl to (${root.baseUrl})
-			var update$_this_child2_child0$baseUrl = function() { _this_child2$child0.baseUrl = (_this_child2$child0._get('root')._get('baseUrl')); }
-			_this_child2$child0._replaceUpdater('baseUrl', [update$_this_child2_child0$baseUrl, [[_this_child2$child0._get('root'), 'baseUrl']]])
 //assigning page to (${homePage.url})
 			var update$_this_child2_child0$page = function() { _this_child2$child0.page = (_this_child2$child0._get('homePage')._get('url')); }
 			_this_child2$child0._replaceUpdater('page', [update$_this_child2_child0$page, [[_this_child2$child0._get('homePage'), 'url']]])
@@ -2498,9 +2492,6 @@ var _this$child0 = new _globals.src.Background($this)
 			_this_child2$child1._replaceUpdater('margins'); _this_child2$child1.margins = (5);
 //assigning imageSource to ("img/mono/menu_situations.png")
 			_this_child2$child1._replaceUpdater('imageSource'); _this_child2$child1.imageSource = ("img/mono/menu_situations.png");
-//assigning baseUrl to (${root.baseUrl})
-			var update$_this_child2_child1$baseUrl = function() { _this_child2$child1.baseUrl = (_this_child2$child1._get('root')._get('baseUrl')); }
-			_this_child2$child1._replaceUpdater('baseUrl', [update$_this_child2_child1$baseUrl, [[_this_child2$child1._get('root'), 'baseUrl']]])
 //assigning page to (${situationsPage.url})
 			var update$_this_child2_child1$page = function() { _this_child2$child1.page = (_this_child2$child1._get('situationsPage')._get('url')); }
 			_this_child2$child1._replaceUpdater('page', [update$_this_child2_child1$page, [[_this_child2$child1._get('situationsPage'), 'url']]])
@@ -2518,9 +2509,6 @@ var _this$child0 = new _globals.src.Background($this)
 			_this_child2$child2._replaceUpdater('margins'); _this_child2$child2.margins = (5);
 //assigning imageSource to ("img/mono/menu_pastillilabs.png")
 			_this_child2$child2._replaceUpdater('imageSource'); _this_child2$child2.imageSource = ("img/mono/menu_pastillilabs.png");
-//assigning baseUrl to (${root.baseUrl})
-			var update$_this_child2_child2$baseUrl = function() { _this_child2$child2.baseUrl = (_this_child2$child2._get('root')._get('baseUrl')); }
-			_this_child2$child2._replaceUpdater('baseUrl', [update$_this_child2_child2$baseUrl, [[_this_child2$child2._get('root'), 'baseUrl']]])
 //assigning page to (${pastilliLabsPage.url})
 			var update$_this_child2_child2$page = function() { _this_child2$child2.page = (_this_child2$child2._get('pastilliLabsPage')._get('url')); }
 			_this_child2$child2._replaceUpdater('page', [update$_this_child2_child2$page, [[_this_child2$child2._get('pastilliLabsPage'), 'url']]])
@@ -5125,7 +5113,6 @@ var _this$child0 = new _globals.core.Image($this)
 	MenuButtonPrototype.constructor = MenuButtonComponent
 
 	MenuButtonPrototype.componentName = 'src.MenuButton'
-	core.addProperty(MenuButtonPrototype, 'string', 'baseUrl')
 	core.addProperty(MenuButtonPrototype, 'bool', 'current', (false))
 	core.addProperty(MenuButtonPrototype, 'int', 'margins', (20))
 	core.addProperty(MenuButtonPrototype, 'string', 'page')
@@ -5164,9 +5151,9 @@ var _this$child0 = new _globals.core.Image($this)
 			$this._replaceUpdater('height'); $this.height = (40);
 //assigning width to (40)
 			$this._replaceUpdater('width'); $this.width = (40);
-//assigning href to (${baseUrl} + ${page})
-			var update$_this$href = function() { $this.href = ($this._get('baseUrl') + $this._get('page')); }
-			$this._replaceUpdater('href', [update$_this$href, [[$this, 'baseUrl'],[$this, 'page']]])
+//assigning href to (${_context.location.origin} + "/" + ${page})
+			var update$_this$href = function() { $this.href = ($this._get('_context')._get('location')._get('origin') + "/" + $this._get('page')); }
+			$this._replaceUpdater('href', [update$_this$href, [[$this._get('_context')._get('location'), 'origin'],[$this, 'page']]])
 //assigning radius to (5)
 			$this._replaceUpdater('radius'); $this.radius = (5);
 //assigning border.width to (${hover} || ${current} ? 2 : 0)
