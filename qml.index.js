@@ -1549,25 +1549,12 @@ var _this$child0 = new _globals.core.ScrollView($this)
 		_this_child0_child0_child0_child0_child2_child1$child0.__create(__closure.__closure__this_child0_child0_child0_child0_child2_child1$child0 = { })
 
 		_this_child0_child0_child0_child0_child2$child1.addChild(_this_child0_child0_child0_child0_child2_child1$child0)
-		var _this_child0_child0_child0_child0_child2_child1$child1 = new _globals.core.Column(_this_child0_child0_child0_child0_child2$child1)
+		var _this_child0_child0_child0_child0_child2_child1$child1 = new _globals.src.Paragraph(_this_child0_child0_child0_child0_child2$child1)
 		__closure._this_child0_child0_child0_child0_child2_child1$child1 = _this_child0_child0_child0_child0_child2_child1$child1
 
-//creating component Column
+//creating component Paragraph
 		_this_child0_child0_child0_child0_child2_child1$child1.__create(__closure.__closure__this_child0_child0_child0_child0_child2_child1$child1 = { })
-		var _this_child0_child0_child0_child0_child2_child1_child1$child0 = new _globals.src.Paragraph(_this_child0_child0_child0_child0_child2_child1$child1)
-		__closure._this_child0_child0_child0_child0_child2_child1_child1$child0 = _this_child0_child0_child0_child0_child2_child1_child1$child0
 
-//creating component Paragraph
-		_this_child0_child0_child0_child0_child2_child1_child1$child0.__create(__closure.__closure__this_child0_child0_child0_child0_child2_child1_child1$child0 = { })
-
-		_this_child0_child0_child0_child0_child2_child1$child1.addChild(_this_child0_child0_child0_child0_child2_child1_child1$child0)
-		var _this_child0_child0_child0_child0_child2_child1_child1$child1 = new _globals.src.Paragraph(_this_child0_child0_child0_child0_child2_child1$child1)
-		__closure._this_child0_child0_child0_child0_child2_child1_child1$child1 = _this_child0_child0_child0_child0_child2_child1_child1$child1
-
-//creating component Paragraph
-		_this_child0_child0_child0_child0_child2_child1_child1$child1.__create(__closure.__closure__this_child0_child0_child0_child0_child2_child1_child1$child1 = { })
-
-		_this_child0_child0_child0_child0_child2_child1$child1.addChild(_this_child0_child0_child0_child0_child2_child1_child1$child1)
 		_this_child0_child0_child0_child0_child2$child1.addChild(_this_child0_child0_child0_child0_child2_child1$child1)
 		_this_child0_child0_child0_child0$child2.addChild(_this_child0_child0_child0_child0_child2$child1)
 		_this_child0_child0_child0$child0.addChild(_this_child0_child0_child0_child0$child2)
@@ -1692,8 +1679,8 @@ var _this$child0 = new _globals.core.ScrollView($this)
 			_this_child0_child0_child0_child0_child0$child1.__setup(__closure.__closure__this_child0_child0_child0_child0_child0$child1)
 			delete __closure.__closure__this_child0_child0_child0_child0_child0$child1
 
-//assigning text to (_globals.qsTr(("With Situations you can make your device work for you. It helps you get rid of routine tasks by doing them automatically!")))
-			var update$_this_child0_child0_child0_child0_child0_child1$text = function() { _this_child0_child0_child0_child0_child0$child1.text = (_globals.qsTr(("With Situations you can make your device work for you. It helps you get rid of routine tasks by doing them automatically!"))); }
+//assigning text to (_globals.qsTr(("With Situations you can make your device work for you. The app helps you get rid of routine tasks by doing them automatically!")))
+			var update$_this_child0_child0_child0_child0_child0_child1$text = function() { _this_child0_child0_child0_child0_child0$child1.text = (_globals.qsTr(("With Situations you can make your device work for you. The app helps you get rid of routine tasks by doing them automatically!"))); }
 			_this_child0_child0_child0_child0_child0$child1._replaceUpdater('text', [update$_this_child0_child0_child0_child0_child0_child1$text, [[_this_child0_child0_child0_child0_child0$child1._context, 'language']]])
 
 
@@ -1736,8 +1723,8 @@ var _this$child0 = new _globals.core.ScrollView($this)
 			_this_child0_child0_child0_child0_child0_child2$child1.__setup(__closure.__closure__this_child0_child0_child0_child0_child0_child2$child1)
 			delete __closure.__closure__this_child0_child0_child0_child0_child0_child2$child1
 
-//assigning text to (_globals.qsTr(("Send SMS from your children's phones when they leave home or school.")))
-			var update$_this_child0_child0_child0_child0_child0_child2_child1$text = function() { _this_child0_child0_child0_child0_child0_child2$child1.text = (_globals.qsTr(("Send SMS from your children's phones when they leave home or school."))); }
+//assigning text to (_globals.qsTr(("Have your your children's phones send SMS when they leave home or school.")))
+			var update$_this_child0_child0_child0_child0_child0_child2_child1$text = function() { _this_child0_child0_child0_child0_child0_child2$child1.text = (_globals.qsTr(("Have your your children's phones send SMS when they leave home or school."))); }
 			_this_child0_child0_child0_child0_child0_child2$child1._replaceUpdater('text', [update$_this_child0_child0_child0_child0_child0_child2_child1$text, [[_this_child0_child0_child0_child0_child0_child2$child1._context, 'language']]])
 
 
@@ -1794,8 +1781,8 @@ var _this$child0 = new _globals.core.ScrollView($this)
 			_this_child0_child0_child0_child0_child1$child1.__setup(__closure.__closure__this_child0_child0_child0_child0_child1$child1)
 			delete __closure.__closure__this_child0_child0_child0_child0_child1$child1
 
-//assigning text to (_globals.qsTr(("Situations app simply follows your instructions. You can set up multiple <b>situations</b> which are collections of <b>conditions</b> and <b>actions</b>. They define <b>what</b> happens and <b>when</b>.")))
-			var update$_this_child0_child0_child0_child0_child1_child1$text = function() { _this_child0_child0_child0_child0_child1$child1.text = (_globals.qsTr(("Situations app simply follows your instructions. You can set up multiple <b>situations</b> which are collections of <b>conditions</b> and <b>actions</b>. They define <b>what</b> happens and <b>when</b>."))); }
+//assigning text to (_globals.qsTr(("Situations app simply follows your instructions. You can set up multiple <b>situations</b> which are collections of conditions and actions. They define <b>what</b> happens and <b>when</b>.")))
+			var update$_this_child0_child0_child0_child0_child1_child1$text = function() { _this_child0_child0_child0_child0_child1$child1.text = (_globals.qsTr(("Situations app simply follows your instructions. You can set up multiple <b>situations</b> which are collections of conditions and actions. They define <b>what</b> happens and <b>when</b>."))); }
 			_this_child0_child0_child0_child0_child1$child1._replaceUpdater('text', [update$_this_child0_child0_child0_child0_child1_child1$text, [[_this_child0_child0_child0_child0_child1$child1._context, 'language']]])
 
 
@@ -1865,45 +1852,19 @@ var _this$child0 = new _globals.core.ScrollView($this)
 			_this_child0_child0_child0_child0_child2_child1$child0.__setup(__closure.__closure__this_child0_child0_child0_child0_child2_child1$child0)
 			delete __closure.__closure__this_child0_child0_child0_child0_child2_child1$child0
 
-//assigning text to (_globals.qsTr(("Situations is available for:")))
-			var update$_this_child0_child0_child0_child0_child2_child1_child0$text = function() { _this_child0_child0_child0_child0_child2_child1$child0.text = (_globals.qsTr(("Situations is available for:"))); }
+//assigning text to (_globals.qsTr(("Android: <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://play.google.com/store/apps/details?id=com.pastillilabs.situations2\">Google Play</a>")))
+			var update$_this_child0_child0_child0_child0_child2_child1_child0$text = function() { _this_child0_child0_child0_child0_child2_child1$child0.text = (_globals.qsTr(("Android: <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://play.google.com/store/apps/details?id=com.pastillilabs.situations2\">Google Play</a>"))); }
 			_this_child0_child0_child0_child0_child2_child1$child0._replaceUpdater('text', [update$_this_child0_child0_child0_child0_child2_child1_child0$text, [[_this_child0_child0_child0_child0_child2_child1$child0._context, 'language']]])
 
 
-//setting up component Column
+//setting up component Paragraph
 			var _this_child0_child0_child0_child0_child2_child1$child1 = __closure._this_child0_child0_child0_child0_child2_child1$child1
 			_this_child0_child0_child0_child0_child2_child1$child1.__setup(__closure.__closure__this_child0_child0_child0_child0_child2_child1$child1)
 			delete __closure.__closure__this_child0_child0_child0_child0_child2_child1$child1
 
-//assigning anchors.right to (${parent.right})
-			var update$_this_child0_child0_child0_child0_child2_child1_child1$anchors_right = function() { _this_child0_child0_child0_child0_child2_child1$child1._get('anchors').right = (_this_child0_child0_child0_child0_child2_child1$child1._get('parent')._get('right')); }
-			_this_child0_child0_child0_child0_child2_child1$child1._get('anchors')._replaceUpdater('right', [update$_this_child0_child0_child0_child0_child2_child1_child1$anchors_right, [[_this_child0_child0_child0_child0_child2_child1$child1._get('parent'), 'right']]])
-//assigning spacing to (5)
-			_this_child0_child0_child0_child0_child2_child1$child1._replaceUpdater('spacing'); _this_child0_child0_child0_child0_child2_child1$child1.spacing = (5);
-//assigning anchors.leftMargin to (20)
-			_this_child0_child0_child0_child0_child2_child1$child1._get('anchors')._replaceUpdater('leftMargin'); _this_child0_child0_child0_child0_child2_child1$child1._get('anchors').leftMargin = (20);
-//assigning anchors.left to (${parent.left})
-			var update$_this_child0_child0_child0_child0_child2_child1_child1$anchors_left = function() { _this_child0_child0_child0_child0_child2_child1$child1._get('anchors').left = (_this_child0_child0_child0_child0_child2_child1$child1._get('parent')._get('left')); }
-			_this_child0_child0_child0_child0_child2_child1$child1._get('anchors')._replaceUpdater('left', [update$_this_child0_child0_child0_child0_child2_child1_child1$anchors_left, [[_this_child0_child0_child0_child0_child2_child1$child1._get('parent'), 'left']]])
-
-//setting up component Paragraph
-			var _this_child0_child0_child0_child0_child2_child1_child1$child0 = __closure._this_child0_child0_child0_child0_child2_child1_child1$child0
-			_this_child0_child0_child0_child0_child2_child1_child1$child0.__setup(__closure.__closure__this_child0_child0_child0_child0_child2_child1_child1$child0)
-			delete __closure.__closure__this_child0_child0_child0_child0_child2_child1_child1$child0
-
-//assigning text to (_globals.qsTr(("● Android in <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://play.google.com/store/apps/details?id=com.pastillilabs.situations2\">Google Play</a>")))
-			var update$_this_child0_child0_child0_child0_child2_child1_child1_child0$text = function() { _this_child0_child0_child0_child0_child2_child1_child1$child0.text = (_globals.qsTr(("● Android in <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://play.google.com/store/apps/details?id=com.pastillilabs.situations2\">Google Play</a>"))); }
-			_this_child0_child0_child0_child0_child2_child1_child1$child0._replaceUpdater('text', [update$_this_child0_child0_child0_child0_child2_child1_child1_child0$text, [[_this_child0_child0_child0_child0_child2_child1_child1$child0._context, 'language']]])
-
-
-//setting up component Paragraph
-			var _this_child0_child0_child0_child0_child2_child1_child1$child1 = __closure._this_child0_child0_child0_child0_child2_child1_child1$child1
-			_this_child0_child0_child0_child0_child2_child1_child1$child1.__setup(__closure.__closure__this_child0_child0_child0_child0_child2_child1_child1$child1)
-			delete __closure.__closure__this_child0_child0_child0_child0_child2_child1_child1$child1
-
-//assigning text to (_globals.qsTr(("● Sailfish in Jolla Store and <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://pastillilabs.github.io/situations/sailfish\">here</a>")))
-			var update$_this_child0_child0_child0_child0_child2_child1_child1_child1$text = function() { _this_child0_child0_child0_child0_child2_child1_child1$child1.text = (_globals.qsTr(("● Sailfish in Jolla Store and <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://pastillilabs.github.io/situations/sailfish\">here</a>"))); }
-			_this_child0_child0_child0_child0_child2_child1_child1$child1._replaceUpdater('text', [update$_this_child0_child0_child0_child0_child2_child1_child1_child1$text, [[_this_child0_child0_child0_child0_child2_child1_child1$child1._context, 'language']]])
+//assigning text to (_globals.qsTr(("Sailfish: Jolla Store and <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://pastillilabs.github.io/situations/sailfish\">here</a>")))
+			var update$_this_child0_child0_child0_child0_child2_child1_child1$text = function() { _this_child0_child0_child0_child0_child2_child1$child1.text = (_globals.qsTr(("Sailfish: Jolla Store and <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://pastillilabs.github.io/situations/sailfish\">here</a>"))); }
+			_this_child0_child0_child0_child0_child2_child1$child1._replaceUpdater('text', [update$_this_child0_child0_child0_child0_child2_child1_child1$text, [[_this_child0_child0_child0_child0_child2_child1$child1._context, 'language']]])
 }
 
 
@@ -4267,8 +4228,8 @@ var _this$child0 = new _globals.core.ScrollView($this)
 			_this_child0_child0_child0_child0_child1$child1.__setup(__closure.__closure__this_child0_child0_child0_child0_child1$child1)
 			delete __closure.__closure__this_child0_child0_child0_child0_child1$child1
 
-//assigning text to (_globals.qsTr(("● Twitter<br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.twitter.com/situationsapp\">www.twitter.com/situationsapp</a>")))
-			var update$_this_child0_child0_child0_child0_child1_child1$text = function() { _this_child0_child0_child0_child0_child1$child1.text = (_globals.qsTr(("● Twitter<br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.twitter.com/situationsapp\">www.twitter.com/situationsapp</a>"))); }
+//assigning text to (_globals.qsTr(("Twitter<br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.twitter.com/situationsapp\">www.twitter.com/situationsapp</a>")))
+			var update$_this_child0_child0_child0_child0_child1_child1$text = function() { _this_child0_child0_child0_child0_child1$child1.text = (_globals.qsTr(("Twitter<br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.twitter.com/situationsapp\">www.twitter.com/situationsapp</a>"))); }
 			_this_child0_child0_child0_child0_child1$child1._replaceUpdater('text', [update$_this_child0_child0_child0_child0_child1_child1$text, [[_this_child0_child0_child0_child0_child1$child1._context, 'language']]])
 
 
@@ -4277,8 +4238,8 @@ var _this$child0 = new _globals.core.ScrollView($this)
 			_this_child0_child0_child0_child0_child1$child2.__setup(__closure.__closure__this_child0_child0_child0_child0_child1$child2)
 			delete __closure.__closure__this_child0_child0_child0_child0_child1$child2
 
-//assigning text to (_globals.qsTr(("● Facebook<br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.facebook.com/situationsapp\">www.facebook.com/situationsapp</a>")))
-			var update$_this_child0_child0_child0_child0_child1_child2$text = function() { _this_child0_child0_child0_child0_child1$child2.text = (_globals.qsTr(("● Facebook<br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.facebook.com/situationsapp\">www.facebook.com/situationsapp</a>"))); }
+//assigning text to (_globals.qsTr(("Facebook<br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.facebook.com/situationsapp\">www.facebook.com/situationsapp</a>")))
+			var update$_this_child0_child0_child0_child0_child1_child2$text = function() { _this_child0_child0_child0_child0_child1$child2.text = (_globals.qsTr(("Facebook<br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.facebook.com/situationsapp\">www.facebook.com/situationsapp</a>"))); }
 			_this_child0_child0_child0_child0_child1$child2._replaceUpdater('text', [update$_this_child0_child0_child0_child0_child1_child2$text, [[_this_child0_child0_child0_child0_child1$child2._context, 'language']]])
 
 
@@ -4287,8 +4248,8 @@ var _this$child0 = new _globals.core.ScrollView($this)
 			_this_child0_child0_child0_child0_child1$child3.__setup(__closure.__closure__this_child0_child0_child0_child0_child1$child3)
 			delete __closure.__closure__this_child0_child0_child0_child0_child1$child3
 
-//assigning text to (_globals.qsTr(("● Mail<br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"mailto:support@pastillilabs.com\">support(at)pastillilabs.com</a>")))
-			var update$_this_child0_child0_child0_child0_child1_child3$text = function() { _this_child0_child0_child0_child0_child1$child3.text = (_globals.qsTr(("● Mail<br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"mailto:support@pastillilabs.com\">support(at)pastillilabs.com</a>"))); }
+//assigning text to (_globals.qsTr(("Mail<br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"mailto:support@pastillilabs.com\">support(at)pastillilabs.com</a>")))
+			var update$_this_child0_child0_child0_child0_child1_child3$text = function() { _this_child0_child0_child0_child0_child1$child3.text = (_globals.qsTr(("Mail<br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"mailto:support@pastillilabs.com\">support(at)pastillilabs.com</a>"))); }
 			_this_child0_child0_child0_child0_child1$child3._replaceUpdater('text', [update$_this_child0_child0_child0_child0_child1_child3$text, [[_this_child0_child0_child0_child0_child1$child3._context, 'language']]])
 }
 
