@@ -12,7 +12,7 @@ We specialize on design & implementation of easy to use high quality cross-platf
 
 Our showcase application **[Situations]({{ site.baseurl }}/situations)** is a highly rated and powerful automation tool currently available for both [Android](https://www.android.com/){:target="_blank"} and [Sailfish](https://sailfishos.org/){:target="_blank"} platforms.
 
-Contact us if you have needs for mobile design & development (Android, iOS) or even just prototyping user interfaces for mobile or embedded platforms.
+[Contact us](mailto:support@pastillilabs.com) if you have needs for mobile design & development (Android, iOS) or even just prototyping user interfaces for mobile or embedded platforms.
 
 
 <br/>
