@@ -8,7 +8,7 @@ use-site-title: true
 <a name="what"></a>
 ## ![]({{ site.baseurl }}/img/h1-situations.png) What it does
 
-With **Situations app** you can make your device work for you. The app helps you **get rid of routine tasks** by doing them **automatically**!
+With **Situations app** you can make your device work for you. The app helps you **get rid of routine device management tasks** by doing them **automatically**!
 
 > *No more forgetting to switch to silent and back for meetings*
 
