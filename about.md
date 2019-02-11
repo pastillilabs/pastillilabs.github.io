@@ -30,3 +30,25 @@ Our showcase application **[Situations]({{ site.baseurl }}/situations)** is a po
 **Maemo.org**  
 [talk.maemo.org](https://talk.maemo.org/showthread.php?p=1553117){:target="_blank"}
 
+
+<br/>
+<br/>
+<a name="info"></a>
+# ![]({{ site.baseurl }}/img/h1-info.png) Company information
+
+**VAT-ID**
+FI24808020
+
+**Address**
+Korpiselänkatu 6
+37120 Nokia
+Finland
+
+**CEO**
+Markus Tassberg
+[roope.tassberg(at)pastillilabs.com](mailto:roope.tassberg@pastillilabs.com)
+
+**CTO**
+Heikki Haveri
+[heikki.haveri(at)pastillilabs.com](mailto:heikki.haveri@pastillilabs.com)
+

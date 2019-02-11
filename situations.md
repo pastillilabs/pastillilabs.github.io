@@ -38,7 +38,7 @@ You can set up multiple **'situations'** which are collections of **'conditions'
 <a name="where"></a>
 ## ![]({{ site.baseurl }}/img/h1-download.png) Where to get it
 
-See our **[home page]({{ site.baseurl }})** for the Android download link.
+See **[Home page]({{ site.url }})** for the Android download link.
 
-If you are looking for a beta, Sailfish or other version of the app, please see our **[resources page]({{ site.baseurl }}/resources)**.
+If you are looking for a beta, Sailfish or other version of the app, please see **[Resources page]({{ site.baseurl }}/resources)**.
 
