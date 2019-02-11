@@ -1,7 +1,7 @@
 ---
 layout: page
 title: About
-subtitle: Putting the smart on your smartphone...
+subtitle: Putting the smart on your smart devices...
 use-site-title: true
 ---
 
@@ -10,7 +10,7 @@ use-site-title: true
 
 We specialize on design & implementation of easy to use high quality cross-platform mobile & embedded software based on [Qt](https://www.qt.io){:target="_blank"} & [QML](https://doc.qt.io/qt-5/qmlapplications.html){:target="_blank"} technology.
 
-Our showcase application **[Situations]({{ site.baseurl }}/situations)** is a highly rated and powerful automation tool currently available for both [Android](https://www.android.com/){:target="_blank"} and [Sailfish](https://sailfishos.org/){:target="_blank"} platforms.
+Our showcase application **[Situations]({{ site.baseurl }}/situations)** is a highly rated, powerful automation tool currently available for both [Android](https://www.android.com/){:target="_blank"} and [Sailfish](https://sailfishos.org/){:target="_blank"} platforms.
 
 [Contact us](mailto:support@pastillilabs.com) if you have needs for mobile design & development (Android, iOS) or even just prototyping user interfaces for mobile or embedded platforms.
 
