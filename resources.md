@@ -42,7 +42,7 @@ Here are the steps to help us provide Situations app with support for your langu
 
 + Copy the complete 'C' folder and rename it with an appropriate two letter identifier based on your target language
 
-+ Do your translation magic
++ Do your translation magic & remove '_type="unfinished"_' attributes from the translated strings
 
 + Send the files back to us ([support(at)pastillilabs.com](mailto:support@pastillilabs.com)) or create a github pull request
 

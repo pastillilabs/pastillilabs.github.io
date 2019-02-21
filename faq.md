@@ -65,3 +65,13 @@ At any other point in time, you can go to application **Settings** and press **U
 
 If your language is not available, please **[consider helping us provide it]({{ site.baseurl }}/resources#translations)**.
 
+
+<br/>
+<br/>
+<a name="q7"></a>
+## ![]({{ site.baseurl }}/img/h1-question.png) Why is the app not working in the background?
+
+Situations is designed to run a continuous background service regardless of the UI being open or not. However, latest Android & manufacturer versions have introduced battery optimization techniques that actively shut down or suspend services running in the background.
+
+Situations does ask the user to disable battery optimization for the app. However, unfortunately that is not enough with all manufacturer specific implementations. Instead, you as a user should also check system Settings and manually disable any manufacturer specific battery or background optimizations for the app.
+
