@@ -49,7 +49,7 @@ Please note that neither _'conditions'_ or _'actions'_ can be re-arranged.
 <a name="q5"></a>
 ## ![]({{ site.baseurl }}/img/h1-question.png) How to remove items in the UI?
 
-You can remove _'situations'_ and individual _'conditions_' and _'actions'_ in them by **long pressing** the items and **dragging** to the trash bin.
+You can remove _'situations'_ and individual _'conditions_' and _'actions'_ in them by **long pressing** the items and **dragging** to the trash bin that appears in the bottom center of the application view.
 
 Please note that with _'conditions'_ and _'actions'_ the long press works only on top of the content part - not on top of the icon or equals sign.
 
