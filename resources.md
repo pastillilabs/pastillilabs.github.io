@@ -93,3 +93,5 @@ Alexandr Petrenko
 **Polish**  
 [Aleksander Burzec](https://github.com/InYourHead){:target="_blank"}
 
+**Chinese**  
+Rui Kon
