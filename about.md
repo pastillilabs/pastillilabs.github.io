@@ -6,7 +6,7 @@ use-site-title: true
 ---
 
 <a name="pastilli_labs"></a>
-# ![]({{ site.baseurl }}/img/h1-pastillilabs.png) We are Pastilli Labs
+# ![]({{ site.baseurl }}/assets/img/h1-pastillilabs.png) We are Pastilli Labs
 
 We specialize on design & implementation of easy to use high quality cross-platform mobile & embedded software based on [Qt](https://www.qt.io){:target="_blank"} & [QML](https://doc.qt.io/qt-5/qmlapplications.html){:target="_blank"} technology.
 
@@ -18,7 +18,7 @@ Our showcase application **[Situations]({{ site.baseurl }}/situations)** is a hi
 <br/>
 <br/>
 <a name="contact"></a>
-# ![]({{ site.baseurl }}/img/h1-contact.png) Contact us at
+# ![]({{ site.baseurl }}/assets/img/h1-contact.png) Contact us at
 
 **Mail**  
 [support(at)pastillilabs.com](mailto:support@pastillilabs.com)
@@ -36,7 +36,7 @@ Our showcase application **[Situations]({{ site.baseurl }}/situations)** is a hi
 <br/>
 <br/>
 <a name="info"></a>
-# ![]({{ site.baseurl }}/img/h1-info.png) Company information
+# ![]({{ site.baseurl }}/assets/img/h1-info.png) Company information
 
 **VAT-ID**  
 FI24808020

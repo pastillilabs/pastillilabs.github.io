@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Polish translations added!
-share-img: https://pastillilabs.com/img/situations-post.png
+share-img: https://pastillilabs.com/assets/img/situations-post.png
 ---
 
 We received a completely new translation contribution from Poland - so now Situations is also available in Polish. Big thank you to [Aleksander Burzec](https://github.com/InYourHead){:target="_blank"} for providing it!!

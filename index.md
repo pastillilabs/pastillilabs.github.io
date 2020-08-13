@@ -6,12 +6,12 @@ use-site-title: true
 ---
 
 <div class="text-center" style="padding:25px">
-  <img style="height:200px;width:200px;" src="{{ site.baseurl }}/img/situations-innershadow.png" />
+  <img style="height:200px;width:200px;" src="{{ site.baseurl }}/assets/img/situations-innershadow.png" />
 </div>
 
 <div class="text-center" style="padding:50px">
   <a href="https://play.google.com/store/apps/details?id=com.pastillilabs.situations2" target="_blank" style="display:inline-block;">
-    <div style="height:60px;width:202px;background-image:url(&quot;img/en-play-badge.png&quot;);background-repeat:no-repeat;background-size:100% 100%"></div>
+    <div style="height:60px;width:202px;background-image:url(&quot;assets/img/en-play-badge.png&quot;);background-repeat:no-repeat;background-size:100% 100%"></div>
   </a>
 </div>
 

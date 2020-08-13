@@ -6,7 +6,7 @@ use-site-title: true
 ---
 
 <a name="q1"></a>
-## ![]({{ site.baseurl }}/img/h1-question.png) How to set priority for a _'situation'_?
+## ![]({{ site.baseurl }}/assets/img/h1-question.png) How to set priority for a _'situation'_?
 
 A _'Situation'_ does not have priority as such. Multiple _'situations'_ can be active at any time.
 
@@ -17,7 +17,7 @@ However, the order of _'situations'_ in the list does have meaning for individua
 <br/>
 <br/>
 <a name="q2"></a>
-## ![]({{ site.baseurl }}/img/h1-question.png) How to make a _'condition'_ use 'NOT'?
+## ![]({{ site.baseurl }}/assets/img/h1-question.png) How to make a _'condition'_ use 'NOT'?
 
 You can make a _'condition'_ (or group of _'conditions'_) follow a 'NOT' logic by **tapping the equals sign**.
 
@@ -25,7 +25,7 @@ You can make a _'condition'_ (or group of _'conditions'_) follow a 'NOT' logic b
 <br/>
 <br/>
 <a name="q3"></a>
-## ![]({{ site.baseurl }}/img/h1-question.png) How to apply 'OR' between _'conditions'_?
+## ![]({{ site.baseurl }}/assets/img/h1-question.png) How to apply 'OR' between _'conditions'_?
 
 In pursuit of keeping the application UI and logic simple, it is not possible switch 'AND' to 'OR' between different types of _'conditions'_ in a _'situation'_.
 
@@ -37,7 +37,7 @@ Multiple entries in the _'Situation condition'_ - like with all other _'conditio
 <br/>
 <br/>
 <a name="q4"></a>
-## ![]({{ site.baseurl }}/img/h1-question.png) How to re-arrange items in the UI?
+## ![]({{ site.baseurl }}/assets/img/h1-question.png) How to re-arrange items in the UI?
 
 You can re-arrange _'situations'_ by **long pressing** the items and **dragging** to a new location in the list.
 
@@ -47,7 +47,7 @@ Please note that neither _'conditions'_ or _'actions'_ can be re-arranged.
 <br/>
 <br/>
 <a name="q5"></a>
-## ![]({{ site.baseurl }}/img/h1-question.png) How to remove items in the UI?
+## ![]({{ site.baseurl }}/assets/img/h1-question.png) How to remove items in the UI?
 
 You can remove _'situations'_ and individual _'conditions_' and _'actions'_ in them by **long pressing** the items and **dragging** to the trash bin that appears in the bottom center of the application view.
 
@@ -57,7 +57,7 @@ Please note that with _'conditions'_ and _'actions'_ the long press works only o
 <br/>
 <br/>
 <a name="q6"></a>
-## ![]({{ site.baseurl }}/img/h1-question.png) How to update the application language?
+## ![]({{ site.baseurl }}/assets/img/h1-question.png) How to update the application language?
 
 On first install the app automatically checks device language and updates corresponding language pack automatically - if available.
 
@@ -69,7 +69,7 @@ If your language is not available, please **[consider helping us provide it]({{ 
 <br/>
 <br/>
 <a name="q7"></a>
-## ![]({{ site.baseurl }}/img/h1-question.png) Why is the app not working in the background?
+## ![]({{ site.baseurl }}/assets/img/h1-question.png) Why is the app not working in the background?
 
 Situations is designed to run a continuous background service regardless of the UI being open or not. However, latest Android & manufacturer versions have introduced battery optimization techniques that actively shut down or suspend services running in the background.
 

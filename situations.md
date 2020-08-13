@@ -6,7 +6,7 @@ use-site-title: true
 ---
 
 <a name="what"></a>
-## ![]({{ site.baseurl }}/img/h1-situations.png) What it does
+## ![]({{ site.baseurl }}/assets/img/h1-situations.png) What it does
 
 With **Situations app** you can make your device work for you. The app helps you **get rid of routine device management tasks** by doing them **automatically**!
 
@@ -22,7 +22,7 @@ And much more...
 <br/>
 <br/>
 <a name="how"></a>
-## ![]({{ site.baseurl }}/img/h1-works.png) How it works
+## ![]({{ site.baseurl }}/assets/img/h1-works.png) How it works
 
 Situations app simply **follows your instructions**. There is no AI or machine learning or snooping your private information involved - unless you specifically decide to use such a feature.
 
@@ -36,7 +36,7 @@ You can set up multiple **'situations'** which are collections of **'conditions'
 <br/>
 <br/>
 <a name="where"></a>
-## ![]({{ site.baseurl }}/img/h1-download.png) Where to get it
+## ![]({{ site.baseurl }}/assets/img/h1-download.png) Where to get it
 
 See **[Home page]({{ site.url }})** for the Android download link.
 
