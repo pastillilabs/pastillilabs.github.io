@@ -39,18 +39,14 @@ Our showcase application **[Situations]({{ site.baseurl }}/situations)** is a hi
 # ![]({{ site.baseurl }}/assets/img/h1-info.png) Company information
 
 **VAT-ID**  
-FI24808020
+FI29815684 
 
 **Address**  
-Korpiselänkatu 6  
-37120 Nokia  
+Jokiniementie 21 B  
+00650 Helsinki  
 Finland
 
-**CEO**  
-Markus Tassberg  
-[roope.tassberg(at)pastillilabs.com](mailto:roope.tassberg@pastillilabs.com)
-
-**CTO**  
+**CEO / CTO**  
 Heikki Haveri  
 [heikki.haveri(at)pastillilabs.com](mailto:heikki.haveri@pastillilabs.com)
 
