@@ -57,13 +57,17 @@ Please note that with _'conditions'_ and _'actions'_ the long press works only o
 <br/>
 <br/>
 <a name="q6"></a>
-## ![]({{ site.baseurl }}/assets/img/h1-question.png) How to update the application language?
+## ![]({{ site.baseurl }}/assets/img/h1-question.png) How to activate a situation by hand?
 
-On first install the app automatically checks device language and updates corresponding language pack automatically - if available.
+Swipe a situation item right on the main list. Swipe again to deactivate. After the swipe, one can also tap the yellow (or green) circle to set a timed activation (max 24h).
 
-At any other point in time, you can go to application **Settings** and press **Update** button under the **Translation** section. Also then, application checks the device language and updates corresponding language pack - if available.
 
-If your language is not available, please **[consider helping us provide it]({{ site.baseurl }}/resources#translations)**.
+<br/>
+<br/>
+<a name="q6"></a>
+## ![]({{ site.baseurl }}/assets/img/h1-question.png) How to put a situation on pause?
+
+Swipe a situation item left on the main list. Swipe again to "unpause". After the swipe, one can also tap the red circle to set a timed pause (max 24h).
 
 
 <br/>
