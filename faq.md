@@ -59,7 +59,7 @@ Please note that with _'conditions'_ and _'actions'_ the long press works only o
 <a name="q6"></a>
 ## ![]({{ site.baseurl }}/assets/img/h1-question.png) How to activate a situation by hand?
 
-Swipe a situation item right on the main list. Swipe again to deactivate. After the swipe, one can also tap the yellow (or green) circle to set a timed activation (max 24h).
+**Swipe** a situation item **right** on the main list. Swipe again to deactivate. After the swipe, one can also tap the yellow (or green) circle to set a timed activation (max 24h).
 
 
 <br/>
@@ -67,7 +67,7 @@ Swipe a situation item right on the main list. Swipe again to deactivate. After 
 <a name="q6"></a>
 ## ![]({{ site.baseurl }}/assets/img/h1-question.png) How to put a situation on pause?
 
-Swipe a situation item left on the main list. Swipe again to "unpause". After the swipe, one can also tap the red circle to set a timed pause (max 24h).
+**Swipe** a situation item **left** on the main list. Swipe again to "unpause". After the swipe, one can also tap the red circle to set a timed pause (max 24h).
 
 
 <br/>
