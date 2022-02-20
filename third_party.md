@@ -24,3 +24,7 @@ Copyright (C) 2016 LinkedIn Corp.
 Copyright (c) 2005-2013, The Android Open Source Project
 [License]({{ site.url }}/situations/third_party_android.html)
 
+# libdaylight
+Copyright (c) 2020 B Krishna Chaitanya
+[License]({{ site.url }}/situations/third_party_libdaylight.html)
+
