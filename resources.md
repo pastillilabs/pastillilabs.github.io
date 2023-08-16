@@ -36,11 +36,9 @@ Please help us make the app even better by updating the existing translations or
 
 Here are the steps to help us provide Situations app with support for your language: 
 
-+ [Download](https://github.com/pastillilabs/translations/archive/master.zip) or fork the repository in [github.com/pastillilabs/translations](https://github.com/pastillilabs/translations){:target="_blank"}
++ [Download](https://github.com/pastillilabs/situations-translations/archive/master.zip) or fork the repository in [github.com/pastillilabs/situations-translations](https://github.com/pastillilabs/situations-translations){:target="_blank"}
 
-+ In your local checkout, navigate to 'sources/situations' -folder
-
-+ Copy the complete 'C' folder and rename it with an appropriate two letter identifier based on your target language
++ In your local checkout, make a copy of the whole 'C' folder and rename it with an appropriate two letter identifier based on your target language
 
 + Do your translation magic & remove '_type="unfinished"_' attributes from the translated strings
 
