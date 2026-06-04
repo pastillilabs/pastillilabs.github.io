@@ -28,3 +28,6 @@ Copyright (c) 2005-2013, The Android Open Source Project
 Copyright (c) 2020 B Krishna Chaitanya
 [License]({{ site.url }}/situations/third_party_libdaylight.html)
 
+# libsu
+[License]({{ site.url }}/situations/third_party_libsu.html)
+
